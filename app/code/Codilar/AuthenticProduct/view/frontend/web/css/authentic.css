@@ -1,0 +1,39 @@
+.authentic-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    /*width: 100vw !important;*/
+    height: 100vh !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(2px) !important; /* Blur kam kar ke 2px kar diya hai */
+    -webkit-backdrop-filter: blur(2px) !important;
+    z-index: 99988 !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.authentic-overlay.is-open {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Right Side Drawer Header & Content (Completely Clear/No Blur) */
+.authentic-drawer {
+    position: fixed !important;
+    top: 0 !important;
+    right: -100% !important;
+    /*width: 100% !important;*/
+    max-width: 420px !important;
+    /*height: 100vh !important;*/
+    background-color: #f0f7ff !important;
+    box-shadow: -8px 0 24px rgba(0, 0, 0, 0.15) !important;
+    z-index: 99999 !important; /* Overlay se high Z-index taaki ye clear dikhe */
+    display: flex !important;
+    flex-direction: column !important;
+    transition: right 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    box-sizing: border-box !important;
+    filter: none !important; /* Ensures no blur on drawer elements */
+}
+.authentic-drawer.is-open {
+    right: 0 !important;
+}

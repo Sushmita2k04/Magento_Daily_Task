@@ -1,0 +1,115 @@
+<?php if ($block->isAuthentic()): ?>
+
+    <div class="authentic-product-wrapper" style="position: relative; width: 100%; font-family: system-ui, -apple-system, sans-serif;">
+
+        <!-- Authentic Product Banner -->
+        <div class="authentic-product-banner" style="display: flex; align-items: center; justify-content: space-between; background-color: #f0f7ff; border-radius: 8px; padding: 10px 16px; width: 100%; box-sizing: border-box; margin-bottom: 12px;">
+
+            <div class="authentic-product-content" style="display: flex; align-items: center; gap: 10px;">
+                <!-- Certificate Icon -->
+                <svg
+                    class="authentic-certificate-icon"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="black"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                    style="flex-shrink: 0; display: block;"
+                >
+                    <rect x="4" y="2" width="16" height="14" rx="2" />
+                    <line x1="8" y1="6" x2="16" y2="6" />
+                    <line x1="8" y1="10" x2="12" y2="10" />
+                    <path d="M12 14l-2 6 2-1 2 1-2-6z" fill="#1877f2" />
+                </svg>
+
+                <span class="authentic-product-label" style="font-size: 14px; font-weight: 600; color: #1877f2; line-height: 1;">
+                    100% Authentic Product
+                </span>
+            </div>
+
+            <!-- Info Button -->
+            <button
+                type="button"
+                class="authentic-info-button"
+                aria-label="About Authentic Product"
+                style="background: transparent; border: none; padding: 0; margin: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; outline: none;"
+            >
+                <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#1c1e21"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="16" x2="12" y2="12" />
+                    <line x1="12" y1="8" x2="12.01" y2="8" />
+                </svg>
+            </button>
+
+        </div>
+
+        <!-- Overlay Background -->
+        <div class="authentic-overlay" aria-hidden="true"></div>
+
+        <!-- Right Side Drawer -->
+        <aside class="authentic-drawer" aria-hidden="true">
+            <div style="display: flex; justify-content: flex-end; padding: 20px 24px 10px 24px;">
+                <button
+                    type="button"
+                    class="authentic-drawer-close"
+                    aria-label="Close"
+                    style="background: transparent; border: none; font-size: 24px; line-height: 1; color: #1a1a1a; cursor: pointer; padding: 4px; outline: none;"
+                >
+                    ✕
+                </button>
+            </div>
+
+            <div style="padding: 20px 32px; display: flex; flex-direction: column; align-items: center; text-align: center; overflow-y: auto;">
+                <svg
+                    width="56"
+                    height="56"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#1877f2"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    style="margin-bottom: 24px;"
+                >
+                    <rect x="4" y="2" width="16" height="14" rx="2" />
+                    <line x1="8" y1="6" x2="16" y2="6" />
+                    <line x1="8" y1="10" x2="12" y2="10" />
+                    <path d="M12 14l-2 6 2-1 2 1-2-6z" fill="#1877f2" />
+                </svg>
+
+                <h3 style="font-size: 18px; font-weight: 700; color: #0d0d0d; margin: 0 0 16px 0; line-height: 1.3;">
+                    Guaranteed Authenticity, Every Time!
+                </h3>
+
+                <p style="font-size: 13px; line-height: 1.6; color: #4a4a4a; margin: 0;">
+                    When you shop with us, you are investing in genuine quality. We pride ourselves on offering only 100% authentic products, meticulously sourced and verified for their originality. Every product we sell is crafted with precision and care, ensuring that you receive nothing but the best. Trust in our commitment to authenticity!
+                </p>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- Web/authentic.js File Path Load Script -->
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "Codilar_AuthenticProduct/js/authentic": {}
+            }
+        }
+    </script>
+
+<?php endif; ?>
