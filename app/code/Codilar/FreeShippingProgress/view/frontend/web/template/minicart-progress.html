@@ -1,14 +1,14 @@
-<div class="codilar-minicart-progress">
+<div class="codilar-minicart-rewards">
 
-    <div class="codilar-minicart-progress__message"
+    <div class="codilar-minicart-rewards__title"
          data-bind="text: message">
     </div>
 
-    <div class="codilar-minicart-progress__bar">
+    <div class="codilar-minicart-rewards__progress">
 
-        <div class="codilar-minicart-progress__track">
+        <div class="codilar-minicart-rewards__track">
 
-            <span class="codilar-minicart-progress__fill"
+            <span class="codilar-minicart-rewards__track-fill"
                   data-bind="style: {
                       width: progressPercent() + '%'
                   }">
@@ -16,41 +16,37 @@
 
         </div>
 
-        <div class="codilar-minicart-progress__milestones">
+        <div class="codilar-minicart-rewards__milestones">
 
             <!-- ko foreach: rewards -->
 
-            <div class="codilar-minicart-progress__step"
+            <div class="reward-step"
                  data-bind="
-                     style: {
-                         left: $parent.rewardPosition(
-                             $data,
-                             $index()
-                         ) + '%'
-                     },
-                     css: {
-                         'is-active':
-                             $parent.isUnlocked($data)
-                     }
+                    style: {
+                        left: $parent.rewardPosition(
+                            $data,
+                            $index()
+                        ) + '%'
+                    },
+                    css: {
+                        'is-active':
+                            $parent.isUnlocked($data)
+                    }
                  ">
 
-                <div class="codilar-minicart-progress__circle">
+                <div class="reward-step__circle">
 
                     <!-- ko if: $parent.isUnlocked($data) -->
-
-                    <span>✓</span>
-
+                    <span class="reward-step__check">✓</span>
                     <!-- /ko -->
 
                     <!-- ko ifnot: $parent.isUnlocked($data) -->
-
-                    <span>%</span>
-
+                    <span class="reward-step__locked">%</span>
                     <!-- /ko -->
 
                 </div>
 
-                <div class="codilar-minicart-progress__content">
+                <div class="reward-step__content">
 
                     <strong data-bind="text: title"></strong>
 

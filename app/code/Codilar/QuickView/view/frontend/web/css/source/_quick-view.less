@@ -1,84 +1,164 @@
+@theme-red: #e62429;
+@theme-red-dark: #c91d22;
+@theme-red-light: #fff1f1;
 
+@theme-blue: #1979c3;
+@theme-blue-dark: #146da8;
+@theme-blue-light: #eef7ff;
 
+@theme-success: #198754;
+@theme-success-light: #edf9f2;
+
+@theme-danger: #d32f2f;
+@theme-danger-light: #fff5f5;
+
+@theme-text-dark: #222222;
+@theme-text: #333333;
+@theme-text-medium: #666666;
+@theme-text-light: #777777;
+@theme-text-muted: #999999;
+
+@theme-white: #ffffff;
+@theme-bg: #f8f8f8;
+@theme-bg-light: #fafafa;
+
+@theme-border: #e1e1e1;
+@theme-border-light: #eeeeee;
+@theme-border-dark: #d9d9d9;
+
+@theme-shadow: rgba(17, 17, 17, 0.12);
+@theme-shadow-dark: rgba(17, 17, 17, 0.28);
+
+@theme-overlay: rgba(17, 17, 17, 0.72);
+
+@theme-font: 'Poppins', sans-serif;
 .modal-popup.codilar-quickview-modal {
-    overflow: hidden;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+    overflow: auto;
+
+    background: rgba(17, 17, 17, 0.72);
+
+    z-index: 1000;
+
 
     .modal-inner-wrap {
-        width: 60vw;
 
-        margin: auto;
+        position: relative;
 
+        width: 92vw;
+        max-width: 900px;
+        min-width: 0;
+
+        margin: 0;
         padding: 0;
 
         overflow: hidden;
 
-        border-radius: 20px;
-
         background: #ffffff;
 
-        box-shadow:
-            0 30px 80px rgba(0, 0, 0, 0.20),
-            0 10px 30px rgba(0, 0, 0, 0.10);
+        border: 0;
+        border-radius: 4px;
 
-        animation: quickViewModalIn 0.45s ease-out both;
+        box-shadow:
+            0 24px 70px rgba(0, 0, 0, 0.28);
+
+        animation:
+            quickViewModalIn
+            0.35s
+            cubic-bezier(.22, 1, .36, 1)
+            both;
 
         transform-origin: center center;
     }
 }
 
 
-/* =========================================================
-   2. MODAL OPEN ANIMATION
-   ========================================================= */
+// =========================================================
+// 2. MODAL OPEN ANIMATION
+// =========================================================
 
 @keyframes quickViewModalIn {
 
-    0% {
+    from {
+
         opacity: 0;
-        transform: translateY(35px) scale(0.94);
+
+        transform:
+            translateY(25px)
+            scale(0.96);
     }
 
-    60% {
-        opacity: 1;
-        transform: translateY(-5px) scale(1.01);
-    }
+    to {
 
-    100% {
         opacity: 1;
-        transform: translateY(0) scale(1);
+
+        transform:
+            translateY(0)
+            scale(1);
     }
 }
 
 
-/* =========================================================
-   3. MODAL HEADER
-   ========================================================= */
+// =========================================================
+// 3. MODAL HEADER
+// =========================================================
 
 .modal-popup.codilar-quickview-modal {
 
     .modal-header {
-        position: relative;
+
+        position: absolute;
+
+        top: 0;
+        right: 0;
+        left: 0;
+
+        height: 0;
 
         margin: 0;
-        padding: 18px 22px 10px;
+        padding: 0;
 
         border: 0;
 
-        z-index: 10;
+        z-index: 30;
     }
 
+
     .modal-title {
+
         display: none;
     }
 
 
-    /* Close button */
+    // =====================================================
+    // CLOSE BUTTON
+    // =====================================================
 
     .action-close {
+
         position: absolute;
 
-        top: 14px;
-        right: 14px;
+        top: 15px;
+        right: 15px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
 
         width: 38px;
         height: 38px;
@@ -86,52 +166,72 @@
         margin: 0;
         padding: 0;
 
+        background: #ffffff;
+
+        border: 1px solid #e1e1e1;
         border-radius: 50%;
 
-        background: black;
+        box-shadow:
+            0 4px 14px rgba(17, 17, 17, 0.12);
 
-        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+        cursor: pointer;
+
+        z-index: 50;
 
         transition:
-            transform 0.3s ease,
-            box-shadow 0.3s ease,
-            background 0.3s ease;
+            background 0.2s ease,
+            border-color 0.2s ease,
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
 
-        z-index: 20;
 
-        &:before {
-            font-size: 18px;
+        &::before {
 
-            line-height: 38px;
+            color: #222222;
 
-            color: #222;
+            font-size: 17px;
+
+            line-height: 1;
 
             transition:
-                color 0.25s ease,
-                transform 0.3s ease;
+                color 0.2s ease;
         }
 
-        &:hover {
-            background: #111111;
 
-            transform: rotate(90deg);
+        &:hover {
+
+            background: @theme-red;
+
+            border-color: @theme-red;
 
             box-shadow:
-                0 8px 24px rgba(0, 0, 0, 0.20);
+                0 5px 16px rgba(230, 36, 41, 0.22);
 
-            &:before {
+            transform:
+                rotate(90deg);
+
+
+            &::before {
+
                 color: #ffffff;
             }
+        }
+
+
+        &:focus {
+
+            outline: none;
         }
     }
 }
 
 
-/* =========================================================
-   4. MODAL CONTENT
-   ========================================================= */
+// =========================================================
+// 4. CONTENT WRAPPER
+// =========================================================
 
 .codilar-quickview-modal-wrapper {
+
     width: 100%;
 
     margin: 0;
@@ -146,22 +246,11 @@
 
 
 .quick-view-content {
-    width: 100%;
-
-    overflow: hidden;
-}
-
-
-/* =========================================================
-   5. MAIN CONTAINER
-   ========================================================= */
-
-.quick-view-container {
-    display: flex;
 
     width: 100%;
 
-    min-height: 460px;
+    margin: 0;
+    padding: 0;
 
     overflow: hidden;
 
@@ -169,20 +258,42 @@
 }
 
 
-/* =========================================================
-   6. IMAGE SECTION
-   ========================================================= */
+// =========================================================
+// 5. MAIN CONTAINER
+// =========================================================
+
+.quick-view-container {
+
+    display: flex;
+
+    width: 100%;
+
+    min-height: 470px;
+
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+}
+
+
+// =========================================================
+// 6. PRODUCT IMAGE SECTION
+// =========================================================
 
 .quick-view-media {
-    position: relative;
 
-    width: 50%;
-    min-width: 50%;
+    position: relative;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
+
+    width: 52%;
+    min-width: 52%;
 
     padding: 45px;
 
@@ -190,51 +301,82 @@
 
     overflow: hidden;
 
-    background:
-        linear-gradient(
-            145deg,
-            #f8fafc 0%,
-            #f1f5f9 100%
-        );
+    background: #f8f8f8;
 
-    animation: quickViewMediaIn 0.55s ease-out 0.08s both;
+    animation:
+        quickViewMediaIn
+        0.45s
+        ease-out
+        0.05s
+        both;
 }
 
 
-/* Decorative glow */
+// =========================================================
+// IMAGE AREA DECORATION
+// =========================================================
 
-.quick-view-media:before {
+.quick-view-media::before {
+
     content: '';
 
     position: absolute;
 
-    width: 260px;
-    height: 260px;
-
-    border-radius: 50%;
-
-    background: rgba(255, 255, 255, 0.75);
-
-    filter: blur(5px);
-
     top: 50%;
     left: 50%;
 
-    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+
+    background: #ffffff;
+
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, -50%);
 
     pointer-events: none;
+
+    opacity: 0.75;
 }
 
 
-/* Image */
+// =========================================================
+// SMALL RED ACCENT
+// =========================================================
+
+.quick-view-media::after {
+
+    content: '';
+
+    position: absolute;
+
+    bottom: 25px;
+    left: 30px;
+
+    width: 45px;
+    height: 3px;
+
+    background: @theme-red;
+
+    box-shadow:
+        18px 0 0 @theme-blue;
+
+    opacity: 0.9;
+}
+
+
+// =========================================================
+// PRODUCT IMAGE
+// =========================================================
 
 .quick-view-media img {
+
     position: relative;
 
     display: block;
 
     width: 100%;
-
     max-width: 360px;
 
     height: 360px;
@@ -246,160 +388,255 @@
     cursor: zoom-in;
 
     filter:
-        drop-shadow(0 18px 22px rgba(0, 0, 0, 0.12));
+        drop-shadow(
+            0 15px 20px rgba(17, 17, 17, 0.12)
+        );
 
-    animation: quickViewImageIn 0.65s cubic-bezier(.22, 1, .36, 1) 0.15s both;
+    animation:
+        quickViewImageIn
+        0.55s
+        cubic-bezier(.22, 1, .36, 1)
+        0.08s
+        both;
 
     transition:
-        transform 0.5s cubic-bezier(.22, 1, .36, 1),
-        filter 0.4s ease;
+        transform 0.35s ease,
+        filter 0.35s ease;
+
 
     &:hover {
-        transform: scale(1.06);
+
+        transform:
+            scale(1.035);
 
         filter:
-            drop-shadow(0 25px 30px rgba(0, 0, 0, 0.18));
+            drop-shadow(
+                0 20px 25px rgba(17, 17, 17, 0.16)
+            );
     }
 }
 
 
-/* Image animation */
+// =========================================================
+// IMAGE SECTION ANIMATION
+// =========================================================
 
 @keyframes quickViewMediaIn {
 
     from {
+
         opacity: 0;
 
-        transform: translateX(-25px);
+        transform:
+            translateX(-25px);
     }
 
     to {
+
         opacity: 1;
 
-        transform: translateX(0);
+        transform:
+            translateX(0);
     }
 }
 
+
+// =========================================================
+// IMAGE ANIMATION
+// =========================================================
 
 @keyframes quickViewImageIn {
 
     from {
+
         opacity: 0;
 
-        transform: scale(0.82) rotate(-2deg);
+        transform:
+            scale(0.88);
     }
 
     to {
+
         opacity: 1;
 
-        transform: scale(1) rotate(0);
+        transform:
+            scale(1);
     }
 }
 
 
-/* =========================================================
-   7. PRODUCT DETAILS
-   ========================================================= */
+// =========================================================
+// 7. PRODUCT DETAILS
+// =========================================================
 
 .quick-view-details {
-    width: 50%;
 
-    padding: 48px 42px;
+    display: flex;
+
+    flex-direction: column;
+
+    width: 48%;
+
+    padding: 48px 42px 42px;
 
     box-sizing: border-box;
 
     overflow: hidden;
 
-    animation: quickViewDetailsIn 0.55s ease-out 0.12s both;
+    background: #ffffff;
+
+    animation:
+        quickViewDetailsIn
+        0.45s
+        ease-out
+        0.10s
+        both;
 }
 
+
+// =========================================================
+// DETAILS ANIMATION
+// =========================================================
 
 @keyframes quickViewDetailsIn {
 
     from {
+
         opacity: 0;
 
-        transform: translateX(25px);
+        transform:
+            translateX(25px);
     }
 
     to {
+
         opacity: 1;
 
-        transform: translateX(0);
+        transform:
+            translateX(0);
     }
 }
 
 
-/* =========================================================
-   8. PRODUCT NAME
-   ========================================================= */
+// =========================================================
+// 8. PRODUCT NAME
+// =========================================================
 
 .quick-view-details .product-name,
 #quick-view-name {
-    margin: 0 0 24px;
+
+    position: relative;
+
+    margin: 0 0 18px;
 
     padding: 0 35px 0 0;
 
-    font-size: 27px;
+    color: #222222;
 
-    line-height: 1.25;
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 25px;
 
     font-weight: 700;
 
-    letter-spacing: -0.4px;
+    line-height: 1.35;
 
-    color: #171717;
+    letter-spacing: -0.3px;
 
-    animation: quickViewTextIn 0.5s ease-out 0.25s both;
+    animation:
+        quickViewTextIn
+        0.4s
+        ease-out
+        0.16s
+        both;
 }
 
+
+// =========================================================
+// RED TITLE ACCENT
+// =========================================================
+
+.quick-view-details .product-name::after,
+#quick-view-name::after {
+
+    content: '';
+
+    display: block;
+
+    width: 38px;
+    height: 3px;
+
+    margin-top: 12px;
+
+    background: @theme-red;
+}
+
+
+// =========================================================
+// COMMON TEXT ANIMATION
+// =========================================================
 
 @keyframes quickViewTextIn {
 
     from {
+
         opacity: 0;
 
-        transform: translateY(12px);
+        transform:
+            translateY(10px);
     }
 
     to {
+
         opacity: 1;
 
-        transform: translateY(0);
+        transform:
+            translateY(0);
     }
 }
 
 
-/* =========================================================
-   9. PRODUCT META
-   ========================================================= */
+// =========================================================
+// 9. PRODUCT META
+// =========================================================
 
 .product-info-meta {
-    margin-bottom: 25px;
 
-    padding-bottom: 18px;
+    margin: 0 0 22px;
+
+    padding: 0 0 18px;
 
     border-bottom: 1px solid #eeeeee;
 
-    animation: quickViewTextIn 0.5s ease-out 0.3s both;
+    animation:
+        quickViewTextIn
+        0.4s
+        ease-out
+        0.20s
+        both;
 }
 
 
 .product-sku,
 .product-stock {
+
     display: flex;
 
     align-items: center;
 
-    margin-bottom: 10px;
+    margin: 0 0 8px;
 
-    font-size: 14px;
+    color: #777777;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 12px;
 
     line-height: 1.5;
 
-    color: #666666;
 
     &:last-child {
+
         margin-bottom: 0;
     }
 }
@@ -407,172 +644,397 @@
 
 .product-sku strong,
 .product-stock strong {
-    min-width: 100px;
+
+    min-width: 82px;
+
+    color: #333333;
+
+    font-size: 12px;
 
     font-weight: 600;
-
-    color: #222222;
 }
 
 
 #quick-view-sku {
-    color: #666666;
+
+    color: #777777;
 
     word-break: break-word;
 }
 
 
 #quick-view-stock {
-    font-weight: 600;
 
-    color: #238636;
+    position: relative;
+
+    color: @theme-success;
+
+    font-weight: 600;
 }
 
 
-/* =========================================================
-   10. PRICE
-   ========================================================= */
+// =========================================================
+// STOCK DOT
+// =========================================================
+
+#quick-view-stock::before {
+
+    content: '';
+
+    display: inline-block;
+
+    width: 6px;
+    height: 6px;
+
+    margin-right: 6px;
+
+    background: @theme-success;
+
+    border-radius: 50%;
+
+    vertical-align: middle;
+}
+
+
+// =========================================================
+// 10. PRICE
+// =========================================================
 
 .product-info-price {
-    margin-bottom: 27px;
 
-    animation: quickViewPriceIn 0.55s ease-out 0.38s both;
+    margin: 0 0 22px;
+
+    animation:
+        quickViewPriceIn
+        0.45s
+        ease-out
+        0.24s
+        both;
 }
 
 
 @keyframes quickViewPriceIn {
 
     from {
+
         opacity: 0;
 
-        transform: translateY(15px) scale(0.97);
+        transform:
+            translateY(12px);
     }
 
     to {
+
         opacity: 1;
 
-        transform: translateY(0) scale(1);
+        transform:
+            translateY(0);
     }
 }
 
 
 #quick-view-price {
+
     margin: 0;
 
     padding: 0;
 
-    font-size: 30px;
+    color: @theme-red;
 
-    line-height: 1.2;
+    font-family: 'Poppins', sans-serif;
 
-    font-weight: 700;
-
-    color: #111111;
-}
-
-
-/*
- * Magento formatted price
- */
-
-#quick-view-price .price {
-    font-size: 30px;
+    font-size: 29px;
 
     font-weight: 700;
 
     line-height: 1.2;
-
-    color: #111111;
-
-    letter-spacing: -0.5px;
 }
 
 
-/*
- * Currency symbol
- */
-
-#quick-view-price .price-currency,
 #quick-view-price .price {
-    font-variant-numeric: tabular-nums;
+
+    color: @theme-red;
+
+    font-size: 29px;
+
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    letter-spacing: -0.4px;
 }
 
 
-/* =========================================================
-   11. DESCRIPTION
-   ========================================================= */
+#quick-view-price .price-currency {
+
+    font-variant-numeric:
+        tabular-nums;
+}
+
+
+// =========================================================
+// 11. DESCRIPTION
+// =========================================================
 
 .product-info-description {
-    padding-top: 2px;
 
-    font-size: 14px;
+    margin: 0;
 
-    line-height: 1.75;
+    padding: 0;
 
     color: #666666;
 
-    animation: quickViewTextIn 0.5s ease-out 0.45s both;
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 13px;
+
+    line-height: 1.75;
+
+    animation:
+        quickViewTextIn
+        0.4s
+        ease-out
+        0.30s
+        both;
 }
 
 
 .product-info-description > strong {
+
     display: block;
 
-    margin-bottom: 8px;
-
-    font-size: 15px;
-
-    font-weight: 700;
+    margin: 0 0 8px;
 
     color: #222222;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    line-height: 1.4;
 }
 
 
 .description-text {
-    margin-top: 8px;
+
+    margin: 0;
 
     max-height: 145px;
 
     overflow: hidden;
 
-    line-height: 1.75;
+    color: #707070;
 
-    color: #666666;
+    line-height: 1.75;
 }
 
 
-/* =========================================================
-   12. ERROR MESSAGE
-   ========================================================= */
+// =========================================================
+// 12. QUICK VIEW CTA AREA
+// =========================================================
+// These styles will apply if your HTML contains CTA buttons.
+// =========================================================
+
+.quick-view-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: auto;
+
+    padding-top: 28px;
+}
+
+
+.quick-view-actions .action.primary,
+.quick-view-actions button {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 46px;
+
+    padding: 0 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            @theme-red 0%,
+            @theme-primary-dark 100%
+        );
+
+    border: 1px solid @theme-red;
+
+    border-radius: 3px;
+
+    color: #ffffff;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    line-height: 1;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 12px rgba(230, 36, 41, 0.18);
+
+    transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+
+
+    &:hover {
+
+        background:
+            linear-gradient(
+                135deg,
+                @theme-primary-dark 0%,
+                @theme-red 100%
+            );
+
+        box-shadow:
+            0 6px 16px rgba(230, 36, 41, 0.25);
+
+        transform:
+            translateY(-1px);
+
+        color: #ffffff;
+
+        text-decoration: none;
+    }
+}
+
+
+// =========================================================
+// SECONDARY CTA
+// =========================================================
+
+.quick-view-actions .secondary {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 46px;
+
+    padding: 0 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #d9d9d9;
+
+    border-radius: 3px;
+
+    color: @theme-blue;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        border-color 0.2s ease,
+        color 0.2s ease,
+        background 0.2s ease;
+
+
+    &:hover {
+
+        background: #f5f8fb;
+
+        border-color: @theme-blue;
+
+        color: @theme-blue-dark;
+
+        text-decoration: none;
+    }
+}
+
+
+// =========================================================
+// 13. ERROR MESSAGE
+// =========================================================
 
 .quick-view-error {
-    margin: 15px 20px;
 
-    border-radius: 8px;
+    margin: 12px 18px;
 
-    animation: quickViewErrorIn 0.3s ease-out;
+    padding: 11px 13px;
+
+    background: #fff5f5;
+
+    border: 1px solid #f0cccc;
+
+    border-radius: 4px;
+
+    color: @theme-danger;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    animation:
+        quickViewErrorIn
+        0.25s
+        ease-out;
 }
 
 
 @keyframes quickViewErrorIn {
 
     from {
+
         opacity: 0;
 
-        transform: translateY(-8px);
+        transform:
+            translateY(-5px);
     }
 
     to {
+
         opacity: 1;
 
-        transform: translateY(0);
+        transform:
+            translateY(0);
     }
 }
 
 
-/* =========================================================
-   13. REMOVE ALL SCROLLBARS
-   ========================================================= */
+// =========================================================
+// 14. MODAL BACKDROP
+// =========================================================
+
+.modal-popup.codilar-quickview-modal {
+
+    &._show {
+
+        background:
+            rgba(17, 17, 17, 0.72);
+    }
+}
+
+
+// =========================================================
+// 15. REMOVE UNNECESSARY SCROLLBARS
+// =========================================================
 
 .modal-popup.codilar-quickview-modal,
 .modal-popup.codilar-quickview-modal .modal-inner-wrap,
@@ -581,6 +1043,7 @@
 .quick-view-container,
 .quick-view-media,
 .quick-view-details {
+
     scrollbar-width: none;
 
     -ms-overflow-style: none;
@@ -594,6 +1057,7 @@
 .quick-view-container::-webkit-scrollbar,
 .quick-view-media::-webkit-scrollbar,
 .quick-view-details::-webkit-scrollbar {
+
     width: 0;
 
     height: 0;
@@ -602,63 +1066,61 @@
 }
 
 
-/* =========================================================
-   14. MOBILE - 768px
-   ========================================================= */
+// =========================================================
+// 16. TABLET
+// =========================================================
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
 
     .modal-popup.codilar-quickview-modal {
 
+        padding: 25px;
+
+
         .modal-inner-wrap {
-            width: 90vw;
 
-            min-width: 0;
+            width: 88vw;
 
-            max-width: 90vw;
-
-            border-radius: 16px;
+            max-width: 820px;
         }
     }
 
 
     .quick-view-container {
-        flex-direction: column;
 
-        min-height: auto;
+        min-height: 430px;
     }
 
 
     .quick-view-media {
-        width: 100%;
 
-        min-width: 100%;
+        padding: 35px;
+    }
 
-        min-height: 320px;
 
-        padding: 30px;
+    .quick-view-media::before {
+
+        width: 240px;
+        height: 240px;
     }
 
 
     .quick-view-media img {
-        width: 100%;
 
-        max-width: 280px;
+        max-width: 300px;
 
-        height: 280px;
+        height: 300px;
     }
 
 
     .quick-view-details {
-        width: 100%;
 
-        padding: 32px 28px 35px;
+        padding: 38px 32px;
     }
 
 
     .quick-view-details .product-name,
     #quick-view-name {
-        margin-bottom: 20px;
 
         font-size: 23px;
     }
@@ -666,36 +1128,170 @@
 
     #quick-view-price,
     #quick-view-price .price {
-        font-size: 27px;
+
+        font-size: 26px;
     }
 }
 
 
-/* =========================================================
-   15. SMALL MOBILE - 480px
-   ========================================================= */
+// =========================================================
+// 17. MOBILE - 768px
+// =========================================================
+
+@media (max-width: 768px) {
+
+    .modal-popup.codilar-quickview-modal {
+
+        align-items: flex-start;
+
+        padding: 20px;
+
+
+        .modal-inner-wrap {
+
+            width: 92vw;
+
+            max-width: 92vw;
+
+            margin: 20px auto;
+
+            border-radius: 4px;
+        }
+    }
+
+
+    .quick-view-container {
+
+        flex-direction: column;
+
+        min-height: auto;
+    }
+
+
+    // =====================================================
+    // IMAGE
+    // =====================================================
+
+    .quick-view-media {
+
+        width: 100%;
+
+        min-width: 100%;
+
+        min-height: 330px;
+
+        padding: 30px;
+    }
+
+
+    .quick-view-media::before {
+
+        width: 230px;
+
+        height: 230px;
+    }
+
+
+    .quick-view-media::after {
+
+        bottom: 18px;
+
+        left: 20px;
+    }
+
+
+    .quick-view-media img {
+
+        max-width: 270px;
+
+        height: 270px;
+    }
+
+
+    // =====================================================
+    // DETAILS
+    // =====================================================
+
+    .quick-view-details {
+
+        width: 100%;
+
+        padding: 30px 28px 32px;
+    }
+
+
+    .quick-view-details .product-name,
+    #quick-view-name {
+
+        margin-bottom: 17px;
+
+        padding-right: 30px;
+
+        font-size: 22px;
+    }
+
+
+    .product-info-meta {
+
+        margin-bottom: 19px;
+
+        padding-bottom: 15px;
+    }
+
+
+    #quick-view-price,
+    #quick-view-price .price {
+
+        font-size: 25px;
+    }
+
+
+    .product-info-description {
+
+        font-size: 12px;
+
+        line-height: 1.7;
+    }
+
+
+    .description-text {
+
+        max-height: 130px;
+    }
+
+
+    .quick-view-actions {
+
+        padding-top: 24px;
+    }
+}
+
+
+// =========================================================
+// 18. SMALL MOBILE - 480px
+// =========================================================
 
 @media (max-width: 480px) {
 
     .modal-popup.codilar-quickview-modal {
 
+        padding: 10px;
+
+
         .modal-inner-wrap {
-            width: 94vw;
 
-            max-width: 94vw;
+            width: 96vw;
 
-            min-width: 0;
+            max-width: 96vw;
 
-            border-radius: 14px;
-        }
+            margin: 10px auto;
 
-
-        .modal-header {
-            padding: 12px;
+            border-radius: 3px;
         }
 
 
         .action-close {
+
             top: 10px;
 
             right: 10px;
@@ -704,80 +1300,161 @@
 
             height: 34px;
 
-            &:before {
-                line-height: 34px;
 
-                font-size: 16px;
+            &::before {
+
+                font-size: 15px;
             }
         }
     }
 
 
     .quick-view-media {
+
         min-height: 260px;
 
         padding: 20px;
     }
 
 
-    .quick-view-media img {
-        max-width: 230px;
+    .quick-view-media::before {
 
-        height: 230px;
+        width: 185px;
+
+        height: 185px;
+    }
+
+
+    .quick-view-media::after {
+
+        bottom: 14px;
+
+        left: 15px;
+
+        width: 35px;
+
+        height: 2px;
+
+        box-shadow:
+            14px 0 0 @theme-blue;
+    }
+
+
+    .quick-view-media img {
+
+        max-width: 215px;
+
+        height: 215px;
     }
 
 
     .quick-view-details {
-        padding: 26px 22px 30px;
+
+        padding: 24px 20px 26px;
     }
 
 
     .quick-view-details .product-name,
     #quick-view-name {
+
+        margin-bottom: 15px;
+
         padding-right: 25px;
 
-        font-size: 21px;
+        font-size: 20px;
 
         line-height: 1.3;
     }
 
 
-    .product-info-meta {
-        margin-bottom: 20px;
+    .quick-view-details .product-name::after,
+    #quick-view-name::after {
 
-        padding-bottom: 15px;
+        width: 30px;
+
+        height: 2px;
+
+        margin-top: 9px;
     }
 
 
     .product-sku,
     .product-stock {
-        font-size: 13px;
+
+        font-size: 11px;
     }
 
 
     .product-sku strong,
     .product-stock strong {
-        min-width: 90px;
+
+        min-width: 72px;
+
+        font-size: 11px;
+    }
+
+
+    .product-info-price {
+
+        margin-bottom: 18px;
     }
 
 
     #quick-view-price,
     #quick-view-price .price {
-        font-size: 25px;
+
+        font-size: 23px;
     }
 
 
     .product-info-description {
-        font-size: 13px;
+
+        font-size: 11px;
 
         line-height: 1.65;
+    }
+
+
+    .product-info-description > strong {
+
+        font-size: 12px;
+    }
+
+
+    .description-text {
+
+        max-height: 120px;
+    }
+
+
+    .quick-view-actions {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 8px;
+
+        padding-top: 20px;
+    }
+
+
+    .quick-view-actions .action.primary,
+    .quick-view-actions button,
+    .quick-view-actions .secondary {
+
+        width: 100%;
+
+        min-height: 44px;
+
+        box-sizing: border-box;
     }
 }
 
 
-/* =========================================================
-   16. ACCESSIBILITY / REDUCED MOTION
-   ========================================================= */
+// =========================================================
+// 19. REDUCED MOTION
+// =========================================================
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -790,12 +1467,21 @@
     .product-info-price,
     .product-info-description,
     .quick-view-error {
+
         animation: none;
 
         transition: none;
     }
 
+
     .quick-view-media img:hover {
+
+        transform: none;
+    }
+
+
+    .modal-popup.codilar-quickview-modal .action-close:hover {
+
         transform: none;
     }
 }

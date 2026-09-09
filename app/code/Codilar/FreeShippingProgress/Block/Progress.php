@@ -44,6 +44,14 @@ class Progress extends Template
         ]
     ];
 
+    /**
+     * @param Template\Context $context
+     * @param CheckoutSession $checkoutSession
+     * @param CollectionFactory $productCollectionFactory
+     * @param Image $imageHelper
+     * @param Json $json
+     * @param array $data
+     */
     public function __construct(
         Template\Context $context,
         private readonly CheckoutSession $checkoutSession,
@@ -54,6 +62,10 @@ class Progress extends Template
     ) {
         parent::__construct($context, $data);
     }
+
+    /**
+     * @return array[]
+     */
 
     public function getRewards(): array
     {
@@ -85,6 +97,11 @@ class Progress extends Template
         );
     }
 
+    /**
+     * @return string
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
     public function getProductsJson(): string
     {
         $quote = $this->checkoutSession->getQuote();
@@ -109,13 +126,7 @@ class Progress extends Template
             );
         }
 
-        $categoryIds = array_values(
-            array_unique(
-                array_filter(
-                    array_map('intval', $categoryIds)
-                )
-            )
-        );
+        $categoryIds = array_values(array_unique(array_filter(array_map('intval', $categoryIds))));
 
         $cartProductIds = array_values(
             array_unique($cartProductIds)

@@ -1,95 +1,199 @@
 .codilar-minicart-rewards {
-    margin: 20px 0;
-    padding: 16px;
-    background: #fff;
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-}
 
-.codilar-minicart-progress__message {
-    margin-bottom: 18px;
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 600;
-    color: #333;
-}
-
-.codilar-minicart-progress__bar {
-    position: relative;
-    padding: 10px 0 55px;
-}
-
-.codilar-minicart-progress__track {
-    position: relative;
     width: 100%;
-    height: 6px;
-    background: #e5e5e5;
-    border-radius: 10px;
+    box-sizing: border-box;
+
+    padding: 13px 11px 10px;
+
     overflow: hidden;
-}
 
-.codilar-minicart-progress__fill {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 0;
-    background: #1979c3;
-    border-radius: 10px;
-    transition: width 0.35s ease;
-}
+    &__title {
+        margin-bottom: 14px;
 
-.codilar-minicart-progress__milestones {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 55px;
-}
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 18px;
 
-.codilar-minicart-progress__step {
-    position: absolute;
-    top: -8px;
-    transform: translateX(-50%);
-    width: 70px;
-    text-align: center;
-}
+        color: #222;
+    }
 
-.codilar-minicart-progress__circle {
-    width: 22px;
-    height: 22px;
-    margin: 0 auto 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #d5d5d5;
-    border-radius: 50%;
-    background: #fff;
-    color: #999;
-    font-size: 11px;
-    font-weight: 700;
-}
+    &__progress {
+        position: relative;
 
-.codilar-minicart-progress__step.is-active
-.codilar-minicart-progress__circle {
-    border-color: #1979c3;
-    background: #1979c3;
-    color: #fff;
-}
+        width: 100%;
+        height: 58px;
+    }
 
-.codilar-minicart-progress__content strong {
-    display: block;
-    font-size: 10px;
-    line-height: 13px;
-    color: #333;
-    white-space: nowrap;
-}
+    /* =========================
+       TRACK
+       ========================= */
 
-.codilar-minicart-progress__content span {
-    display: block;
-    margin-top: 2px;
-    font-size: 9px;
-    line-height: 12px;
-    color: #999;
-    white-space: nowrap;
+    &__track {
+        position: absolute;
+
+        top: 9px;
+        left: 0;
+        right: 0;
+
+        width: 100%;
+        height: 4px;
+
+        background: #e6ebef;
+
+        border-radius: 4px;
+
+        overflow: hidden;
+    }
+
+    /* =========================
+       FILLED TRACK
+       ========================= */
+
+    &__track-fill {
+        display: block;
+
+        width: 0;
+        height: 100%;
+
+        background: #e62429;
+
+        border-radius: 4px;
+
+        transition: width 0.3s ease;
+    }
+
+    /* =========================
+       MILESTONES
+       ========================= */
+
+    &__milestones {
+        position: absolute;
+
+        top: 0;
+        left: 0;
+
+        width: 84%;
+        height: 58px;
+
+        z-index: 3;
+    }
+
+    /* =========================
+       REWARD STEP
+       ========================= */
+
+    .reward-step {
+        position: absolute;
+
+        top: 0;
+
+        width: 54px;
+        max-width: 54px;
+
+        margin: 0;
+        padding: 0;
+
+        box-sizing: border-box;
+
+        transform: translateX(-50%);
+
+        text-align: center;
+
+        z-index: 4;
+    }
+
+    /* =========================
+       CIRCLE
+       ========================= */
+
+    .reward-step__circle {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        width: 18px;
+        height: 18px;
+
+        margin: 0 auto;
+
+        box-sizing: border-box;
+
+        background: #fff;
+
+        border: 2px solid #d6dde3;
+
+        border-radius: 50%;
+
+        color: #1979c3;
+
+        font-size: 10px;
+        font-weight: 700;
+    }
+
+    /* =========================
+       ACTIVE
+       ========================= */
+
+    .reward-step.is-active {
+
+        .reward-step__circle {
+            background: #1979c3;
+
+            border-color: #1979c3;
+
+            color: #fff;
+        }
+    }
+
+    /* =========================
+       TEXT
+       ========================= */
+
+    .reward-step__content {
+        width: 100%;
+
+        margin-top: 6px;
+
+        text-align: center;
+
+        overflow: hidden;
+    }
+
+    .reward-step__content strong {
+        display: block;
+
+        width: 100%;
+
+        font-size: 9px;
+        font-weight: 700;
+
+        line-height: 12px;
+
+        color: #222;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+    }
+
+    .reward-step__content span {
+        display: block;
+
+        width: 100%;
+
+        font-size: 8px;
+
+        line-height: 11px;
+
+        color: #777;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+    }
 }
