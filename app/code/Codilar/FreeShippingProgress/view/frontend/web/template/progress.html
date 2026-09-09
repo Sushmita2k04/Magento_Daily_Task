@@ -1,0 +1,105 @@
+<div class="codilar-rewards__title"
+     data-bind="text: message">
+</div>
+
+<div class="codilar-rewards__progress">
+
+    <div class="codilar-rewards__track">
+        <span class="codilar-rewards__track-fill"
+              data-bind="style: {
+                  width: progressPercent() + '%'
+              }">
+        </span>
+    </div>
+
+    <div class="codilar-rewards__milestones">
+
+        <!-- ko foreach: rewards -->
+
+        <div class="reward-step"
+             data-bind="
+                 style: {
+                     left: $parent.rewardPosition($data, $index()) + '%'
+                 },
+                 css: {
+                     'is-active': $parent.isUnlocked($data)
+                 }
+             ">
+
+            <div class="reward-step__circle">
+
+                <!-- ko if: $parent.isUnlocked($data) -->
+                <span class="reward-step__check">✓</span>
+                <!-- /ko -->
+
+                <!-- ko ifnot: $parent.isUnlocked($data) -->
+                <span class="reward-step__locked">%</span>
+                <!-- /ko -->
+
+            </div>
+
+            <div class="reward-step__content">
+
+                <strong data-bind="text: title"></strong>
+
+                <span data-bind="text: subtitle"></span>
+
+            </div>
+
+        </div>
+
+        <!-- /ko -->
+
+    </div>
+
+</div>
+
+<div class="codilar-rewards__products">
+
+    <!-- ko foreach: products -->
+
+    <div class="reward-product">
+
+        <a class="reward-product__image"
+           data-bind="attr: {
+               href: url,
+               title: name
+           }">
+
+            <img loading="lazy"
+                 data-bind="attr: {
+                     src: image,
+                     alt: name
+                 }">
+
+            <button type="button"
+                    class="reward-product__wishlist"
+                    aria-label="Add to wishlist">
+                ♡
+            </button>
+
+            <span class="reward-product__add">+</span>
+
+        </a>
+
+        <div class="reward-product__price">
+
+            <strong data-bind="
+                text: $parent.formatPrice(final_price)
+            "></strong>
+
+            <!-- ko if: Number(regular_price) > Number(final_price) -->
+
+            <del data-bind="
+                text: $parent.formatPrice(regular_price)
+            "></del>
+
+            <!-- /ko -->
+
+        </div>
+
+    </div>
+
+    <!-- /ko -->
+
+</div>

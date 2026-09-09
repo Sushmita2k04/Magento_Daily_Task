@@ -1,0 +1,22 @@
+<div class="codilar-success-message"
+     data-bind="scope: 'codilarSuccessMessage'">
+
+    <!-- ko template: getTemplate() --><!-- /ko -->
+
+</div>
+
+<script type="text/x-magento-init">
+    {
+        ".codilar-success-message": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "codilarSuccessMessage": {
+                        "component": "Codilar_FreeShippingProgress/js/success-message",
+                        "rewards": <?= /* @noEscape */ $block->getRewardsJson() ?>,
+                    "initialSubtotal": <?= (float) $block->getInitialSubtotal() ?>
+    }
+}
+}
+}
+}
+</script>

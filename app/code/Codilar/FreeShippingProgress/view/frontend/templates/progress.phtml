@@ -1,0 +1,43 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * @var \Codilar\FreeShippingProgress\Block\Progress $block
+ */
+?>
+
+<div class="codilar-rewards"
+     data-bind="scope: 'codilarRewards'">
+
+    <!-- ko template: getTemplate() -->
+    <!-- /ko -->
+
+</div>
+
+
+<script type="text/x-magento-init">
+    {
+        ".codilar-rewards": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "codilarRewards": {
+                        "component": "Codilar_FreeShippingProgress/js/progress",
+
+                        "rewards":
+    <?= /* @noEscape */ $block->getRewardsJson() ?>,
+
+                    "products":
+    <?= /* @noEscape */ $block->getProductsJson() ?>,
+
+                    "maxRewardAmount":
+    <?= (float) $block->getMaxRewardAmount() ?>,
+
+                    "initialSubtotal":
+    <?= (float) $block->getInitialSubtotal() ?>
+    }
+}
+}
+}
+}
+</script>

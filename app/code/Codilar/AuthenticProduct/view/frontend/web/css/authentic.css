@@ -1,39 +1,453 @@
-.authentic-overlay {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    /*width: 100vw !important;*/
-    height: 100vh !important;
-    background-color: rgba(0, 0, 0, 0.4) !important;
-    backdrop-filter: blur(2px) !important; /* Blur kam kar ke 2px kar diya hai */
-    -webkit-backdrop-filter: blur(2px) !important;
-    z-index: 99988 !important;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-.authentic-overlay.is-open {
-    opacity: 1 !important;
-    visibility: visible !important;
+/* =========================================================
+   AUTHENTIC PRODUCT
+   ========================================================= */
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+body.authentic-drawer-open {
+    overflow: hidden !important;
 }
 
-/* Right Side Drawer Header & Content (Completely Clear/No Blur) */
+
+/* =========================================================
+   AUTHENTIC PRODUCT WRAPPER
+   ========================================================= */
+
+.authentic-product-wrapper {
+    position: relative;
+    width: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+
+/* =========================================================
+   AUTHENTIC PRODUCT BANNER
+   ========================================================= */
+
+.authentic-product-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+
+    padding: 10px 16px;
+
+    margin-bottom: 12px;
+
+    box-sizing: border-box;
+
+    background-color: #f0f7ff;
+
+    border-radius: 8px;
+}
+
+
+/* =========================================================
+   BANNER CONTENT
+   ========================================================= */
+
+.authentic-product-content {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+/* =========================================================
+   CERTIFICATE ICON
+   ========================================================= */
+
+.authentic-certificate-icon {
+    flex-shrink: 0;
+    display: block;
+}
+
+
+/* =========================================================
+   PRODUCT LABEL
+   ========================================================= */
+
+.authentic-product-label {
+    font-size: 14px;
+
+    font-weight: 600;
+
+    line-height: 1;
+
+    color: #1877f2;
+}
+
+
+/* =========================================================
+   INFO BUTTON
+   ========================================================= */
+
+.authentic-info-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+
+    padding: 0;
+    margin: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    outline: none;
+}
+
+
+/* =========================================================
+   INFO BUTTON HOVER
+   ========================================================= */
+
+.authentic-info-button:hover {
+    opacity: 0.7;
+}
+
+
+/* =========================================================
+   OVERLAY - CLOSED
+   ========================================================= */
+
+.authentic-overlay {
+    position: fixed !important;
+
+    top: 0 !important;
+    left: 0 !important;
+
+    width: 0 !important;
+    height: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    background-color: rgba(0, 0, 0, 0.4) !important;
+
+    backdrop-filter: blur(2px) !important;
+    -webkit-backdrop-filter: blur(2px) !important;
+
+    opacity: 0 !important;
+
+    visibility: hidden !important;
+
+    pointer-events: none !important;
+
+    overflow: hidden !important;
+
+    z-index: 99998 !important;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        width 0s linear 0.3s,
+        height 0s linear 0.3s !important;
+}
+
+
+/* =========================================================
+   OVERLAY - OPEN
+   ========================================================= */
+
+.authentic-overlay.is-open {
+    width: 100vw !important;
+    height: 100vh !important;
+
+    opacity: 1 !important;
+
+    visibility: visible !important;
+
+    pointer-events: auto !important;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        width 0s,
+        height 0s !important;
+}
+
+
+/* =========================================================
+   DRAWER - CLOSED
+   ========================================================= */
+
 .authentic-drawer {
     position: fixed !important;
+
     top: 0 !important;
-    right: -100% !important;
-    /*width: 100% !important;*/
+    right: 0 !important;
+
+    width: 0 !important;
+    height: 0 !important;
+
     max-width: 420px !important;
-    /*height: 100vh !important;*/
-    background-color: #f0f7ff !important;
-    box-shadow: -8px 0 24px rgba(0, 0, 0, 0.15) !important;
-    z-index: 99999 !important; /* Overlay se high Z-index taaki ye clear dikhe */
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    box-sizing: border-box !important;
+
     display: flex !important;
     flex-direction: column !important;
-    transition: right 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
-    box-sizing: border-box !important;
-    filter: none !important; /* Ensures no blur on drawer elements */
+
+    background-color: #f0f7ff !important;
+
+    overflow: hidden !important;
+
+    opacity: 0 !important;
+
+    visibility: hidden !important;
+
+    pointer-events: none !important;
+
+    transform: translateX(100%) !important;
+
+    box-shadow: none !important;
+
+    z-index: 99999 !important;
+
+    transition:
+        transform 0.35s cubic-bezier(
+            0.25,
+            1,
+            0.5,
+            1
+        ),
+        opacity 0.25s ease,
+        visibility 0.25s ease,
+        width 0s linear 0.35s,
+        height 0s linear 0.35s !important;
 }
+
+
+/* =========================================================
+   DRAWER - OPEN
+   ========================================================= */
+
 .authentic-drawer.is-open {
+    top: 0 !important;
     right: 0 !important;
+
+    width: 420px !important;
+    max-width: 420px !important;
+
+    height: 100vh !important;
+    height: 100dvh !important;
+
+    opacity: 1 !important;
+
+    visibility: visible !important;
+
+    pointer-events: auto !important;
+
+    transform: translateX(0) !important;
+
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+
+    box-shadow:
+        -8px 0 30px rgba(0, 0, 0, 0.18) !important;
+
+    transition:
+        transform 0.35s cubic-bezier(
+            0.25,
+            1,
+            0.5,
+            1
+        ),
+        opacity 0.25s ease,
+        visibility 0.25s ease,
+        width 0s,
+        height 0s !important;
+}
+
+
+/* =========================================================
+   DRAWER HEADER
+   ========================================================= */
+
+.authentic-drawer-header {
+    width: 100%;
+
+    min-height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    padding: 20px 24px 10px;
+
+    box-sizing: border-box;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+.authentic-drawer-close {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #1a1a1a;
+
+    font-size: 28px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    outline: none;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+.authentic-drawer-close:hover {
+    transform: rotate(90deg);
+
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   DRAWER CONTENT
+   ========================================================= */
+
+.authentic-drawer-content {
+    width: 100%;
+
+    padding: 20px 32px 40px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   DRAWER ICON
+   ========================================================= */
+
+.authentic-drawer-icon {
+    display: block;
+
+    flex-shrink: 0;
+
+    margin-bottom: 24px;
+}
+
+
+/* =========================================================
+   DRAWER HEADING
+   ========================================================= */
+
+.authentic-drawer-content h3 {
+    margin: 0 0 16px;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    line-height: 1.3;
+
+    color: #0d0d0d;
+}
+
+
+/* =========================================================
+   DRAWER TEXT
+   ========================================================= */
+
+.authentic-drawer-content p {
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    color: #4a4a4a;
+}
+
+
+/* =========================================================
+   DRAWER SCROLLBAR
+   ========================================================= */
+
+.authentic-drawer::-webkit-scrollbar {
+    width: 5px;
+}
+
+.authentic-drawer::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.authentic-drawer::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media screen and (max-width: 767px) {
+
+    .authentic-drawer {
+        max-width: 100vw !important;
+    }
+
+    .authentic-drawer.is-open {
+        width: 100vw !important;
+        max-width: 100vw !important;
+
+        height: 100vh !important;
+        height: 100dvh !important;
+    }
+
+    .authentic-drawer-content {
+        padding: 20px 20px 30px;
+    }
+
+    .authentic-drawer-header {
+        padding: 12px 16px 8px;
+    }
 }

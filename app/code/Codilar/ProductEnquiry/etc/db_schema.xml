@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="product_enquiry" resource="default" engine="innodb" comment="Product Enquiry">
+
+        <column name="entity_id"
+                xsi:type="int"
+                unsigned="true"
+                nullable="false"
+                identity="true"
+                comment="Entity ID"/>
+
+        <column name="name"
+                xsi:type="varchar"
+                length="255"
+                nullable="false"
+                comment="Customer Name"/>
+
+        <column name="email"
+                xsi:type="varchar"
+                length="255"
+                nullable="false"
+                comment="Customer Email"/>
+
+        <column name="sku"
+                xsi:type="varchar"
+                length="255"
+                nullable="false"
+                comment="Product SKU"/>
+
+        <column name="quantity"
+                xsi:type="int"
+                unsigned="true"
+                nullable="false"
+                default="1"
+                comment="Quantity"/>
+
+        <column xsi:type="text"
+                name="address"
+                nullable="false"
+                comment="Customer Address"/>
+
+        <column name="created_at"
+                xsi:type="timestamp"
+                nullable="false"
+                default="CURRENT_TIMESTAMP"
+                on_update="false"
+                comment="Created At"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+
+    </table>
+
+</schema>

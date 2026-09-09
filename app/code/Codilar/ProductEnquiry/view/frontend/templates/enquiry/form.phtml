@@ -1,0 +1,149 @@
+<?php
+
+/** @var \Magento\Catalog\Block\Product\View $block */
+
+$product = $block->getProduct();
+
+if (!$product) {
+    return;
+}
+?>
+
+<div class="product-enquiry-wrapper">
+
+    <button
+        type="button"
+        class="action primary product-enquiry-button"
+        id="product-enquiry-button">
+        <span><?= $block->escapeHtml(__('Product Enquiry')) ?></span>
+    </button>
+
+</div>
+
+<div id="product-enquiry-modal"
+     style="display:none;">
+
+    <form id="product-enquiry-form">
+
+        <!-- Name -->
+        <div class="field required">
+            <label class="label" for="enquiry-name">
+                <span><?= $block->escapeHtml(__('Name')) ?></span>
+            </label>
+
+            <div class="control">
+                <input
+                    type="text"
+                    name="name"
+                    id="enquiry-name"
+                    class="input-text"
+                    data-validate='{"required":true}'/>
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="field required">
+            <label class="label" for="enquiry-email">
+                <span><?= $block->escapeHtml(__('Email')) ?></span>
+            </label>
+
+            <div class="control">
+                <input
+                    type="email"
+                    name="email"
+                    id="enquiry-email"
+                    class="input-text"
+                    data-validate='{
+                        "required":true,
+                        "validate-email":true
+                    }'/>
+            </div>
+        </div>
+
+        <!-- Address -->
+        <div class="field required">
+            <label class="label" for="enquiry-address">
+                <span><?= $block->escapeHtml(__('Address')) ?></span>
+            </label>
+
+            <div class="control">
+                <textarea
+                    name="address"
+                    id="enquiry-address"
+                    class="input-text"
+                    rows="4"
+                    data-validate='{"required":true}'></textarea>
+            </div>
+        </div>
+
+        <!-- SKU -->
+        <div class="field required">
+            <label class="label" for="enquiry-sku">
+                <span><?= $block->escapeHtml(__('SKU')) ?></span>
+            </label>
+
+            <div class="control">
+                <input
+                    type="text"
+                    name="sku"
+                    id="enquiry-sku"
+                    class="input-text"
+                    value="<?= $block->escapeHtmlAttr($product->getSku()) ?>"
+                    readonly/>
+            </div>
+        </div>
+
+        <!-- Quantity -->
+        <div class="field required">
+            <label class="label" for="enquiry-quantity">
+                <span><?= $block->escapeHtml(__('Quantity')) ?></span>
+            </label>
+
+            <div class="control">
+                <input
+                    type="number"
+                    name="quantity"
+                    id="enquiry-quantity"
+                    class="input-text"
+                    value="1"
+                    min="1"
+                    data-validate='{
+                        "required":true,
+                        "validate-number":true,
+                        "validate-greater-than-zero":true
+                    }'/>
+            </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="actions-toolbar">
+
+            <div class="primary">
+
+                <button
+                    type="submit"
+                    class="action primary">
+                    <span><?= $block->escapeHtml(__('Submit')) ?></span>
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Message -->
+        <div
+            id="product-enquiry-message"
+            style="margin-top:15px;">
+        </div>
+
+    </form>
+
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Codilar_ProductEnquiry/js/product-enquiry": {}
+        }
+    }
+</script>

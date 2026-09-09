@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Magento\Framework\View\Model\Layout\Update\Validator"
+                type="Codilar\CoreFix\Model\Layout\Update\Validator"/>
+
+    <preference for="Magento\Framework\View\PageLayout\Config"
+                type="Codilar\CoreFix\Model\View\PageLayout\Config"/>
+
+    <preference for="Magento\Framework\View\Layout\PageType\Config\SchemaLocator"
+                type="Codilar\CoreFix\Model\View\Layout\PageType\Config\SchemaLocator"/>
+
+    <preference for="Magento\Theme\Model\Layout\Config\SchemaLocator"
+                type="Codilar\CoreFix\Model\Theme\Layout\Config\SchemaLocator"/>
+
+</config>
