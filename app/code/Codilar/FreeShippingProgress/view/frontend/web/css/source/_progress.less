@@ -1,54 +1,123 @@
+// =========================================================
+// SUBTLE SPIDER-MAN CART REWARDS
+// =========================================================
+
 .codilar-rewards {
+    position: relative;
+
     width: 100%;
     box-sizing: border-box;
 
-    margin: 12px 0;
-    padding: 16px 18px;
+    margin: 14px 0;
+    padding: 17px 18px;
 
-    background: #fff;
+    background: #ffffff;
 
-    border: 1px solid #e5e5e5;
-    border-radius: 16px;
+    border: 1px solid #e7e9ed;
+    border-radius: 14px;
 
     overflow: hidden;
 
-    &__title {
-        margin: 0 0 22px;
+    box-shadow:
+        0 3px 14px rgba(20, 35, 50, 0.06);
 
-        color: #222;
 
-        font-size: 18px;
-        line-height: 1.35;
-        font-weight: 600;
+    // Subtle red accent
+    &::before {
+        content: '';
+
+        position: absolute;
+
+        top: 0;
+        left: 0;
+
+        width: 42px;
+        height: 3px;
+
+        background: #e62429;
+
+        border-radius: 0 0 4px 0;
     }
+
+
+    // Subtle blue accent
+    &::after {
+        content: '';
+
+        position: absolute;
+
+        top: 0;
+        left: 42px;
+
+        width: 28px;
+        height: 3px;
+
+        background: #1769aa;
+
+        border-radius: 0 0 4px 4px;
+    }
+
+
+    // =====================================================
+    // TITLE
+    // =====================================================
+
+    &__title {
+        margin: 0 0 21px;
+
+        color: #24272b;
+
+        font-family: 'Poppins', sans-serif;
+
+        font-size: 17px;
+        line-height: 1.4;
+        font-weight: 600;
+
+        letter-spacing: -0.15px;
+    }
+
+
+    // =====================================================
+    // PROGRESS AREA
+    // =====================================================
 
     &__progress {
         position: relative;
 
         width: 100%;
-        height: 82px;
+        height: 78px;
 
-        margin-bottom: 22px;
+        margin-bottom: 20px;
     }
+
+
+    // =====================================================
+    // TRACK
+    // =====================================================
 
     &__track {
         position: absolute;
 
-        top: 14px;
+        top: 13px;
         left: 0;
         right: 0;
 
         width: auto;
         height: 5px;
 
-        background: #e9edef;
+        background: #e9edf1;
 
-        border-radius: 999px;
+        border-radius: 20px;
 
         overflow: hidden;
 
         z-index: 1;
     }
+
+
+    // =====================================================
+    // FILL
+    // =====================================================
 
     &__track-fill {
         position: absolute;
@@ -59,14 +128,26 @@
         width: 0;
         height: 100%;
 
-        background: #4aa545;
+        background:
+            linear-gradient(
+                90deg,
+                #e62429 0%,
+                #e62429 65%,
+                #1769aa 100%
+            );
 
-        border-radius: 999px;
+        border-radius: 20px;
 
-        transition: width .35s ease;
+        transition:
+            width .4s cubic-bezier(.4, 0, .2, 1);
 
         will-change: width;
     }
+
+
+    // =====================================================
+    // MILESTONES
+    // =====================================================
 
     &__milestones {
         position: absolute;
@@ -76,10 +157,15 @@
         right: 0;
 
         width: 100%;
-        height: 75px;
+        height: 72px;
 
         z-index: 3;
     }
+
+
+    // =====================================================
+    // PRODUCTS
+    // =====================================================
 
     &__products {
         display: flex;
@@ -119,9 +205,9 @@
 }
 
 
-/* =========================================================
-   REWARD STEP
-   ========================================================= */
+// =========================================================
+// REWARD STEP
+// =========================================================
 
 .reward-step {
     position: absolute;
@@ -146,9 +232,15 @@
 
     transform: translateX(-50%);
 
-    transition: left .35s ease;
+    transition:
+        left .35s ease;
 
     z-index: 4;
+
+
+    // =====================================================
+    // CIRCLE
+    // =====================================================
 
     &__circle {
         display: flex;
@@ -156,49 +248,68 @@
         align-items: center;
         justify-content: center;
 
-        width: 30px;
-        height: 30px;
+        width: 28px;
+        height: 28px;
 
-        min-width: 30px;
-        min-height: 30px;
+        min-width: 28px;
+        min-height: 28px;
 
         margin-bottom: 7px;
 
         box-sizing: border-box;
 
-        background: #eef1f3;
+        background: #f3f5f7;
+
+        border: 2px solid #d8dde2;
 
         border-radius: 50%;
 
-        color: #55a447;
+        color: #6d8496;
 
-        font-size: 15px;
+        font-size: 13px;
         line-height: 1;
-        font-weight: 700;
+        font-weight: 600;
 
         box-shadow:
-            0 0 0 3px #fff;
+            0 0 0 3px #ffffff;
 
         transition:
-            background-color .25s ease,
+            background .25s ease,
+            border-color .25s ease,
             color .25s ease,
             transform .25s ease;
     }
 
+
+    // =====================================================
+    // ACTIVE
+    // =====================================================
+
     &.is-active {
 
         .reward-step__circle {
-            background: #55a447;
+            background: #e62429;
 
-            color: #fff;
+            border-color: #e62429;
+
+            color: #ffffff;
 
             transform: scale(1.04);
+
+            box-shadow:
+                0 0 0 3px #ffffff,
+                0 2px 6px rgba(230, 36, 41, .20);
         }
 
         .reward-step__content strong {
-            color: #3f8636;
+            color: #d71920;
         }
     }
+
+
+    // =====================================================
+    // CONTENT
+    // =====================================================
 
     &__content {
         display: flex;
@@ -212,9 +323,11 @@
         strong {
             display: block;
 
-            color: #222;
+            color: #30343a;
 
-            font-size: 12px;
+            font-family: 'Poppins', sans-serif;
+
+            font-size: 11px;
             line-height: 1.25;
             font-weight: 600;
 
@@ -226,9 +339,11 @@
 
             margin-top: 2px;
 
-            color: #777;
+            color: #82909c;
 
-            font-size: 10px;
+            font-family: 'Poppins', sans-serif;
+
+            font-size: 9px;
             line-height: 1.25;
             font-weight: 400;
 
@@ -236,30 +351,37 @@
         }
     }
 
+
+    // =====================================================
+    // SPECIAL TEXT
+    // =====================================================
+
     &__view {
-        color: #c74473 !important;
+        color: #1769aa !important;
 
         font-weight: 500 !important;
     }
 
+
     &__locked {
-        color: #55a447;
+        color: #1769aa;
     }
 
+
     &__check {
-        color: #fff;
+        color: #ffffff;
     }
 }
 
 
-/* =========================================================
-   PRODUCT CARD
-   ========================================================= */
+// =========================================================
+// PRODUCT CARD
+// =========================================================
 
 .reward-product {
     position: relative;
 
-    flex: 0 0 190px;
+    flex: 0 0 135px;
 
     width: 135px;
     min-width: 135px;
@@ -267,6 +389,11 @@
     box-sizing: border-box;
 
     scroll-snap-align: start;
+
+
+    // =====================================================
+    // IMAGE
+    // =====================================================
 
     &__image {
         position: relative;
@@ -278,14 +405,29 @@
 
         box-sizing: border-box;
 
-        background: #fff;
+        background: #ffffff;
 
-        border: 1px solid #e6e6e6;
-        border-radius: 11px;
+        border: 1px solid #e4e7ea;
+
+        border-radius: 10px;
 
         overflow: hidden;
 
         text-decoration: none;
+
+        transition:
+            border-color .2s ease,
+            box-shadow .2s ease,
+            transform .2s ease;
+
+        &:hover {
+            border-color: #d5dbe0;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 5px 14px rgba(20, 35, 50, .08);
+        }
 
         img {
             display: block;
@@ -297,11 +439,16 @@
         }
     }
 
+
+    // =====================================================
+    // WISHLIST
+    // =====================================================
+
     &__wishlist {
         position: absolute;
 
-        top: 5px;
-        right: 5px;
+        top: 6px;
+        right: 6px;
 
         display: flex;
 
@@ -315,25 +462,29 @@
 
         box-sizing: border-box;
 
-        background: #fff;
+        background: rgba(255, 255, 255, .96);
 
-        border: 0;
+        border: 1px solid #e1e4e7;
 
         border-radius: 50%;
 
-        color: #c74473;
+        color: #e62429;
 
-        font-size: 18px;
+        font-size: 17px;
         line-height: 1;
 
         cursor: pointer;
 
         z-index: 5;
 
-        transition: transform .2s ease;
+        transition:
+            background .2s ease,
+            transform .2s ease;
 
         &:hover {
-            transform: scale(1.05);
+            background: #fff3f3;
+
+            transform: scale(1.06);
         }
 
         &:focus {
@@ -341,11 +492,16 @@
         }
     }
 
+
+    // =====================================================
+    // ADD
+    // =====================================================
+
     &__add {
         position: absolute;
 
-        right: 5px;
-        bottom: 5px;
+        right: 6px;
+        bottom: 6px;
 
         display: flex;
 
@@ -357,28 +513,32 @@
 
         box-sizing: border-box;
 
-        background: #fff;
+        background: #ffffff;
 
-        border: 1px solid #c74473;
+        border: 1px solid #e62429;
 
-        border-radius: 8px;
+        border-radius: 7px;
 
-        color: #c74473;
+        color: #e62429;
 
-        font-size: 19px;
+        font-size: 18px;
         line-height: 1;
-        font-weight: 400;
+        font-weight: 500;
 
         cursor: pointer;
 
         z-index: 5;
 
         transition:
-            background-color .2s ease,
+            background .2s ease,
             color .2s ease,
             transform .2s ease;
 
         &:hover {
+            background: #e62429;
+
+            color: #ffffff;
+
             transform: scale(1.05);
         }
 
@@ -386,6 +546,11 @@
             outline: none;
         }
     }
+
+
+    // =====================================================
+    // PRICE
+    // =====================================================
 
     &__price {
         display: flex;
@@ -398,20 +563,23 @@
 
         margin-top: 6px;
 
+
         strong {
             display: inline-block;
 
             padding: 3px 7px;
 
-            background: #55a447;
+            background: #1769aa;
 
-            border: 1px solid #276c2d;
+            border: 1px solid #12578e;
 
-            border-radius: 7px;
+            border-radius: 6px;
 
-            color: #fff;
+            color: #ffffff;
 
-            font-size: 12px;
+            font-family: 'Poppins', sans-serif;
+
+            font-size: 11px;
             line-height: 1.2;
             font-weight: 600;
 
@@ -419,7 +587,9 @@
         }
 
         del {
-            color: #777;
+            color: #8a9198;
+
+            font-family: 'Poppins', sans-serif;
 
             font-size: 10px;
             line-height: 1.2;
@@ -428,61 +598,85 @@
         }
     }
 }
+
+
+// =========================================================
+// SUCCESS MESSAGE
+// =========================================================
+
 .codilar-success-message {
     margin-top: 12px;
 
+
     &__inner {
         display: flex;
+
         align-items: center;
+
         gap: 8px;
-        padding: 10px 14px;
-        background: #eef8ec;
-        border: 1px solid #b9dcae;
+
+        padding: 10px 13px;
+
+        background: #f2f7fb;
+
+        border: 1px solid #c9dce9;
+
         border-radius: 8px;
-        color: #3f8636;
-        font-size: 14px;
+
+        color: #1769aa;
+
+        font-family: 'Poppins', sans-serif;
+
+        font-size: 13px;
         font-weight: 600;
     }
 
+
     &__icon {
         display: flex;
+
         align-items: center;
         justify-content: center;
+
         width: 20px;
         height: 20px;
+
+        min-width: 20px;
+
         border-radius: 50%;
-        background: #55a447;
-        color: #fff;
-        font-size: 12px;
+
+        background: #e62429;
+
+        color: #ffffff;
+
+        font-size: 11px;
         font-weight: 700;
     }
 }
 
-/* =========================================================
-   TABLET
-   ========================================================= */
+
+// =========================================================
+// TABLET
+// =========================================================
 
 @media (max-width: 768px) {
 
     .codilar-rewards {
-        padding: 13px 14px;
+        padding: 14px 14px;
 
         &__title {
-            margin-bottom: 19px;
-
+            margin-bottom: 18px;
             font-size: 16px;
         }
 
         &__progress {
             height: 70px;
-
-            margin-bottom: 19px;
+            margin-bottom: 18px;
         }
 
         &__track {
-            top: 13px;
-
-            height: 4px;
+            top: 12px;
+            height: 5px;
         }
 
         &__milestones {
@@ -490,21 +684,17 @@
         }
     }
 
+
     .reward-step {
 
         &__circle {
-            width: 28px;
-            height: 28px;
+            width: 27px;
+            height: 27px;
 
-            min-width: 28px;
-            min-height: 28px;
+            min-width: 27px;
+            min-height: 27px;
 
-            margin-bottom: 6px;
-
-            font-size: 14px;
-
-            box-shadow:
-                0 0 0 2px #fff;
+            font-size: 12px;
         }
 
         &__content {
@@ -514,13 +704,14 @@
             }
 
             span {
-                font-size: 9px;
+                font-size: 8px;
             }
         }
     }
 
+
     .reward-product {
-        flex: 0 0 115px;
+        flex-basis: 115px;
 
         width: 115px;
         min-width: 115px;
@@ -528,54 +719,20 @@
         &__image {
             height: 115px;
         }
-
-        &__wishlist {
-            top: 4px;
-            right: 4px;
-
-            width: 25px;
-            height: 25px;
-
-            font-size: 16px;
-        }
-
-        &__add {
-            right: 4px;
-            bottom: 4px;
-
-            width: 25px;
-            height: 25px;
-
-            font-size: 17px;
-        }
-
-        &__price {
-            margin-top: 5px;
-
-            gap: 4px;
-
-            strong {
-                padding: 2px 6px;
-
-                font-size: 11px;
-            }
-
-            del {
-                font-size: 9px;
-            }
-        }
     }
 }
 
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
+// =========================================================
+// MOBILE
+// =========================================================
 
 @media (max-width: 480px) {
 
     .codilar-rewards {
-        padding: 11px 10px;
+        padding: 12px 10px;
+
+        border-radius: 11px;
 
         &__title {
             margin-bottom: 17px;
@@ -588,11 +745,11 @@
         &__progress {
             height: 65px;
 
-            margin-bottom: 17px;
+            margin-bottom: 16px;
         }
 
         &__track {
-            top: 12px;
+            top: 11px;
 
             height: 4px;
         }
@@ -602,127 +759,25 @@
         }
     }
 
+
     .reward-step {
 
         &__circle {
-            width: 26px;
-            height: 26px;
+            width: 25px;
+            height: 25px;
 
-            min-width: 26px;
-            min-height: 26px;
+            min-width: 25px;
+            min-height: 25px;
 
             margin-bottom: 5px;
 
-            font-size: 13px;
-
-            box-shadow:
-                0 0 0 2px #fff;
+            font-size: 11px;
         }
 
         &__content {
 
             strong {
                 font-size: 9px;
-
-                line-height: 1.2;
-            }
-
-            span {
-                margin-top: 1px;
-
-                font-size: 8px;
-
-                line-height: 1.2;
-            }
-        }
-    }
-
-    .reward-product {
-        flex: 0 0 100px;
-
-        width: 100px;
-        min-width: 100px;
-
-        &__image {
-            height: 105px;
-
-            border-radius: 10px;
-        }
-
-        &__wishlist {
-            top: 4px;
-            right: 4px;
-
-            width: 24px;
-            height: 24px;
-
-            font-size: 16px;
-        }
-
-        &__add {
-            right: 4px;
-            bottom: 4px;
-
-            width: 24px;
-            height: 24px;
-
-            border-radius: 7px;
-
-            font-size: 17px;
-        }
-
-        &__price {
-            margin-top: 5px;
-
-            gap: 4px;
-
-            strong {
-                padding: 2px 5px;
-
-                font-size: 10px;
-
-                border-radius: 6px;
-            }
-
-            del {
-                font-size: 9px;
-            }
-        }
-    }
-}
-
-
-/* =========================================================
-   VERY SMALL MOBILE
-   ========================================================= */
-
-@media (max-width: 360px) {
-
-    .codilar-rewards {
-        padding-left: 8px;
-        padding-right: 8px;
-
-        &__title {
-            font-size: 14px;
-        }
-    }
-
-    .reward-step {
-
-        &__circle {
-            width: 24px;
-            height: 24px;
-
-            min-width: 24px;
-            min-height: 24px;
-
-            font-size: 12px;
-        }
-
-        &__content {
-
-            strong {
-                font-size: 8px;
             }
 
             span {
@@ -731,14 +786,42 @@
         }
     }
 
-    .reward-product {
-        flex-basis: 92px;
 
-        width: 92px;
-        min-width: 92px;
+    .reward-product {
+        flex-basis: 100px;
+
+        width: 100px;
+        min-width: 100px;
 
         &__image {
-            height: 96px;
+            height: 105px;
+        }
+
+        &__wishlist,
+        &__add {
+            width: 24px;
+            height: 24px;
+        }
+
+        &__price {
+
+            strong {
+                font-size: 10px;
+            }
+
+            del {
+                font-size: 9px;
+            }
+        }
+    }
+
+
+    .codilar-success-message {
+
+        &__inner {
+            padding: 9px 11px;
+
+            font-size: 12px;
         }
     }
 }

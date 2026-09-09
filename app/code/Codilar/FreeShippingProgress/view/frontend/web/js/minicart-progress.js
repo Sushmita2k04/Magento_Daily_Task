@@ -1,11 +1,11 @@
 define([
     'uiComponent',
     'ko',
-    'Magento_Checkout/js/model/quote'
+    'Magento_Customer/js/customer-data'
 ], function (
     Component,
     ko,
-    quote
+    customerData
 ) {
     'use strict';
 
@@ -38,212 +38,274 @@ define([
             ]
         },
 
-        progressSections: 5,
-
         initialize: function () {
             this._super();
 
+            /**
+             * Magento customer-data cart section.
+             *
+             * this.cart     = Knockout observable
+             * this.cart()   = current cart data
+             */
+            this.cart = customerData.get('cart');
+
+            console.log('Cart data:', this.cart());
+
+            /**
+             * Current subtotal
+             */
             this.subtotal = ko.observable(
                 this.getSubtotal()
             );
 
-            this.rewards = ko.observableArray(
-                this.rewards
-            );
-
+            /**
+             * Progress bar percentage
+             */
             this.progressPercent = ko.pureComputed(
-                this.calculateProgress,
+                function () {
+                    var subtotal = this.subtotal();
+                    var rewards = this.rewards;
+
+                    if (!rewards.length) {
+                        return 0;
+                    }
+
+                    var sectionWidth =
+                        100 / rewards.length;
+
+                    var currentIndex = -1;
+
+                    var firstReward =
+                        Number(rewards[0].amount);
+
+                    var currentReward;
+                    var nextReward;
+                    var range;
+                    var travelled;
+                    var sectionProgress;
+
+                    /**
+                     * Find the last unlocked reward
+                     */
+                    rewards.forEach(
+                        function (reward, index) {
+                            if (
+                                subtotal >=
+                                Number(reward.amount)
+                            ) {
+                                currentIndex = index;
+                            }
+                        }
+                    );
+
+                    /**
+                     * Before first reward
+                     */
+                    if (subtotal < firstReward) {
+                        sectionProgress =
+                            subtotal / firstReward;
+
+                        return Math.max(
+                            0,
+                            Math.min(
+                                sectionProgress *
+                                sectionWidth,
+                                sectionWidth
+                            )
+                        );
+                    }
+
+                    /**
+                     * All rewards unlocked
+                     */
+                    if (
+                        currentIndex ===
+                        rewards.length - 1
+                    ) {
+                        return 100;
+                    }
+
+                    /**
+                     * Current reward
+                     */
+                    currentReward =
+                        Number(
+                            rewards[currentIndex].amount
+                        );
+
+                    /**
+                     * Next reward
+                     */
+                    nextReward =
+                        Number(
+                            rewards[currentIndex + 1].amount
+                        );
+
+                    range =
+                        nextReward - currentReward;
+
+                    travelled =
+                        subtotal - currentReward;
+
+                    sectionProgress =
+                        range > 0
+                            ? travelled / range
+                            : 0;
+
+                    return Math.max(
+                        0,
+                        Math.min(
+                            (
+                                (currentIndex + 1) *
+                                sectionWidth
+                            ) +
+                            (
+                                sectionProgress *
+                                sectionWidth
+                            ),
+                            100
+                        )
+                    );
+                },
                 this
             );
 
+            /**
+             * Message above progress bar
+             */
             this.message = ko.pureComputed(
-                this.getMessage,
+                function () {
+                    var nextReward =
+                        this.getNextReward();
+
+                    if (!nextReward) {
+                        return 'All rewards unlocked!';
+                    }
+
+                    return 'Shop $' +
+                        this.amountRemaining() +
+                        ' more, Unlock ' +
+                        nextReward.title;
+                },
                 this
             );
 
-            this.totalsSubscription = quote.totals.subscribe(
-                this.updateSubtotal.bind(this)
-            );
+            /**
+             * Listen for customer-data cart changes
+             */
+            this.cartSubscription =
+                this.cart.subscribe(
+                    this.updateSubtotal.bind(this)
+                );
 
             return this;
         },
 
+        /**
+         * Get subtotal from customer-data cart
+         */
         getSubtotal: function () {
-            var totals = quote.totals();
+            var cart = this.cart();
 
-            if (!totals) {
+            if (!cart) {
                 return 0;
             }
 
-            return Number(totals.subtotal) || 0;
+            console.log(
+                'Cart subtotal:',
+                cart.subtotalAmount
+            );
+
+            return Number(
+                cart.subtotalAmount
+            ) || 0;
         },
 
-        updateSubtotal: function (totals) {
-            if (!totals) {
-                return;
-            }
-
-            var subtotal = Number(totals.subtotal);
-
-            if (Number.isFinite(subtotal)) {
-                this.subtotal(subtotal);
-            }
+        /**
+         * Update subtotal when cart changes
+         */
+        updateSubtotal: function () {
+            this.subtotal(
+                this.getSubtotal()
+            );
         },
 
-        calculateProgress: function () {
+        /**
+         * Get next locked reward
+         */
+        getNextReward: function () {
             var subtotal = this.subtotal();
-            var rewards = this.rewards();
-            var rewardCount = rewards.length;
-            var sectionWidth = 100 / this.progressSections;
-            var currentIndex = -1;
-            var firstReward;
-            var currentReward;
-            var nextReward;
-            var range;
-            var travelled;
-            var sectionProgress;
 
-            if (!rewardCount) {
-                return 0;
-            }
-
-            firstReward = Number(rewards[0].amount);
-
-            rewards.forEach(function (reward, index) {
-                if (subtotal >= Number(reward.amount)) {
-                    currentIndex = index;
+            return this.rewards.find(
+                function (reward) {
+                    return subtotal <
+                        Number(reward.amount);
                 }
-            });
-
-            if (subtotal < firstReward) {
-                sectionProgress = firstReward > 0
-                    ? subtotal / firstReward
-                    : 0;
-
-                return Math.max(
-                    0,
-                    Math.min(
-                        sectionProgress * sectionWidth,
-                        sectionWidth
-                    )
-                );
-            }
-
-            if (currentIndex === rewardCount - 1) {
-                return rewardCount * sectionWidth;
-            }
-
-            currentReward = Number(
-                rewards[currentIndex].amount
-            );
-
-            nextReward = Number(
-                rewards[currentIndex + 1].amount
-            );
-
-            range = nextReward - currentReward;
-            travelled = subtotal - currentReward;
-
-            sectionProgress = range > 0
-                ? travelled / range
-                : 0;
-
-            return Math.max(
-                0,
-                Math.min(
-                    (
-                        (currentIndex + 1) *
-                        sectionWidth
-                    ) +
-                    (
-                        sectionProgress *
-                        sectionWidth
-                    ),
-                    rewardCount * sectionWidth
-                )
-            );
+            ) || null;
         },
 
+        /**
+         * Get current unlocked reward
+         */
         getCurrentReward: function () {
             var subtotal = this.subtotal();
             var currentReward = null;
 
-            this.rewards().forEach(function (reward) {
-                if (subtotal >= Number(reward.amount)) {
-                    currentReward = reward;
+            this.rewards.forEach(
+                function (reward) {
+                    if (
+                        subtotal >=
+                        Number(reward.amount)
+                    ) {
+                        currentReward = reward;
+                    }
                 }
-            });
+            );
 
             return currentReward;
         },
 
-        getNextReward: function () {
-            var subtotal = this.subtotal();
-
-            return this.rewards().find(function (reward) {
-                return subtotal < Number(reward.amount);
-            }) || null;
-        },
-
+        /**
+         * Amount remaining for next reward
+         */
         amountRemaining: function () {
-            var nextReward = this.getNextReward();
+            var nextReward =
+                this.getNextReward();
 
             if (!nextReward) {
                 return 0;
             }
 
-            return Math.max(
-                0,
-                Math.ceil(
-                    Number(nextReward.amount) -
-                    this.subtotal()
-                )
+            return Math.ceil(
+                Number(nextReward.amount) -
+                this.subtotal()
             );
         },
 
-        getMessage: function () {
-            var currentReward = this.getCurrentReward();
-            var nextReward = this.getNextReward();
-
-            if (!nextReward) {
-                return 'All rewards unlocked!';
-            }
-
-            if (!currentReward) {
-                return 'Shop $' +
-                    this.amountRemaining() +
-                    ' more, Unlock ' +
-                    nextReward.title;
-            }
-
-            return currentReward.title +
-                ' unlocked! Shop $' +
-                this.amountRemaining() +
-                ' more, Unlock ' +
-                nextReward.title;
-        },
-
+        /**
+         * Check whether reward is unlocked
+         */
         isUnlocked: function (reward) {
-            return this.subtotal() >= Number(
-                reward.amount
+            return this.subtotal() >=
+                Number(reward.amount);
+        },
+
+        /**
+         * Position of reward marker
+         */
+        rewardPosition: function (reward, index) {
+            return (
+                (index + 1) *
+                (100 / this.rewards.length)
             );
         },
 
-        rewardPosition: function (reward, index) {
-            var sectionWidth =
-                100 / this.progressSections;
-
-            return (index + 1) * sectionWidth;
-        },
-
-        formatPrice: function (amount) {
-            return '$' +
-                Number(amount || 0).toFixed(2);
-        },
-
+        /**
+         * Cleanup subscriptions/computed observables
+         */
         dispose: function () {
-            if (this.totalsSubscription) {
-                this.totalsSubscription.dispose();
+            if (this.cartSubscription) {
+                this.cartSubscription.dispose();
             }
 
             if (this.progressPercent) {
