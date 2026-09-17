@@ -4,19 +4,12 @@ declare(strict_types=1);
 
 namespace Codilar\FreeShippingProgress\Block;
 
-use Magento\Catalog\Helper\Image;
-use Magento\Catalog\Model\Product;
-use Magento\Catalog\Model\Product\Attribute\Source\Status;
-use Magento\Catalog\Model\Product\Visibility;
-use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\View\Element\Template;
 
 class Progress extends Template
 {
-    private const PRODUCT_LIMIT = 10;
-
     private const REWARDS = [
         [
             'amount' => 500,
@@ -44,28 +37,14 @@ class Progress extends Template
         ]
     ];
 
-    /**
-     * @param Template\Context $context
-     * @param CheckoutSession $checkoutSession
-     * @param CollectionFactory $productCollectionFactory
-     * @param Image $imageHelper
-     * @param Json $json
-     * @param array $data
-     */
     public function __construct(
         Template\Context $context,
         private readonly CheckoutSession $checkoutSession,
-        private readonly CollectionFactory $productCollectionFactory,
-        private readonly Image $imageHelper,
         private readonly Json $json,
         array $data = []
     ) {
         parent::__construct($context, $data);
     }
-
-    /**
-     * @return array[]
-     */
 
     public function getRewards(): array
     {
@@ -95,127 +74,5 @@ class Progress extends Template
         return $this->json->serialize(
             $this->getRewards()
         );
-    }
-
-    /**
-     * @return string
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
-     */
-    public function getProductsJson(): string
-    {
-        $quote = $this->checkoutSession->getQuote();
-
-        $categoryIds = [];
-        $cartProductIds = [];
-
-        foreach ($quote->getAllVisibleItems() as $item) {
-            $product = $item->getProduct();
-
-            if (!$product || !$product->getId()) {
-                continue;
-            }
-
-            $productId = (int) $product->getId();
-
-            $cartProductIds[] = $productId;
-
-            $categoryIds = array_merge(
-                $categoryIds,
-                $product->getCategoryIds()
-            );
-        }
-
-        $categoryIds = array_values(array_unique(array_filter(array_map('intval', $categoryIds))));
-
-        $cartProductIds = array_values(
-            array_unique($cartProductIds)
-        );
-
-        if (!$categoryIds) {
-            return $this->json->serialize([]);
-        }
-
-        $collection = $this->productCollectionFactory->create();
-
-        $collection->addAttributeToSelect([
-            'name',
-            'price',
-            'special_price',
-            'small_image'
-        ]);
-
-        $collection->addAttributeToFilter(
-            'status',
-            Status::STATUS_ENABLED
-        );
-
-        $collection->addAttributeToFilter(
-            'visibility',
-            [
-                'in' => [
-                    Visibility::VISIBILITY_IN_CATALOG,
-                    Visibility::VISIBILITY_IN_SEARCH,
-                    Visibility::VISIBILITY_BOTH
-                ]
-            ]
-        );
-
-        if ($cartProductIds) {
-            $collection->addAttributeToFilter(
-                'entity_id',
-                [
-                    'nin' => $cartProductIds
-                ]
-            );
-        }
-
-        $categoryProductSelect = $collection
-            ->getConnection()
-            ->select()
-            ->from(
-                ['category_product' => 'catalog_category_product'],
-                ['product_id']
-            )
-            ->where(
-                'category_product.category_id IN (?)',
-                $categoryIds
-            );
-
-        $collection->getSelect()->where(
-            'e.entity_id IN (?)',
-            $categoryProductSelect
-        );
-
-        $collection
-            ->addUrlRewrite()
-            ->setOrder(
-                'entity_id',
-                'DESC'
-            )
-            ->setPageSize(
-                self::PRODUCT_LIMIT
-            );
-
-        $products = [];
-
-        /** @var Product $product */
-        foreach ($collection as $product) {
-            $products[] = [
-                'id' => (int) $product->getId(),
-                'name' => (string) $product->getName(),
-                'url' => (string) $product->getProductUrl(),
-                'image' => $this->imageHelper
-                    ->init(
-                        $product,
-                        'product_small_image'
-                    )
-                    ->getUrl(),
-                'regular_price' => (float) $product->getPrice(),
-                'final_price' => (float) $product->getFinalPrice()
-            ];
-        }
-
-        return $this->json->serialize($products);
     }
 }

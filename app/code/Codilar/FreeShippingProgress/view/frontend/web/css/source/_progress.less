@@ -1,706 +1,245 @@
-// =========================================================
-// SUBTLE SPIDER-MAN CART REWARDS
-// =========================================================
-
 .codilar-rewards {
+    justify-self: center;
     position: relative;
 
-    width: 100%;
+    width: 70%;
     box-sizing: border-box;
 
-    margin: 14px 0;
-    padding: 17px 18px;
+    margin: 24px 0 32px;
+    padding: 22px 24px 20px;
 
     background: #ffffff;
-
-    border: 1px solid #e7e9ed;
-    border-radius: 14px;
+    border: 1px solid #e6e6e6;
+    border-radius: 0;
 
     overflow: hidden;
 
-    box-shadow:
-        0 3px 14px rgba(20, 35, 50, 0.06);
-
-
-    // Subtle red accent
     &::before {
         content: '';
-
         position: absolute;
-
         top: 0;
         left: 0;
-
-        width: 42px;
-        height: 3px;
-
-        background: #e62429;
-
-        border-radius: 0 0 4px 0;
+        width: 100%;
+        height: 2px;
+        background: #111111;
     }
-
-
-    // Subtle blue accent
-    &::after {
-        content: '';
-
-        position: absolute;
-
-        top: 0;
-        left: 42px;
-
-        width: 28px;
-        height: 3px;
-
-        background: #1769aa;
-
-        border-radius: 0 0 4px 4px;
-    }
-
-
-    // =====================================================
-    // TITLE
-    // =====================================================
 
     &__title {
-        margin: 0 0 21px;
+        margin: 0 0 28px;
 
-        color: #24272b;
-
+        color: #111111;
         font-family: 'Poppins', sans-serif;
-
-        font-size: 17px;
-        line-height: 1.4;
-        font-weight: 600;
-
-        letter-spacing: -0.15px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.5;
     }
-
-
-    // =====================================================
-    // PROGRESS AREA
-    // =====================================================
 
     &__progress {
         position: relative;
-
         width: 100%;
-        height: 78px;
-
-        margin-bottom: 20px;
+        height: 76px;
     }
-
-
-    // =====================================================
-    // TRACK
-    // =====================================================
 
     &__track {
         position: absolute;
-
         top: 13px;
         left: 0;
         right: 0;
 
-        width: auto;
-        height: 5px;
+        width: 100%;
+        height: 3px;
 
-        background: #e9edf1;
-
-        border-radius: 20px;
-
+        background: #e5e5e5;
         overflow: hidden;
-
         z-index: 1;
     }
 
-
-    // =====================================================
-    // FILL
-    // =====================================================
-
     &__track-fill {
         position: absolute;
-
         top: 0;
         left: 0;
 
         width: 0;
         height: 100%;
 
-        background:
-            linear-gradient(
-                90deg,
-                #e62429 0%,
-                #e62429 65%,
-                #1769aa 100%
-            );
-
-        border-radius: 20px;
-
-        transition:
-            width .4s cubic-bezier(.4, 0, .2, 1);
-
-        will-change: width;
+        background: #111111;
+        transition: width 0.4s ease;
     }
-
-
-    // =====================================================
-    // MILESTONES
-    // =====================================================
 
     &__milestones {
         position: absolute;
-
         top: 0;
         left: 0;
         right: 0;
 
         width: 100%;
-        height: 72px;
+        height: 76px;
 
         z-index: 3;
     }
-
-
-    // =====================================================
-    // PRODUCTS
-    // =====================================================
-
-    &__products {
-        display: flex;
-
-        flex-wrap: nowrap;
-
-        gap: 12px;
-
-        width: 100%;
-
-        padding: 2px 2px 8px;
-
-        box-sizing: border-box;
-
-        overflow-x: auto;
-        overflow-y: hidden;
-
-        scroll-behavior: smooth;
-        scroll-snap-type: x proximity;
-
-        overscroll-behavior-x: contain;
-
-        -webkit-overflow-scrolling: touch;
-
-        scrollbar-width: none;
-
-        &::-webkit-scrollbar {
-            display: none;
-        }
-
-        cursor: grab;
-
-        &:active {
-            cursor: grabbing;
-        }
-    }
 }
-
-
-// =========================================================
-// REWARD STEP
-// =========================================================
 
 .reward-step {
     position: absolute;
-
     top: 0;
 
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
 
     width: max-content;
-
-    max-width: 130px;
-
-    box-sizing: border-box;
+    max-width: 120px;
 
     text-align: center;
-
     white-space: nowrap;
 
     transform: translateX(-50%);
-
-    transition:
-        left .35s ease;
-
+    transition: left 0.35s ease;
     z-index: 4;
-
-
-    // =====================================================
-    // CIRCLE
-    // =====================================================
 
     &__circle {
         display: flex;
-
         align-items: center;
         justify-content: center;
 
-        width: 28px;
-        height: 28px;
+        width: 27px;
+        height: 27px;
+        min-width: 27px;
+        min-height: 27px;
 
-        min-width: 28px;
-        min-height: 28px;
-
-        margin-bottom: 7px;
+        margin-bottom: 8px;
 
         box-sizing: border-box;
 
-        background: #f3f5f7;
-
-        border: 2px solid #d8dde2;
-
+        background: #ffffff;
+        border: 1px solid #cfcfcf;
         border-radius: 50%;
 
-        color: #6d8496;
-
-        font-size: 13px;
+        color: #999999;
+        font-family: 'Poppins', sans-serif;
+        font-size: 11px;
+        font-weight: 500;
         line-height: 1;
-        font-weight: 600;
 
-        box-shadow:
-            0 0 0 3px #ffffff;
+        box-shadow: 0 0 0 3px #ffffff;
 
         transition:
-            background .25s ease,
-            border-color .25s ease,
-            color .25s ease,
-            transform .25s ease;
+            background 0.25s ease,
+            border-color 0.25s ease,
+            color 0.25s ease,
+            transform 0.25s ease;
     }
 
-
-    // =====================================================
-    // ACTIVE
-    // =====================================================
-
-    &.is-active {
-
-        .reward-step__circle {
-            background: #e62429;
-
-            border-color: #e62429;
-
-            color: #ffffff;
-
-            transform: scale(1.04);
-
-            box-shadow:
-                0 0 0 3px #ffffff,
-                0 2px 6px rgba(230, 36, 41, .20);
-        }
-
-        .reward-step__content strong {
-            color: #d71920;
-        }
+    &__check {
+        display: block;
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 1;
     }
 
-
-    // =====================================================
-    // CONTENT
-    // =====================================================
+    &__locked {
+        display: block;
+        color: #999999;
+        font-size: 10px;
+        font-weight: 500;
+        line-height: 1;
+    }
 
     &__content {
         display: flex;
-
         flex-direction: column;
-
         align-items: center;
 
         min-width: 0;
 
         strong {
             display: block;
+            margin: 0;
 
-            color: #30343a;
-
+            color: #222222;
             font-family: 'Poppins', sans-serif;
-
-            font-size: 11px;
-            line-height: 1.25;
-            font-weight: 600;
-
+            font-size: 10px;
+            font-weight: 500;
+            line-height: 1.35;
             white-space: nowrap;
         }
 
         span {
             display: block;
+            margin-top: 3px;
 
-            margin-top: 2px;
-
-            color: #82909c;
-
+            color: #888888;
             font-family: 'Poppins', sans-serif;
-
             font-size: 9px;
-            line-height: 1.25;
             font-weight: 400;
-
+            line-height: 1.35;
             white-space: nowrap;
         }
     }
 
-
-    // =====================================================
-    // SPECIAL TEXT
-    // =====================================================
-
-    &__view {
-        color: #1769aa !important;
-
-        font-weight: 500 !important;
-    }
-
-
-    &__locked {
-        color: #1769aa;
-    }
-
-
-    &__check {
-        color: #ffffff;
-    }
-}
-
-
-// =========================================================
-// PRODUCT CARD
-// =========================================================
-
-.reward-product {
-    position: relative;
-
-    flex: 0 0 135px;
-
-    width: 135px;
-    min-width: 135px;
-
-    box-sizing: border-box;
-
-    scroll-snap-align: start;
-
-
-    // =====================================================
-    // IMAGE
-    // =====================================================
-
-    &__image {
-        position: relative;
-
-        display: block;
-
-        width: 100%;
-        height: 135px;
-
-        box-sizing: border-box;
-
-        background: #ffffff;
-
-        border: 1px solid #e4e7ea;
-
-        border-radius: 10px;
-
-        overflow: hidden;
-
-        text-decoration: none;
-
-        transition:
-            border-color .2s ease,
-            box-shadow .2s ease,
-            transform .2s ease;
-
-        &:hover {
-            border-color: #d5dbe0;
-
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 5px 14px rgba(20, 35, 50, .08);
-        }
-
-        img {
-            display: block;
-
-            width: 100%;
-            height: 100%;
-
-            object-fit: contain;
-        }
-    }
-
-
-    // =====================================================
-    // WISHLIST
-    // =====================================================
-
-    &__wishlist {
-        position: absolute;
-
-        top: 6px;
-        right: 6px;
-
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-
-        width: 27px;
-        height: 27px;
-
-        padding: 0;
-
-        box-sizing: border-box;
-
-        background: rgba(255, 255, 255, .96);
-
-        border: 1px solid #e1e4e7;
-
-        border-radius: 50%;
-
-        color: #e62429;
-
-        font-size: 17px;
-        line-height: 1;
-
-        cursor: pointer;
-
-        z-index: 5;
-
-        transition:
-            background .2s ease,
-            transform .2s ease;
-
-        &:hover {
-            background: #fff3f3;
-
-            transform: scale(1.06);
-        }
-
-        &:focus {
-            outline: none;
-        }
-    }
-
-
-    // =====================================================
-    // ADD
-    // =====================================================
-
-    &__add {
-        position: absolute;
-
-        right: 6px;
-        bottom: 6px;
-
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-
-        width: 27px;
-        height: 27px;
-
-        box-sizing: border-box;
-
-        background: #ffffff;
-
-        border: 1px solid #e62429;
-
-        border-radius: 7px;
-
-        color: #e62429;
-
-        font-size: 18px;
-        line-height: 1;
-        font-weight: 500;
-
-        cursor: pointer;
-
-        z-index: 5;
-
-        transition:
-            background .2s ease,
-            color .2s ease,
-            transform .2s ease;
-
-        &:hover {
-            background: #e62429;
-
+    &.is-active {
+        .reward-step__circle {
+            background: #111111;
+            border-color: #111111;
             color: #ffffff;
 
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
-        &:focus {
-            outline: none;
-        }
-    }
+        .reward-step__content {
+            strong {
+                color: #111111;
+                font-weight: 600;
+            }
 
-
-    // =====================================================
-    // PRICE
-    // =====================================================
-
-    &__price {
-        display: flex;
-
-        align-items: center;
-
-        gap: 5px;
-
-        min-height: 25px;
-
-        margin-top: 6px;
-
-
-        strong {
-            display: inline-block;
-
-            padding: 3px 7px;
-
-            background: #1769aa;
-
-            border: 1px solid #12578e;
-
-            border-radius: 6px;
-
-            color: #ffffff;
-
-            font-family: 'Poppins', sans-serif;
-
-            font-size: 11px;
-            line-height: 1.2;
-            font-weight: 600;
-
-            white-space: nowrap;
-        }
-
-        del {
-            color: #8a9198;
-
-            font-family: 'Poppins', sans-serif;
-
-            font-size: 10px;
-            line-height: 1.2;
-
-            white-space: nowrap;
+            span {
+                color: #666666;
+            }
         }
     }
 }
 
-
-// =========================================================
-// SUCCESS MESSAGE
-// =========================================================
-
-.codilar-success-message {
-    margin-top: 12px;
-
-
-    &__inner {
-        display: flex;
-
-        align-items: center;
-
-        gap: 8px;
-
-        padding: 10px 13px;
-
-        background: #f2f7fb;
-
-        border: 1px solid #c9dce9;
-
-        border-radius: 8px;
-
-        color: #1769aa;
-
-        font-family: 'Poppins', sans-serif;
-
-        font-size: 13px;
-        font-weight: 600;
-    }
-
-
-    &__icon {
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-
-        width: 20px;
-        height: 20px;
-
-        min-width: 20px;
-
-        border-radius: 50%;
-
-        background: #e62429;
-
-        color: #ffffff;
-
-        font-size: 11px;
-        font-weight: 700;
+.checkout-cart-index {
+    .codilar-rewards {
+        max-width: 100%;
+        margin-top: 20px;
+        margin-bottom: 30px;
     }
 }
-
-
-// =========================================================
-// TABLET
-// =========================================================
 
 @media (max-width: 768px) {
-
     .codilar-rewards {
-        padding: 14px 14px;
+        margin: 18px 0 25px;
+        padding: 18px 18px 17px;
 
         &__title {
-            margin-bottom: 18px;
-            font-size: 16px;
+            margin-bottom: 24px;
+            font-size: 13px;
         }
 
-        &__progress {
+        &__progress,
+        &__milestones {
             height: 70px;
-            margin-bottom: 18px;
         }
 
         &__track {
             top: 12px;
-            height: 5px;
-        }
-
-        &__milestones {
-            height: 64px;
         }
     }
 
-
     .reward-step {
-
         &__circle {
-            width: 27px;
-            height: 27px;
-
-            min-width: 27px;
-            min-height: 27px;
-
-            font-size: 12px;
+            width: 25px;
+            height: 25px;
+            min-width: 25px;
+            min-height: 25px;
+            margin-bottom: 7px;
+            font-size: 10px;
         }
 
         &__content {
-
             strong {
-                font-size: 10px;
+                font-size: 9px;
             }
 
             span {
@@ -708,120 +247,50 @@
             }
         }
     }
-
-
-    .reward-product {
-        flex-basis: 115px;
-
-        width: 115px;
-        min-width: 115px;
-
-        &__image {
-            height: 115px;
-        }
-    }
 }
 
-
-// =========================================================
-// MOBILE
-// =========================================================
-
 @media (max-width: 480px) {
-
     .codilar-rewards {
-        padding: 12px 10px;
-
-        border-radius: 11px;
+        margin: 15px 0 20px;
+        padding: 16px 12px 15px;
 
         &__title {
-            margin-bottom: 17px;
-
-            font-size: 15px;
-
-            line-height: 1.3;
+            margin-bottom: 21px;
+            font-size: 12px;
         }
 
-        &__progress {
+        &__progress,
+        &__milestones {
             height: 65px;
-
-            margin-bottom: 16px;
         }
 
         &__track {
             top: 11px;
-
-            height: 4px;
-        }
-
-        &__milestones {
-            height: 59px;
+            height: 3px;
         }
     }
 
-
     .reward-step {
+        max-width: 85px;
 
         &__circle {
-            width: 25px;
-            height: 25px;
-
-            min-width: 25px;
-            min-height: 25px;
-
-            margin-bottom: 5px;
-
-            font-size: 11px;
+            width: 23px;
+            height: 23px;
+            min-width: 23px;
+            min-height: 23px;
+            margin-bottom: 6px;
+            font-size: 9px;
         }
 
         &__content {
-
             strong {
-                font-size: 9px;
+                font-size: 8px;
             }
 
             span {
+                margin-top: 2px;
                 font-size: 7px;
             }
-        }
-    }
-
-
-    .reward-product {
-        flex-basis: 100px;
-
-        width: 100px;
-        min-width: 100px;
-
-        &__image {
-            height: 105px;
-        }
-
-        &__wishlist,
-        &__add {
-            width: 24px;
-            height: 24px;
-        }
-
-        &__price {
-
-            strong {
-                font-size: 10px;
-            }
-
-            del {
-                font-size: 9px;
-            }
-        }
-    }
-
-
-    .codilar-success-message {
-
-        &__inner {
-            padding: 9px 11px;
-
-            font-size: 12px;
         }
     }
 }

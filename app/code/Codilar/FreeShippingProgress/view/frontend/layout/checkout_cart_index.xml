@@ -5,6 +5,7 @@
 
     <body>
 
+        <!-- Free Shipping Progress -->
         <referenceContainer name="content">
 
             <block
@@ -15,6 +16,7 @@
 
         </referenceContainer>
 
+        <!-- Success Message -->
         <referenceContainer name="cart.summary">
 
             <block
@@ -26,5 +28,4 @@
         </referenceContainer>
 
     </body>
-
 </page>

@@ -1,13 +1,12 @@
+
 define([
     'uiComponent',
     'ko',
-    'Magento_Checkout/js/model/quote',
-    'Magento_Catalog/js/price-utils'
+    'Magento_Checkout/js/model/quote'
 ], function (
     Component,
     ko,
-    quote,
-    priceUtils
+    quote
 ) {
     'use strict';
 
@@ -16,7 +15,6 @@ define([
         defaults: {
             template: 'Codilar_FreeShippingProgress/progress',
             rewards: [],
-            products: [],
             initialSubtotal: 0
         },
 
@@ -32,12 +30,6 @@ define([
             this.rewards = ko.observableArray(
                 Array.isArray(this.rewards)
                     ? this.rewards
-                    : []
-            );
-
-            this.products = ko.observableArray(
-                Array.isArray(this.products)
-                    ? this.products
                     : []
             );
 
@@ -132,14 +124,7 @@ define([
                     return 'All rewards unlocked!';
                 }
 
-                if (!currentReward) {
-                    return 'Shop $' +
-                        this.amountRemaining() +
-                        ' more, Unlock ' +
-                        nextReward.title;
-                }
-
-                return ' Shop $' +
+                return 'Shop $' +
                     this.amountRemaining() +
                     ' more, Unlock ' +
                     nextReward.title;
@@ -217,14 +202,6 @@ define([
             return (index + 1) * sectionWidth;
         },
 
-        isLastReward: function (index) {
-            return index === this.rewards().length - 1;
-        },
-
-        formatPrice: function (amount) {
-            return '$' + Number(amount || 0).toFixed(2);
-        },
-
         dispose: function () {
             if (this.totalsSubscription) {
                 this.totalsSubscription.dispose();
@@ -242,4 +219,3 @@ define([
         }
     });
 });
-
