@@ -1,0 +1,424 @@
+/* =========================================================
+   MORE CHOICES / CROSS SELL
+   ========================================================= */
+
+.block.crosssell {
+    width: 100%;
+    margin: 50px 0 0;
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+
+
+    /* =====================================================
+       TITLE
+       ===================================================== */
+
+    .block-title {
+        margin: 0 0 28px;
+        padding: 0;
+
+        strong {
+            margin: 0;
+            padding: 0;
+            color: #111111;
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+    }
+
+
+    /* =====================================================
+       PRODUCT GRID
+       ===================================================== */
+
+    .products.list.items.product-items {
+        display: grid !important;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        box-sizing: border-box;
+    }
+
+
+    /* =====================================================
+       PRODUCT ITEM
+
+       Magento normally gives product-item a width such as
+       20%. Override that because our grid controls width.
+       ===================================================== */
+
+    .products-grid .product-item,
+    .products.list.items.product-items .product-item {
+        float: none !important;
+        width: 100% !important;
+        max-width: none !important;
+        min-width: 0;
+        margin: 0 !important;
+        padding: 0;
+        box-sizing: border-box;
+        list-style: none;
+    }
+
+
+    /* =====================================================
+       PRODUCT INFO
+       ===================================================== */
+
+    .product-item-info {
+        display: block;
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
+    /* =====================================================
+       PRODUCT IMAGE
+       ===================================================== */
+
+    .product-item-photo {
+        display: block !important;
+        width: 100% !important;
+        height: 310px;
+        margin: 0;
+        padding: 0;
+        border: 1px solid #eeeeee;
+        background: #ffffff;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+
+    /* =====================================================
+       IMAGE CONTAINER
+       ===================================================== */
+
+    .product-item-photo .product-image-container {
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        aspect-ratio: auto !important;
+        box-sizing: border-box;
+    }
+
+
+    /* =====================================================
+       IMAGE WRAPPER
+       ===================================================== */
+
+    .product-item-photo .product-image-wrapper {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 100% !important;
+        height: 100% !important;
+        padding: 0 !important;
+        background: #ffffff;
+        box-sizing: border-box;
+    }
+
+
+    /* =====================================================
+       PRODUCT IMAGE
+       ===================================================== */
+
+    .product-item-photo .product-image-photo {
+        display: block;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        margin: 0;
+        padding: 0;
+        object-fit: contain;
+    }
+
+
+    /* =====================================================
+       PRODUCT DETAILS
+       ===================================================== */
+
+    .product-item-details {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0;
+        padding: 10px 20px 0;
+        box-sizing: border-box;
+    }
+
+
+    /* =====================================================
+       NEW LABEL
+       ===================================================== */
+
+    .product-item-details:before {
+        content: 'New';
+        display: block;
+        margin: 0 0 5px;
+        color: #d97706;
+        font-family: 'Poppins', sans-serif;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 1.3;
+    }
+
+
+    /* =====================================================
+       PRODUCT NAME
+       ===================================================== */
+
+    .product-item-name {
+        display: block;
+        width: 100%;
+        min-height: 42px;
+        margin: 0 0 4px;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .product-item-name .product-item-link {
+        display: block;
+        width: 100%;
+        color: #111111;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.45;
+        text-decoration: none;
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: normal;
+    }
+
+    .product-item-name .product-item-link:hover {
+        color: #111111;
+        text-decoration: underline;
+    }
+
+
+    /* =====================================================
+       PRICE
+       ===================================================== */
+
+    .price-box {
+        display: block;
+        width: 100%;
+        margin: 5px 0 0;
+        padding: 0;
+    }
+
+    .price-box .price-container {
+        display: inline;
+        margin: 0;
+        padding: 0;
+    }
+
+    .price-box .price-wrapper {
+        display: inline;
+        margin: 0;
+        padding: 0;
+    }
+
+    .price-box .price {
+        color: #222222;
+        font-family: 'Poppins', sans-serif;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 1.4;
+        white-space: nowrap;
+    }
+
+
+    /* =====================================================
+       HIDE REVIEWS
+       ===================================================== */
+
+    .product-reviews-summary {
+        display: none !important;
+    }
+
+
+    /* =====================================================
+       HIDE ACTIONS
+       ===================================================== */
+
+    .product-item-actions {
+        display: none !important;
+    }
+
+    .actions-primary {
+        display: none !important;
+    }
+
+    .secondary-addto-links {
+        display: none !important;
+    }
+}
+
+
+/* =========================================================
+   OVERRIDE MAGENTO GENERATED IMAGE CSS
+   ========================================================= */
+
+.block.crosssell {
+    .product-image-container {
+        width: 100% !important;
+        height: 100% !important;
+        aspect-ratio: auto !important;
+    }
+
+    .product-image-container .product-image-wrapper {
+        width: 100% !important;
+        height: 100% !important;
+        padding-bottom: 0 !important;
+    }
+}
+
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media (min-width: 1200px) {
+    .block.crosssell {
+
+        .products.list.items.product-items {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .product-item-photo {
+            height: 310px;
+        }
+
+        .product-item-details {
+            padding: 10px 20px 0;
+        }
+    }
+}
+
+
+/* =========================================================
+   LAPTOP
+   ========================================================= */
+
+@media (max-width: 1199px) {
+    .block.crosssell {
+
+        .products.list.items.product-items {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .product-item-photo {
+            height: 270px;
+        }
+
+        .product-item-details {
+            padding: 10px 15px 0;
+        }
+
+        .product-item-name .product-item-link {
+            font-size: 13px;
+        }
+    }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 991px) {
+    .block.crosssell {
+
+        .products.list.items.product-items {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .product-item-photo {
+            height: 250px;
+        }
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+    .block.crosssell {
+        margin-top: 40px;
+
+        .block-title {
+            margin-bottom: 20px;
+
+            strong {
+                font-size: 24px;
+            }
+        }
+
+        .products.list.items.product-items {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .product-item-photo {
+            height: 220px;
+        }
+
+        .product-item-details {
+            padding: 8px 10px 0;
+        }
+
+        .product-item-name {
+            min-height: 40px;
+        }
+
+        .product-item-name .product-item-link {
+            font-size: 12px;
+        }
+
+        .product-item-details:before {
+            font-size: 12px;
+        }
+
+        .price-box .price {
+            font-size: 12px;
+        }
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+    .block.crosssell {
+
+        .products.list.items.product-items {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .product-item-photo {
+            height: 180px;
+        }
+
+        .product-item-details {
+            padding: 7px 8px 0;
+        }
+
+        .product-item-name .product-item-link {
+            font-size: 11px;
+        }
+    }
+}

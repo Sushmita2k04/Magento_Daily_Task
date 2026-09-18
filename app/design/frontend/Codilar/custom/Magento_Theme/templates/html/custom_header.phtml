@@ -1,0 +1,13 @@
+<div class="custom-header-wrapper">
+    <div class="header-inner">
+        <span><?= $escaper->escapeHtml(__('Welcome to Our Custom Store')) ?></span>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        ".custom-header-wrapper": {
+            "Magento_Theme/js/custom-header": {}
+        }
+    }
+</script>
