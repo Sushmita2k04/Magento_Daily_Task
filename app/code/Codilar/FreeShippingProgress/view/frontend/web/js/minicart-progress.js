@@ -41,26 +41,14 @@ define([
         initialize: function () {
             this._super();
 
-            /**
-             * Magento customer-data cart section.
-             *
-             * this.cart     = Knockout observable
-             * this.cart()   = current cart data
-             */
             this.cart = customerData.get('cart');
 
             console.log('Cart data:', this.cart());
 
-            /**
-             * Current subtotal
-             */
             this.subtotal = ko.observable(
                 this.getSubtotal()
             );
 
-            /**
-             * Progress bar percentage
-             */
             this.progressPercent = ko.pureComputed(
                 function () {
                     var subtotal = this.subtotal();
@@ -70,23 +58,15 @@ define([
                         return 0;
                     }
 
-                    var sectionWidth =
-                        100 / rewards.length;
-
+                    var sectionWidth = 100 / rewards.length;
                     var currentIndex = -1;
-
-                    var firstReward =
-                        Number(rewards[0].amount);
-
+                    var firstReward =Number(rewards[0].amount);
                     var currentReward;
                     var nextReward;
                     var range;
                     var travelled;
                     var sectionProgress;
 
-                    /**
-                     * Find the last unlocked reward
-                     */
                     rewards.forEach(
                         function (reward, index) {
                             if (
@@ -98,9 +78,6 @@ define([
                         }
                     );
 
-                    /**
-                     * Before first reward
-                     */
                     if (subtotal < firstReward) {
                         sectionProgress =
                             subtotal / firstReward;
@@ -115,9 +92,6 @@ define([
                         );
                     }
 
-                    /**
-                     * All rewards unlocked
-                     */
                     if (
                         currentIndex ===
                         rewards.length - 1
@@ -125,30 +99,15 @@ define([
                         return 100;
                     }
 
-                    /**
-                     * Current reward
-                     */
-                    currentReward =
-                        Number(
-                            rewards[currentIndex].amount
-                        );
+                    currentReward =Number(rewards[currentIndex].amount);
 
-                    /**
-                     * Next reward
-                     */
-                    nextReward =
-                        Number(
-                            rewards[currentIndex + 1].amount
-                        );
+                    nextReward = Number(rewards[currentIndex + 1].amount);
 
-                    range =
-                        nextReward - currentReward;
+                    range = nextReward - currentReward;
 
-                    travelled =
-                        subtotal - currentReward;
+                    travelled =  subtotal - currentReward;
 
-                    sectionProgress =
-                        range > 0
+                    sectionProgress =  range > 0
                             ? travelled / range
                             : 0;
 
@@ -190,9 +149,6 @@ define([
                 this
             );
 
-            /**
-             * Listen for customer-data cart changes
-             */
             this.cartSubscription =
                 this.cart.subscribe(
                     this.updateSubtotal.bind(this)
@@ -201,9 +157,6 @@ define([
             return this;
         },
 
-        /**
-         * Get subtotal from customer-data cart
-         */
         getSubtotal: function () {
             var cart = this.cart();
 
@@ -221,18 +174,12 @@ define([
             ) || 0;
         },
 
-        /**
-         * Update subtotal when cart changes
-         */
         updateSubtotal: function () {
             this.subtotal(
                 this.getSubtotal()
             );
         },
 
-        /**
-         * Get next locked reward
-         */
         getNextReward: function () {
             var subtotal = this.subtotal();
 
@@ -244,9 +191,6 @@ define([
             ) || null;
         },
 
-        /**
-         * Get current unlocked reward
-         */
         getCurrentReward: function () {
             var subtotal = this.subtotal();
             var currentReward = null;
@@ -265,12 +209,8 @@ define([
             return currentReward;
         },
 
-        /**
-         * Amount remaining for next reward
-         */
         amountRemaining: function () {
-            var nextReward =
-                this.getNextReward();
+            var nextReward = this.getNextReward();
 
             if (!nextReward) {
                 return 0;
@@ -282,17 +222,11 @@ define([
             );
         },
 
-        /**
-         * Check whether reward is unlocked
-         */
         isUnlocked: function (reward) {
             return this.subtotal() >=
                 Number(reward.amount);
         },
 
-        /**
-         * Position of reward marker
-         */
         rewardPosition: function (reward, index) {
             return (
                 (index + 1) *
@@ -300,9 +234,6 @@ define([
             );
         },
 
-        /**
-         * Cleanup subscriptions/computed observables
-         */
         dispose: function () {
             if (this.cartSubscription) {
                 this.cartSubscription.dispose();

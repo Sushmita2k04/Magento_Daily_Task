@@ -5,18 +5,16 @@
 
     <body>
 
-        <!-- Free Shipping Progress -->
         <referenceContainer name="content">
 
             <block
                 class="Codilar\FreeShippingProgress\Block\Progress"
                 name="codilar.free.shipping.progress"
                 template="Codilar_FreeShippingProgress::progress.phtml"
-                before="-" />
+                before="checkout.cart" />
 
         </referenceContainer>
 
-        <!-- Success Message -->
         <referenceContainer name="cart.summary">
 
             <block
@@ -26,6 +24,36 @@
                 after="totals" />
 
         </referenceContainer>
+ <referenceBlock name="page.main.title" remove="true"/>
+
+        <!-- Order Summary title -->
+
+        <referenceBlock name="checkout.cart.summary.title">
+            <arguments>
+                <argument name="text" xsi:type="string">
+                    Order Summary
+                </argument>
+            </arguments>
+        </referenceBlock>
+
+
+        <!-- Cross sell -->
+
+        <move
+            element="checkout.cart.crosssell"
+            destination="content"
+            after="checkout.cart.container"
+        />
+
+
+        <!-- Discount -->
+
+        <move
+            element="checkout.cart.coupon"
+            destination="cart.summary"
+            after="checkout.cart.summary.title"
+        />
 
     </body>
+
 </page>

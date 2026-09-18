@@ -1,0 +1,1099 @@
+.checkout-cart-index {
+    .page-main {
+        width: 100%;
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 40px;
+        box-sizing: border-box;
+
+        .page-title-wrapper {
+            display: none;
+        }
+
+        .columns {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+
+            .column.main {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+
+                .cart-container {
+                    display: grid;
+                    grid-template-columns: minmax(0, 765px) minmax(0, 555px);
+                    gap: 30px;
+                    align-items: start;
+
+                    width: 100%;
+                    max-width: 1350px;
+                    margin: 0 auto;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+
+                /* =====================================================
+                   CART FORM
+                   ===================================================== */
+
+                .form.form-cart {
+                    grid-column: 1;
+                    width: 100%;
+                    margin: 0;
+                    padding: 0;
+                    min-width: 0;
+
+                    /* =================================================
+                       MY BAG HEADER
+                       ================================================= */
+
+                    .cart-items {
+                        width: 100%;
+                        margin: 0;
+                        padding: 0;
+
+                        >.mybag {
+                            display: inline-block;
+                            margin: 0 0 20px;
+                            padding: 0;
+
+                            font-family: 'Proxima Nova', Arial, sans-serif;
+                            font-size: 20px;
+                            font-weight: 600;
+                            line-height: 24px;
+                            color: #111;
+                        }
+
+                        >.cart-c {
+                            float: right;
+
+                            margin: 0 0 20px;
+                            padding: 0;
+
+                            font-family: 'Proxima Nova', Arial, sans-serif;
+                            font-size: 16px;
+                            font-weight: 400;
+                            line-height: 24px;
+                            color: #666;
+                        }
+
+                        /* Clear float */
+                        &::after {
+                            content: '';
+                            display: table;
+                            clear: both;
+                        }
+
+                        /* =================================================
+                           PRODUCT LIST
+                           ================================================= */
+
+                        .cart-items-list {
+                            clear: both;
+
+                            width: 100%;
+                            margin: 0;
+                            padding: 0;
+
+                            /* =================================================
+                               PRODUCT CARD
+                               ================================================= */
+
+                            .cart-product-card {
+                                position: relative;
+
+                                display: grid;
+                                grid-template-columns: 155px minmax(0, 1fr);
+
+                                width: 100%;
+                                height: 155px;
+
+                                margin: 0 0 15px;
+                                padding: 0;
+
+                                border: 1px solid #eeeeee;
+                                background: #fff;
+
+                                box-sizing: border-box;
+
+                                /* =================================================
+                                   PRODUCT IMAGE
+                                   ================================================= */
+
+                                .cart-product-image {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+
+                                    width: 154px;
+                                    height: 154px;
+
+                                    margin: 0;
+                                    padding: 0;
+
+                                    overflow: hidden;
+                                    box-sizing: border-box;
+
+                                    background: #fff;
+
+                                    .cart-product-image-link {
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+
+                                        width: 100%;
+                                        height: 100%;
+
+                                        margin: 0;
+                                        padding: 0;
+                                    }
+
+                                    img {
+                                        display: block;
+
+                                        width: 100%;
+                                        height: 100%;
+
+                                        margin: 0;
+                                        padding: 0;
+
+                                        object-fit: contain;
+                                    }
+                                }
+
+                                /* =================================================
+                                   PRODUCT DETAILS
+                                   ================================================= */
+
+                                .cart-product-details {
+                                    position: relative;
+
+                                    width: 100%;
+                                    height: 154px;
+
+                                    min-width: 0;
+
+                                    margin: 0;
+                                    padding: 4px 10px 5px 10px;
+
+                                    box-sizing: border-box;
+
+                                    /* =================================================
+                                       PRODUCT NAME
+                                       ================================================= */
+
+                                    .cart-product-name {
+                                        display: block;
+
+                                        width: calc(100% - 75px);
+
+                                        margin: 0;
+                                        padding: 0;
+
+                                        font-family: 'Proxima Nova', Arial, sans-serif;
+                                        font-size: 14px;
+                                        font-weight: 600;
+                                        line-height: 19px;
+
+                                        color: #111;
+
+                                        a {
+                                            color: #111;
+                                            text-decoration: none;
+
+                                            &:hover {
+                                                color: #111;
+                                                text-decoration: none;
+                                            }
+                                        }
+                                    }
+
+                                    /* =================================================
+                                       PRODUCT OPTIONS
+                                       ================================================= */
+
+                                    .cart-product-options {
+                                        margin: 6px 0 0;
+                                        padding: 0;
+
+                                        .cart-product-option {
+                                            margin: 0 0 3px;
+                                            padding: 0;
+
+                                            font-family: 'Proxima Nova', Arial, sans-serif;
+                                            font-size: 12px;
+                                            font-weight: 400;
+                                            line-height: 16px;
+
+                                            color: #555;
+
+                                            .option-label {
+                                                font-weight: 400;
+                                            }
+
+                                            .option-value {
+                                                font-weight: 400;
+                                            }
+                                        }
+                                    }
+
+                                    /* =================================================
+                                       QUANTITY
+                                       ================================================= */
+
+                                    .cart-product-qty {
+                                        position: absolute;
+
+                                        left: 10px;
+                                        bottom: 30px;
+
+                                        display: flex;
+                                        align-items: center;
+
+                                        height: 26px;
+
+                                        margin: 0;
+                                        padding: 0;
+
+                                        gap: 0;
+
+                                        /* Plus / Minus buttons */
+
+                                        .qty-button,
+                                        .qty-btn {
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+
+                                            width: 24px;
+                                            height: 24px;
+
+                                            margin: 0;
+                                            padding: 0;
+
+                                            border: 0;
+                                            border-radius: 2px;
+
+                                            background: #f5f5f5;
+                                            color: #666;
+
+                                            font-family: Arial, sans-serif;
+                                            font-size: 18px;
+                                            font-weight: 400;
+                                            line-height: 24px;
+
+                                            cursor: pointer;
+
+                                            transition:
+                                                background 0.15s ease,
+                                                color 0.15s ease;
+
+                                            &:hover {
+                                                background: #eeeeee;
+                                                color: #111;
+                                            }
+
+                                            &:focus {
+                                                outline: none;
+                                                box-shadow: none;
+                                            }
+                                        }
+
+                                        /* Quantity input */
+
+                                        input.qty,
+                                        input[data-role='cart-item-qty'] {
+                                            width: 40px;
+                                            height: 24px;
+
+                                            margin: 0;
+                                            padding: 0;
+
+                                            border: 0;
+                                            background: #fff;
+
+                                            font-family: 'Proxima Nova', Arial, sans-serif;
+                                            font-size: 13px;
+                                            font-weight: 400;
+                                            line-height: 24px;
+
+                                            color: #111;
+                                            text-align: center;
+
+                                            box-shadow: none;
+
+                                            &:focus {
+                                                outline: none;
+                                                border: 0;
+                                                box-shadow: none;
+                                            }
+
+                                            /* Chrome / Edge / Safari */
+
+                                            &::-webkit-inner-spin-button,
+                                            &::-webkit-outer-spin-button {
+                                                margin: 0;
+                                                -webkit-appearance: none;
+                                            }
+
+                                            /* Firefox */
+
+                                            -moz-appearance: textfield;
+                                        }
+                                    }
+                                }
+
+                                /* =================================================
+                                   PRICE
+                                   ================================================= */
+
+                                .cart-product-price {
+                                    position: absolute;
+
+                                    right: 0;
+                                    bottom: 30px;
+
+                                    margin: 0;
+                                    padding: 0 0 0 10px;
+
+                                    font-family: 'Proxima Nova', Arial, sans-serif;
+                                    font-size: 14px;
+                                    font-weight: 600;
+                                    line-height: 20px;
+
+                                    color: #111;
+
+                                    .price {
+                                        font-size: 14px;
+                                        font-weight: 600;
+                                        color: #111;
+                                        padding: 10px;
+                                    }
+                                }
+
+                                /* =================================================
+                                   EDIT / DELETE
+                                   ================================================= */
+
+                                .cart-product-actions {
+                                    position: absolute;
+
+                                    top: 7px;
+                                    right: 8px;
+
+                                    z-index: 5;
+
+                                    display: flex;
+                                    align-items: center;
+
+                                    margin: 0;
+                                    padding: 0;
+
+                                    gap: 8px;
+
+                                    .action {
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+
+                                        width: 24px;
+                                        height: 24px;
+
+                                        margin: 0;
+                                        padding: 0;
+
+                                        border: 0;
+                                        background: #f7f7f7;
+
+                                        color: #555;
+
+                                        text-decoration: none;
+
+                                        cursor: pointer;
+
+                                        transition:
+                                            background 0.15s ease,
+                                            color 0.15s ease;
+
+                                        span {
+                                            display: none;
+                                        }
+
+                                        &:hover {
+                                            background: #eeeeee;
+                                            color: #111;
+                                        }
+                                    }
+
+                                    .action-edit {
+                                        &::before {
+                                            content: '✎';
+
+                                            font-size: 13px;
+                                            line-height: 24px;
+                                        }
+                                    }
+
+                                    .action-delete {
+                                        &::before {
+                                            content: '×';
+
+                                            font-size: 20px;
+                                            font-weight: 300;
+                                            line-height: 22px;
+                                        }
+                                    }
+
+                                    .action-towishlist {
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    /* =====================================================
+                       UPDATE CART
+                       ===================================================== */
+
+                    .cart.main.actions {
+                        display: flex;
+                        justify-content: flex-end;
+
+                        width: 100%;
+
+                        margin: 10px 0 0;
+                        padding: 0;
+
+                        .action.update {
+                            margin: 0;
+                        }
+
+                        .action.continue,
+                        .action.clear {
+                            display: none;
+                        }
+                    }
+                }
+
+                /* =========================================================
+                   ORDER SUMMARY
+                   ========================================================= */
+
+                .cart-summary {
+                    grid-column: 2;
+
+                    position: static;
+
+                    width: 100%;
+                    max-width: 555px;
+
+                    min-width: 0;
+                    height: 390px;
+
+                    margin: 0;
+                    padding: 25px 20px;
+
+                    box-sizing: border-box;
+
+                    background: #f8f9f9;
+
+                    /* =====================================================
+                       SUMMARY TITLE
+                       ===================================================== */
+
+                    .summary.title {
+                        margin: 0 0 20px;
+                        padding: 0;
+
+                        font-family: 'Proxima Nova', Arial, sans-serif;
+                        font-size: 18px;
+                        font-weight: 600;
+                        line-height: 22px;
+
+                        color: #111;
+                    }
+
+                    /* =====================================================
+                       COUPON
+                       ===================================================== */
+
+                    .block.discount {
+                        width: 100%;
+
+                        margin: 0 0 20px;
+                        padding: 0;
+
+                        .title {
+                            margin: 0 0 8px;
+                            padding: 0;
+
+                            border: 0;
+
+                            font-family: 'Proxima Nova', Arial, sans-serif;
+                            font-size: 12px;
+                            font-weight: 600;
+                            line-height: 16px;
+
+                            color: #111;
+
+                            &::after {
+                                display: none !important;
+                            }
+                        }
+
+                        .content {
+                            display: block !important;
+
+                            width: 100%;
+                            height: auto !important;
+
+                            margin: 0;
+                            padding: 0;
+                        }
+
+                        #discount-coupon-form {
+                            width: 100%;
+                            margin: 0;
+                        }
+
+                        .fieldset.coupon {
+                            display: flex;
+                            align-items: center;
+
+                            width: 100%;
+                            height: 54px;
+
+                            margin: 0;
+                            padding: 6px 8px 6px 15px;
+
+                            gap: 10px;
+
+                            box-sizing: border-box;
+
+                            border: 1px solid #e1e1e1;
+                            border-radius: 4px;
+
+                            background: #fff;
+
+                            .field {
+                                flex: 1;
+
+                                min-width: 0;
+
+                                margin: 0;
+                                padding: 0;
+
+                                .input-text {
+                                    width: 100%;
+                                    height: 40px;
+
+                                    margin: 0;
+                                    padding: 0;
+
+                                    border: 0;
+                                    border-radius: 0;
+
+                                    background: transparent;
+
+                                    font-family: 'Proxima Nova', Arial, sans-serif;
+                                    font-size: 13px;
+                                    line-height: 40px;
+
+                                    color: #111;
+
+                                    box-shadow: none;
+
+                                    &:focus {
+                                        outline: none;
+                                        border: 0;
+                                        box-shadow: none;
+                                    }
+                                }
+                            }
+
+                            .actions-toolbar {
+                                flex-shrink: 0;
+
+                                margin: 0;
+                                padding: 0;
+
+                                .action.apply {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+
+                                    width: 80px;
+                                    height: 40px;
+
+                                    margin: 0;
+                                    padding: 0;
+
+                                    border: 0;
+                                    border-radius: 4px;
+
+                                    background: #111;
+                                    color: #fff;
+
+                                    font-family: 'Proxima Nova', Arial, sans-serif;
+                                    font-size: 12px;
+                                    font-weight: 500;
+
+                                    cursor: pointer;
+
+                                    &:hover {
+                                        background: #222;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    /* Hide shipping */
+                    .block.shipping {
+                        display: none !important;
+                    }
+
+                    /* =====================================================
+                       CART TOTALS
+                       ===================================================== */
+
+                    .cart-totals {
+                        width: 100%;
+                        margin: 0;
+                        border: none;
+
+                        table {
+                            width: 100%;
+                            margin: 0;
+                            padding: 0;
+
+                            border-collapse: collapse;
+                        }
+
+                        tr {
+                            height: 30px;
+
+                            td,
+                            th {
+                                margin: 0;
+                                padding: 0;
+
+                                border: 0;
+
+                                font-family: 'Proxima Nova', Arial, sans-serif;
+                                font-size: 13px;
+                                font-weight: 400;
+                                line-height: 30px;
+
+                                color: #111;
+                            }
+                        }
+
+                        .mark {
+                            text-align: left;
+                        }
+
+                        .amount {
+                            text-align: right;
+
+                            .price {
+                                font-size: 13px;
+                            }
+                        }
+
+                        .grand.totals {
+                            margin-top: 5px;
+
+                            td,
+                            th {
+                                font-size: 16px;
+                                font-weight: 600;
+                                line-height: 34px;
+                            }
+
+                            .price {
+                                font-size: 16px;
+                                font-weight: 600;
+                            }
+                        }
+                    }
+
+                    /* =====================================================
+                       CHECKOUT BUTTON
+                       ===================================================== */
+
+                    .action.primary.checkout {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        width: 100%;
+                        height: 44px;
+
+                        margin: 18px 0 0;
+                        padding: 0;
+
+                        border: 1px solid #111;
+                        border-radius: 3px;
+
+                        background: #111;
+                        color: #fff;
+
+                        font-family: 'Proxima Nova', Arial, sans-serif;
+                        font-size: 13px;
+                        font-weight: 600;
+
+                        text-decoration: none;
+
+                        cursor: pointer;
+
+                        &:hover {
+                            background: #222;
+                            border-color: #222;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* =============================================================
+   TABLET
+   ============================================================= */
+
+@media (max-width: 1199px) {
+    .checkout-cart-index {
+        .page-main {
+            padding: 0 25px;
+
+            .columns {
+                .column.main {
+                    .cart-container {
+                        grid-template-columns: minmax(0, 1fr) minmax(350px, 555px);
+                        gap: 20px;
+                    }
+
+                    .form.form-cart {
+                        .cart-items {
+                            .cart-items-list {
+                                .cart-product-card {
+                                    grid-template-columns: 135px minmax(0, 1fr);
+                                    height: 145px;
+
+                                    .cart-product-image {
+                                        width: 134px;
+                                        height: 144px;
+                                    }
+
+                                    .cart-product-details {
+                                        height: 144px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* =============================================================
+   MOBILE / TABLET
+   ============================================================= */
+
+@media (max-width: 991px) {
+    .checkout-cart-index {
+        .page-main {
+            padding: 0 20px;
+
+            .columns {
+                .column.main {
+                    .cart-container {
+                        display: grid;
+                        grid-template-columns: 1fr;
+                        gap: 25px;
+                    }
+
+                    .form.form-cart {
+                        grid-column: 1;
+                    }
+
+                    .cart-summary {
+                        grid-column: 1;
+
+                        width: 100%;
+                        max-width: none;
+                        height: auto;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* =============================================================
+   MOBILE
+   ============================================================= */
+
+@media (max-width: 767px) {
+    .checkout-cart-index {
+        .page-main {
+            padding: 0 15px;
+
+            .columns {
+                .column.main {
+                    .cart-container {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 20px;
+                    }
+
+                    .form.form-cart {
+                        width: 100%;
+
+                        .cart-items {
+                            >.mybag {
+                                margin-bottom: 15px;
+                                font-size: 18px;
+                            }
+
+                            >.cart-c {
+                                margin-bottom: 15px;
+                                font-size: 15px;
+                            }
+
+                            .cart-items-list {
+                                .cart-product-card {
+                                    grid-template-columns: 100px minmax(0, 1fr);
+
+                                    width: 100%;
+                                    height: 125px;
+
+                                    margin-bottom: 10px;
+
+                                    .cart-product-image {
+                                        width: 99px;
+                                        height: 124px;
+                                    }
+
+                                    .cart-product-details {
+                                        height: 124px;
+
+                                        padding: 5px 8px;
+
+                                        .cart-product-name {
+                                            width: calc(100% - 45px);
+
+                                            font-size: 12px;
+                                            line-height: 16px;
+                                        }
+
+                                        .cart-product-options {
+                                            margin-top: 4px;
+
+                                            .cart-product-option {
+                                                font-size: 10px;
+                                                line-height: 14px;
+                                            }
+                                        }
+
+                                        .cart-product-qty {
+                                            left: 8px;
+                                            bottom: 20px;
+
+                                            .qty-button,
+                                            .qty-btn {
+                                                width: 22px;
+                                                height: 22px;
+
+                                                font-size: 16px;
+                                            }
+
+                                            input.qty,
+                                            input[data-role='cart-item-qty'] {
+                                                width: 32px;
+                                                height: 22px;
+
+                                                font-size: 12px;
+                                            }
+                                        }
+                                    }
+
+                                    .cart-product-price {
+                                        right: 8px;
+                                        bottom: 20px;
+
+                                        font-size: 12px;
+
+                                        .price {
+                                            font-size: 12px;
+                                        }
+                                    }
+
+                                    .cart-product-actions {
+                                        top: 5px;
+                                        right: 5px;
+
+                                        gap: 4px;
+
+                                        .action {
+                                            width: 21px;
+                                            height: 21px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .cart-summary {
+                        padding: 20px 15px;
+
+                        .summary.title {
+                            font-size: 17px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* =============================================================
+   SMALL MOBILE
+   ============================================================= */
+
+@media (max-width: 480px) {
+    .checkout-cart-index {
+        .page-main {
+            padding: 0 10px;
+
+            .columns {
+                .column.main {
+                    .cart-container {
+                        gap: 15px;
+                    }
+
+                    .form.form-cart {
+                        .cart-items {
+
+                            >.mybag,
+                            >.cart-c {
+                                font-size: 16px;
+                                line-height: 20px;
+                            }
+
+                            .cart-items-list {
+                                .cart-product-card {
+                                    grid-template-columns: 85px minmax(0, 1fr);
+
+                                    height: 115px;
+
+                                    .cart-product-image {
+                                        width: 84px;
+                                        height: 114px;
+                                    }
+
+                                    .cart-product-details {
+                                        height: 114px;
+
+                                        padding: 4px 6px;
+
+                                        .cart-product-name {
+                                            width: calc(100% - 35px);
+
+                                            font-size: 11px;
+                                            line-height: 15px;
+                                        }
+
+                                        .cart-product-options {
+                                            margin-top: 3px;
+
+                                            .cart-product-option {
+                                                font-size: 9px;
+                                                line-height: 12px;
+                                            }
+                                        }
+
+                                        .cart-product-qty {
+                                            left: 6px;
+                                            bottom: 15px;
+
+                                            .qty-button,
+                                            .qty-btn {
+                                                width: 20px;
+                                                height: 20px;
+
+                                                font-size: 14px;
+                                            }
+
+                                            input.qty,
+                                            input[data-role='cart-item-qty'] {
+                                                width: 28px;
+                                                height: 20px;
+
+                                                font-size: 11px;
+                                            }
+                                        }
+                                    }
+
+                                    .cart-product-price {
+                                        right: 6px;
+                                        bottom: 15px;
+
+                                        font-size: 11px;
+
+                                        .price {
+                                            font-size: 11px;
+                                        }
+                                    }
+
+                                    .cart-product-actions {
+                                        top: 4px;
+                                        right: 4px;
+
+                                        .action {
+                                            width: 19px;
+                                            height: 19px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .cart-summary {
+                        padding: 15px 10px;
+
+                        .block.discount {
+                            .fieldset.coupon {
+                                height: 50px;
+
+                                .field {
+                                    .input-text {
+                                        font-size: 12px;
+                                    }
+                                }
+
+                                .actions-toolbar {
+                                    .action.apply {
+                                        width: 70px;
+                                        height: 38px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
