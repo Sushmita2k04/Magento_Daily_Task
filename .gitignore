@@ -1,0 +1,145 @@
+# =========================================================
+# Magento 2 - Git Ignore
+# =========================================================
+
+# ---------------------------------------------------------
+# IDE / Editor
+# ---------------------------------------------------------
+.idea/
+.vscode/
+.project
+.buildpath
+.settings/
+.nbproject/
+.metadata
+.cache/
+
+# ---------------------------------------------------------
+# OS
+# ---------------------------------------------------------
+.DS_Store
+Thumbs.db
+
+# ---------------------------------------------------------
+# Environment / Local configuration
+# ---------------------------------------------------------
+app/etc/env.php
+app/etc/config.php
+
+# ---------------------------------------------------------
+# Composer dependencies
+# ---------------------------------------------------------
+vendor/
+
+# ---------------------------------------------------------
+# Magento generated files
+# ---------------------------------------------------------
+generated/*
+!generated/.htaccess
+
+# ---------------------------------------------------------
+# Magento cache / runtime files
+# ---------------------------------------------------------
+var/*
+!var/.htaccess
+
+# ---------------------------------------------------------
+# Magento static content
+# ---------------------------------------------------------
+pub/static/*
+!pub/static/.htaccess
+
+# ---------------------------------------------------------
+# Magento media files
+# ---------------------------------------------------------
+pub/media/*
+!pub/media/.htaccess
+
+pub/media/attribute/*
+!pub/media/attribute/.htaccess
+
+pub/media/catalog/*
+!pub/media/catalog/.htaccess
+
+pub/media/customer/*
+!pub/media/customer/.htaccess
+
+pub/media/downloadable/*
+!pub/media/downloadable/.htaccess
+
+pub/media/import/*
+!pub/media/import/.htaccess
+
+pub/media/logo/*
+!pub/media/logo/.htaccess
+
+pub/media/custom_options/*
+!pub/media/custom_options/.htaccess
+
+pub/media/theme/*
+!pub/media/theme/.htaccess
+
+pub/media/theme_customization/*
+!pub/media/theme_customization/.htaccess
+
+pub/media/wysiwyg/*
+!pub/media/wysiwyg/.htaccess
+
+pub/media/tmp/*
+!pub/media/tmp/.htaccess
+
+pub/media/captcha/*
+!pub/media/captcha/.htaccess
+
+pub/media/sitemap/*
+!pub/media/sitemap/.htaccess
+
+pub/media/analytics/*
+
+# ---------------------------------------------------------
+# Magento local files
+# ---------------------------------------------------------
+pub/robots.txt
+pub/sitemap.xml
+pub/sitemap/
+
+# ---------------------------------------------------------
+# Node / Frontend dependencies
+# ---------------------------------------------------------
+node_modules/
+
+# ---------------------------------------------------------
+# Grunt generated/local files
+# ---------------------------------------------------------
+.grunt/
+Gruntfile.js
+grunt-config.json
+
+# ---------------------------------------------------------
+# Package manager files
+# ---------------------------------------------------------
+# Keep package.json/package-lock.json if your project uses them.
+# Do NOT ignore them unless your team specifically wants that.
+
+# ---------------------------------------------------------
+# PHP CS Fixer
+# ---------------------------------------------------------
+.php_cs
+.php_cs.cache
+.php-cs-fixer.php
+.php-cs-fixer.cache
+
+# ---------------------------------------------------------
+# Magento test modules
+# ---------------------------------------------------------
+app/code/Magento/TestModule*
+
+# ---------------------------------------------------------
+# Local Magento files
+# ---------------------------------------------------------
+app/config_sandbox
+
+# ---------------------------------------------------------
+# Local logs / reports
+# ---------------------------------------------------------
+*.log
