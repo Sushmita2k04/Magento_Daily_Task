@@ -1,0 +1,210 @@
+<?php
+/** @var \Magento\Theme\Block\Html\Pager $block */
+
+$currentPage = (int) $block->getCurrentPage();
+$lastPage = (int) $block->getLastPageNum();
+
+if ($lastPage <= 1) {
+    return;
+}
+?>
+
+<div
+    class="custom-pagination"
+    aria-label="<?= $block->escapeHtmlAttr(__('Pagination')) ?>"
+>
+
+    <!-- First Page -->
+    <?php if ($currentPage > 1): ?>
+
+        <a
+            class="custom-pagination__first"
+            href="<?= $block->escapeUrl($block->getFirstPageUrl()) ?>"
+            aria-label="<?= $block->escapeHtmlAttr(__('First page')) ?>"
+        >
+            «
+        </a>
+
+    <?php else: ?>
+
+        <span
+            class="custom-pagination__first custom-pagination__disabled"
+            aria-disabled="true"
+            aria-label="<?= $block->escapeHtmlAttr(__('First page')) ?>"
+        >
+            «
+        </span>
+
+    <?php endif; ?>
+
+
+    <!-- Previous Page -->
+    <?php if ($currentPage > 1): ?>
+
+        <a
+            class="custom-pagination__previous"
+            href="<?= $block->escapeUrl($block->getPreviousPageUrl()) ?>"
+            aria-label="<?= $block->escapeHtmlAttr(__('Previous page')) ?>"
+        >
+            <?= $block->escapeHtml(__('Prev')) ?>
+        </a>
+
+    <?php else: ?>
+
+        <span
+            class="custom-pagination__previous custom-pagination__disabled"
+            aria-disabled="true"
+            aria-label="<?= $block->escapeHtmlAttr(__('Previous page')) ?>"
+        >
+            <?= $block->escapeHtml(__('Prev')) ?>
+        </span>
+
+    <?php endif; ?>
+
+
+    <!-- Page Numbers -->
+    <div class="custom-pagination__pages">
+
+        <?php
+        /*
+         * Build the visible page numbers dynamically.
+         *
+         * Example for page 31 of 62:
+         *
+         * 1 ... 30 31 32 ... 62
+         */
+
+        $pages = [];
+
+        // Always show first page.
+        $pages[] = 1;
+
+        // Page before current page.
+        if ($currentPage > 2) {
+            $pages[] = $currentPage - 1;
+        }
+
+        // Current page.
+        $pages[] = $currentPage;
+
+        // Page after current page.
+        if ($currentPage < $lastPage - 1) {
+            $pages[] = $currentPage + 1;
+        }
+
+        // Always show last page.
+        if ($lastPage > 1) {
+            $pages[] = $lastPage;
+        }
+
+        // Remove duplicate pages.
+        $pages = array_unique($pages);
+
+        // Sort pages numerically.
+        sort($pages);
+        ?>
+
+        <?php $previousPage = null; ?>
+
+        <?php foreach ($pages as $page): ?>
+
+            <?php
+            /*
+             * Add ellipsis when there is a gap
+             * between two page numbers.
+             */
+            ?>
+
+            <?php if (
+                $previousPage !== null
+                && $page > $previousPage + 1
+            ): ?>
+
+                <span
+                    class="custom-pagination__ellipsis"
+                    aria-hidden="true"
+                >
+                    &hellip;
+                </span>
+
+            <?php endif; ?>
+
+
+            <!-- Current Page -->
+            <?php if ($page === $currentPage): ?>
+
+                <span
+                    class="custom-pagination__page custom-pagination__page--current"
+                    aria-current="page"
+                >
+                    <?= (int) $page ?>
+                </span>
+
+            <?php else: ?>
+
+                <!-- Other Page -->
+                <a
+                    class="custom-pagination__page"
+                    href="<?= $block->escapeUrl($block->getPageUrl((int) $page)) ?>"
+                >
+                    <?= (int) $page ?>
+                </a>
+
+            <?php endif; ?>
+
+
+            <?php $previousPage = $page; ?>
+
+        <?php endforeach; ?>
+
+    </div>
+
+
+    <!-- Next Page -->
+    <?php if ($currentPage < $lastPage): ?>
+
+        <a
+            class="custom-pagination__next"
+            href="<?= $block->escapeUrl($block->getNextPageUrl()) ?>"
+            aria-label="<?= $block->escapeHtmlAttr(__('Next page')) ?>"
+        >
+            <?= $block->escapeHtml(__('Next')) ?>
+        </a>
+
+    <?php else: ?>
+
+        <span
+            class="custom-pagination__next custom-pagination__disabled"
+            aria-disabled="true"
+            aria-label="<?= $block->escapeHtmlAttr(__('Next page')) ?>"
+        >
+            <?= $block->escapeHtml(__('Next')) ?>
+        </span>
+
+    <?php endif; ?>
+
+
+    <!-- Last Page -->
+    <?php if ($currentPage < $lastPage): ?>
+
+        <a
+            class="custom-pagination__last"
+            href="<?= $block->escapeUrl($block->getLastPageUrl()) ?>"
+            aria-label="<?= $block->escapeHtmlAttr(__('Last page')) ?>"
+        >
+            »
+        </a>
+
+    <?php else: ?>
+
+        <span
+            class="custom-pagination__last custom-pagination__disabled"
+            aria-disabled="true"
+            aria-label="<?= $block->escapeHtmlAttr(__('Last page')) ?>"
+        >
+            »
+        </span>
+
+    <?php endif; ?>
+
+</div>

@@ -1,0 +1,27 @@
+<?php
+/**
+ * @var \Magento\Customer\Block\Account\Navigation $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+
+<a
+    href="<?= $escaper->escapeUrl($block->getUrl('customer/account')) ?>"
+    class="codilar-account__link"
+    aria-label="<?= $escaper->escapeHtmlAttr(__('My Account')) ?>"
+>
+
+    <span class="codilar-account__icon" aria-hidden="true">
+
+        <img
+            src="<?= $escaper->escapeUrl(
+                $block->getViewFileUrl('images/user.png')
+            ) ?>"
+            alt=""
+            width="22"
+            height="22"
+        />
+
+    </span>
+
+</a>

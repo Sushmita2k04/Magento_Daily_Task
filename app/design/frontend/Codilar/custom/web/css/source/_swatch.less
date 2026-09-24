@@ -1,0 +1,51 @@
+.swatch-attribute {
+    &.color {
+        .swatch-attribute-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .swatch-option {
+            width: 25px;
+            height: 25px;
+            min-width: 30px;
+            min-height: 30px;
+            padding: 0;
+            margin: 0;
+            border-radius: 50%;
+            box-sizing: border-box;
+        }
+
+        .swatch-option.selected {
+            border: 2px solid #000;
+            outline: none;
+        }
+    }
+
+    &.size {
+        .swatch-attribute-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .swatch-option {
+            width: 35px;
+            height: 25px;
+            min-width: 30px;
+            min-height: 30px;
+            padding: 0;
+            margin: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+    }
+}
+
+/*
+ * Hide Magento's large swatch tooltip.
+ */
+.swatch-option-tooltip {
+    display: none !important;
+}

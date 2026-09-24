@@ -1,0 +1,52 @@
+<?php
+/** @var $block \Magento\Checkout\Block\Cart\Grid */
+?>
+
+<?= $block->getChildHtml('form_before') ?>
+
+<form
+    action="<?= $escaper->escapeUrl($block->getUrl('checkout/cart/updatePost')) ?>"
+    method="post"
+    id="form-validate"
+    class="form form-cart"
+    data-mage-init='{"cartQtyUpdater": {}}'
+>
+    <?= $block->getBlockHtml('formkey') ?>
+
+    <div class="cart-items">
+        <span class="mybag"><?= $escaper->escapeHtml(__('My Bag')) ?></span>
+        <span class="cart-c">
+            <?= (int)count($block->getItems()) ?>
+            <?= $escaper->escapeHtml(__('Item(s)')) ?>
+        </span>
+
+        <?php if ($block->getPagerHtml()): ?>
+            <div class="cart-products-toolbar cart-products-toolbar-top toolbar" data-attribute="cart-products-toolbar-top">
+                <?= $block->getPagerHtml() ?>
+            </div>
+        <?php endif; ?>
+
+        <div class="cart-items-list">
+            <?php foreach ($block->getItems() as $_item): ?>
+                <?= $block->getItemHtml($_item) ?>
+            <?php endforeach; ?>
+        </div>
+
+        <?php if ($block->getPagerHtml()): ?>
+            <div class="cart-products-toolbar cart-products-toolbar-bottom toolbar" data-attribute="cart-products-toolbar-bottom">
+                <?= $block->getPagerHtml() ?>
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <div class="cart main actions">
+        <?php if ($block->getContinueShoppingUrl()): ?>
+            <a class="action continue" href="<?= $escaper->escapeUrl($block->getContinueShoppingUrl()) ?>">
+                <span><?= $escaper->escapeHtml(__('Continue Shopping')) ?></span>
+            </a>
+        <?php endif; ?>
+    </div>
+</form>
+
+<?= $block->getChildHtml('checkout.cart.order.actions') ?>
+<?= $block->getChildHtml('shopping.cart.table.after') ?>

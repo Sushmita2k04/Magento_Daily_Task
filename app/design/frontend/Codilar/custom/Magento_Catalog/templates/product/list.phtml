@@ -1,0 +1,270 @@
+<?php
+
+use Magento\Framework\App\Action\Action;
+
+/** @var \Magento\Catalog\Block\Product\ListProduct $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$_productCollection = $block->getLoadedProductCollection();
+$_helper = $block->getData('outputHelper');
+
+$wishlistHelper = $block->getData('wishlistHelper')
+    ?? $this->helper(\Magento\Wishlist\Helper\Data::class);
+
+$wishlistItemIds = [];
+
+if ($wishlistHelper->isAllow()) {
+    $wishlist = $wishlistHelper->getWishlist();
+
+    if ($wishlist && $wishlist->getId()) {
+        foreach ($wishlist->getItemCollection() as $item) {
+            $wishlistItemIds[] = (int) $item->getProductId();
+        }
+    }
+}
+?>
+
+<?php if (!$block->getData('has_error') && $_productCollection->count()): ?>
+
+    <?= $block->getToolbarHtml() ?>
+    <?= $block->getAdditionalHtml() ?>
+
+    <?php
+    $viewMode = $block->getMode() === 'grid' ? 'grid' : 'list';
+
+    $imageDisplayArea = $viewMode === 'grid'
+        ? 'category_page_grid'
+        : 'category_page_list';
+
+    $templateType =
+        \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+    ?>
+
+    <div
+        class="products wrapper <?= $escaper->escapeHtmlAttr($viewMode) ?> products-<?= $escaper->escapeHtmlAttr($viewMode) ?>"
+        data-role="product-list-container"
+    >
+
+        <ol
+            class="products list items product-items"
+            data-role="product-list"
+        >
+
+            <?php foreach ($_productCollection as $_product): ?>
+
+                <?php
+                $productId = (int) $_product->getId();
+
+                $isWishlisted = in_array(
+                    $productId,
+                    $wishlistItemIds,
+                    true
+                );
+
+                $productImage = $block->getImage(
+                    $_product,
+                    $imageDisplayArea
+                );
+                ?>
+
+                <li class="item product product-item">
+
+                    <div
+                        class="product-item-info"
+                        data-container="product-<?= $escaper->escapeHtmlAttr($viewMode) ?>"
+                    >
+
+                        <div class="codilar-product-image-wrapper">
+
+                            <a
+                                href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
+                                class="product photo product-item-photo"
+                                tabindex="-1"
+                            >
+                                <?= $productImage->toHtml() ?>
+                            </a>
+
+                            <?php if ($wishlistHelper->isAllow()): ?>
+
+                                <button
+                                    type="button"
+                                    class="codilar-wishlist-button <?= $isWishlisted ? 'in-wishlist' : '' ?>"
+                                    title="<?= $escaper->escapeHtmlAttr(__('Add to Wish List')) ?>"
+                                    data-post='<?= /* @noEscape */ $wishlistHelper->getAddParams($_product) ?>'
+                                    data-action="add-to-wishlist"
+                                    aria-label="<?= $escaper->escapeHtmlAttr(__('Add to Wish List')) ?>"
+                                >
+
+                                    <svg
+                                        class="heart-icon"
+                                        viewBox="0 0 24 24"
+                                        width="20"
+                                        height="20"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        aria-hidden="true"
+                                    >
+                                        <path d="M20.84 4.61
+                                            a5.5 5.5 0 0 0-7.78 0
+                                            L12 5.67
+                                            l-1.06-1.06
+                                            a5.5 5.5 0 0 0-7.78 7.78
+                                            l1.06 1.06
+                                            L12 21.23
+                                            l7.78-7.78
+                                            1.06-1.06
+                                            a5.5 5.5 0 0 0 0-7.78z"/>
+                                    </svg>
+
+                                </button>
+
+                            <?php endif; ?>
+
+                            <button
+                                type="button"
+                                class="codilar-quick-view-button"
+                                title="<?= $escaper->escapeHtmlAttr(__('Quick view')) ?>"
+                                aria-label="<?= $escaper->escapeHtmlAttr(__('Quick view')) ?>"
+                                data-product-id="<?= $escaper->escapeHtmlAttr((string) $productId) ?>"
+                                data-url="<?= $escaper->escapeUrl(
+                                    $block->getUrl('quickview/product/view')
+                                ) ?>"
+                            >
+
+                                <svg
+                                    class="eye-icon"
+                                    viewBox="0 0 24 24"
+                                    width="19"
+                                    height="19"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    aria-hidden="true"
+                                >
+                                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12
+                                        c1.73 4.39 6 7.5 11 7.5
+                                        s9.27-3.11 11-7.5
+                                        c-1.73-4.39-6-7.5-11-7.5z
+                                        M12 17c-2.76 0-5-2.24-5-5
+                                        s2.24-5 5-5 5 2.24 5 5
+                                        -2.24 5-5 5zm0-8
+                                        c-1.66 0-3 1.34-3 3
+                                        s1.34 3 3 3 3-1.34 3-3
+                                        -1.34-3-3-3z"/>
+                                </svg>
+
+                            </button>
+
+                        </div>
+
+                        <div class="product details product-item-details">
+
+                            <strong class="product name product-item-name">
+
+                                <a
+                                    class="product-item-link"
+                                    href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
+                                >
+                                    <?= /* @noEscape */
+                                    $_helper->productAttribute(
+                                        $_product,
+                                        $_product->getName(),
+                                        'name'
+                                    ) ?>
+                                </a>
+
+                            </strong>
+
+                            <?= $block->getReviewsSummaryHtml(
+                                $_product,
+                                $templateType
+                            ) ?>
+
+                            <?= /* @noEscape */
+                            $block->getProductPrice($_product) ?>
+
+                            <?= /* @noEscape */
+                            $block->getProductDetailsHtml($_product) ?>
+
+                            <div class="product-item-inner">
+
+                                <div class="product actions product-item-actions">
+
+                                    <div class="actions-primary">
+
+                                        <?php if ($_product->isSaleable()): ?>
+
+                                            <?php
+                                            $postParams =
+                                                $block->getAddToCartPostParams($_product);
+                                            ?>
+
+                                            <form
+                                                data-role="tocart-form"
+                                                action="<?= $escaper->escapeUrl($postParams['action']) ?>"
+                                                method="post"
+                                            >
+
+                                                <input
+                                                    type="hidden"
+                                                    name="product"
+                                                    value="<?= /* @noEscape */ $postParams['data']['product'] ?>"
+                                                >
+
+                                                <input
+                                                    type="hidden"
+                                                    name="<?= /* @noEscape */ Action::PARAM_NAME_URL_ENCODED ?>"
+                                                    value="<?= /* @noEscape */ $postParams['data'][Action::PARAM_NAME_URL_ENCODED] ?>"
+                                                >
+
+                                                <?= $block->getBlockHtml('formkey') ?>
+
+                                                <button
+                                                    type="submit"
+                                                    class="action tocart primary"
+                                                >
+                                                    <span>
+                                                        <?= $escaper->escapeHtml(__('Add to Cart')) ?>
+                                                    </span>
+                                                </button>
+
+                                            </form>
+
+                                        <?php endif; ?>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </li>
+
+            <?php endforeach; ?>
+
+        </ol>
+
+        <?php
+        $currentPage = (int) $_productCollection->getCurPage();
+        $lastPage = (int) $_productCollection->getLastPageNumber();
+        ?>
+
+        <div
+            class="mobile-infinite-scroll"
+            data-role="mobile-infinite-scroll"
+            data-current-page="<?= $currentPage ?>"
+            data-last-page="<?= $lastPage ?>"
+        >
+            <span class="mobile-infinite-scroll__loader">
+                <?= $escaper->escapeHtml(__('Loading...')) ?>
+            </span>
+        </div>
+
+        <?= $block->getChildBlock('toolbar')
+            ->setIsBottom(true)
+            ->toHtml() ?>
+
+    </div>
+
+<?php endif; ?>

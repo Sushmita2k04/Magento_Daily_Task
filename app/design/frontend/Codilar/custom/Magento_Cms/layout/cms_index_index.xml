@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<page
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+>
+
+    <body>
+
+        <referenceContainer name="content">
+
+            <block
+                class="Codilar\CampaignWidget\Block\Widget\Campaign"
+                name="codilar.campaign.widget"
+                after="cms_page"
+                template="Codilar_CampaignWidget::widget/campaign.phtml"
+            >
+                <arguments>
+
+                    <argument name="campaign_title" xsi:type="string">
+                        Ramadan
+                    </argument>
+
+                    <argument name="product_ids" xsi:type="string">
+                        5,6,7,8
+                    </argument>
+
+                    <argument name="product_quantity" xsi:type="number">
+                        10
+                    </argument>
+
+                    <argument name="enabled" xsi:type="boolean">
+                        true
+                    </argument>
+
+                </arguments>
+            </block>
+
+        </referenceContainer>
+
+    </body>
+
+</page>

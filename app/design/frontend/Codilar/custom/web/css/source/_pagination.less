@@ -1,0 +1,89 @@
+.custom-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: 40px 0;
+
+    &__pages {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+    }
+
+    &__first,
+    &__previous,
+    &__next,
+    &__last,
+    &__page {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #515151;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    &__first:visited,
+    &__previous:visited,
+    &__next:visited,
+    &__last:visited,
+    &__page:visited {
+        color: #515151;
+        text-decoration: none;
+    }
+
+    &__page {
+        min-width: 32px;
+        height: 32px;
+        padding: 0 8px;
+        box-sizing: border-box;
+    }
+
+    &__page--current {
+        border: 1px solid #222;
+        color: #222;
+    }
+
+    &__ellipsis {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 20px;
+        height: 32px;
+        color: #515151;
+        font-size: 16px;
+    }
+
+    &__disabled {
+        color: #d8d8d8;
+        pointer-events: none;
+    }
+}
+
+.mobile-infinite-scroll {
+    display: none;
+}
+
+@media (max-width: 425px) {
+
+    .custom-pagination {
+        display: none;
+    }
+
+    .mobile-infinite-scroll {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 60px;
+        margin: 20px 0;
+    }
+
+    .mobile-infinite-scroll__loader {
+        display: none;
+    }
+
+    .mobile-infinite-scroll.is-loading .mobile-infinite-scroll__loader {
+        display: block;
+    }
+}
