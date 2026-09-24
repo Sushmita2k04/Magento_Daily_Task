@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <head>
+        <css src="Codilar_Suggestion::css/related_products.css"/>
+    </head>
+
+    <body>
+
+        <referenceContainer name="content">
+
+            <!-- Suggestion Products -->
+            <block class="Codilar\Suggestion\Block\RelatedCategoryProducts"
+                   name="codilar.suggestion.related.category.products"
+                   template="Codilar_Suggestion::product/related_category_products.phtml"
+                   before="catalog.product.related"/>
+
+        </referenceContainer>
+
+    </body>
+</page>

@@ -1,0 +1,90 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+
+<div id="quick-view-modal"
+     class="codilar-quickview-modal-wrapper"
+     style="display: none;">
+
+    <div class="quick-view-error message error"
+         style="display: none;">
+    </div>
+
+    <div class="quick-view-content">
+
+        <div class="quick-view-container">
+
+            <div class="quick-view-media">
+
+                <img id="quick-view-image"
+                     src=""
+                     alt="<?= $escaper->escapeHtmlAttr(__('Product Image')) ?>">
+
+            </div>
+
+            <div class="quick-view-details">
+
+                <h2 id="quick-view-name"
+                    class="product-name">
+                </h2>
+
+                <div class="product-info-meta">
+
+                    <div class="product-sku">
+
+                        <strong>
+                            <?= $escaper->escapeHtml(__('SKU:')) ?>
+                        </strong>
+
+                        <span id="quick-view-sku"></span>
+
+                    </div>
+
+                    <div class="product-stock">
+
+                        <strong>
+                            <?= $escaper->escapeHtml(__('Availability:')) ?>
+                        </strong>
+
+                        <span id="quick-view-stock"></span>
+
+                    </div>
+
+                </div>
+
+                <div class="product-info-price"> Price :
+
+                    <div id="quick-view-price"
+                         class="price-box price-final_price">
+                    </div>
+
+                </div>
+
+                <div class="product-info-description">
+
+                    <strong>
+                        <?= $escaper->escapeHtml(__('Overview:')) ?>
+                    </strong>
+
+                    <div id="quick-view-description"
+                         class="description-text">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Codilar_QuickView/js/quick-view": {}
+        }
+    }
+</script>

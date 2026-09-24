@@ -1,0 +1,29 @@
+<?php
+/** @var \Codilar\CampaignWidget\Block\Widget\Campaign $block */
+
+$products = $block->getProducts();
+?>
+
+<div style="padding: 2rem; background: #000; color: #fff;">
+
+    <div>
+        Campaign Title:
+        <?= $block->escapeHtml($block->getCampaignTitle()) ?>
+    </div>
+
+    <div>
+        Category ID:
+        <?= (int) $block->getCategoryId() ?>
+    </div>
+
+    <div>
+        Product Quantity:
+        <?= (int) $block->getProductQuantity() ?>
+    </div>
+
+    <div>
+        Products Found:
+        <?= count($products) ?>
+    </div>
+
+</div>

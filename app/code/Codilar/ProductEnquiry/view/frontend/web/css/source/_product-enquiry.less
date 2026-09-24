@@ -1,0 +1,158 @@
+.product-enquiry-wrapper {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.product-enquiry-button {
+    width: 100%;
+    min-height: 55px;
+
+    background: #111827 !important;
+    color: #ffffff !important;
+
+    border: 0 !important;
+    border-radius: 10px !important;
+
+    font-size: 16px !important;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+
+    &:hover {
+        background: #000000 !important;
+        color: #ffffff !important;
+        transform: translateY(-2px);
+    }
+}
+
+
+/* =========================================
+   PRODUCT ENQUIRY MODAL
+   ========================================= */
+
+.modal-popup.product-enquiry-popup {
+
+    .modal-inner-wrap {
+        width: 520px !important;
+        max-width: calc(100% - 30px);
+
+        border-radius: 16px !important;
+        overflow: hidden;
+
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    .modal-header {
+        padding: 24px 28px 18px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+    }
+
+    .modal-title {
+        margin: 0;
+
+        color: #111827 !important;
+
+        font-size: 24px !important;
+        font-weight: 700 !important;
+    }
+
+    .modal-content {
+        padding: 28px !important;
+    }
+
+    .action-close {
+
+        &:hover {
+            background: #f3f4f6;
+        }
+    }
+}
+
+
+/* =========================================
+   FORM
+   ========================================= */
+
+#product-enquiry-modal {
+
+    .field {
+        margin-bottom: 20px;
+    }
+
+    .label {
+        display: block;
+
+        margin-bottom: 8px;
+
+        color: #374151;
+
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .input-text {
+        width: 100% !important;
+        min-height: 48px;
+
+        padding: 12px 14px;
+
+        border: 1px solid #d1d5db !important;
+        border-radius: 8px !important;
+
+        background: #ffffff !important;
+        color: #111827 !important;
+
+        box-sizing: border-box;
+
+        &:focus {
+            border-color: #111827 !important;
+            outline: none;
+
+            box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08) !important;
+        }
+    }
+
+    textarea.input-text {
+        min-height: 110px;
+        resize: vertical;
+    }
+
+    #enquiry-sku {
+        background: #f3f4f6 !important;
+        color: #6b7280 !important;
+        cursor: not-allowed;
+    }
+
+    #enquiry-quantity {
+        max-width: 150px;
+    }
+
+    .actions-toolbar {
+        margin-top: 25px;
+
+        .primary {
+            width: 100%;
+        }
+    }
+
+    button[type="submit"] {
+        width: 100% !important;
+        min-height: 52px;
+
+        border: 0 !important;
+        border-radius: 9px !important;
+
+        background: #111827 !important;
+        color: #ffffff !important;
+
+        font-size: 15px !important;
+        font-weight: 600;
+
+        &:hover {
+            background: #000000 !important;
+            color: #ffffff !important;
+        }
+    }
+}

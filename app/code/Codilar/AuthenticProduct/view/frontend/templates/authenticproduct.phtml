@@ -1,0 +1,211 @@
+<?php if ($block->isAuthentic()): ?>
+
+    <div class="authentic-product-wrapper">
+
+        <!-- =========================================
+             AUTHENTIC PRODUCT BANNER
+             ========================================= -->
+
+        <div class="authentic-product-banner">
+
+            <div class="authentic-product-content">
+
+                <!-- Certificate Icon -->
+                <svg
+                    class="authentic-certificate-icon"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="black"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <rect x="4" y="2" width="16" height="14" rx="2"></rect>
+
+                    <line
+                        x1="8"
+                        y1="6"
+                        x2="16"
+                        y2="6"
+                    ></line>
+
+                    <line
+                        x1="8"
+                        y1="10"
+                        x2="12"
+                        y2="10"
+                    ></line>
+
+                    <path
+                        d="M12 14l-2 6 2-1 2 1-2-6z"
+                        fill="#1877f2"
+                    ></path>
+                </svg>
+
+                <span class="authentic-product-label">
+                    100% Authentic Product
+                </span>
+
+            </div>
+
+
+            <!-- Info Button -->
+            <button
+                type="button"
+                class="authentic-info-button"
+                aria-label="About Authentic Product"
+            >
+
+                <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#1c1e21"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                    ></circle>
+
+                    <line
+                        x1="12"
+                        y1="16"
+                        x2="12"
+                        y2="12"
+                    ></line>
+
+                    <line
+                        x1="12"
+                        y1="8"
+                        x2="12.01"
+                        y2="8"
+                    ></line>
+                </svg>
+
+            </button>
+
+        </div>
+
+
+        <!-- =========================================
+             OVERLAY
+             ========================================= -->
+
+        <div
+            class="authentic-overlay"
+            aria-hidden="true"
+        ></div>
+
+
+        <!-- =========================================
+             RIGHT SIDE DRAWER
+             ========================================= -->
+
+        <aside
+            class="authentic-drawer"
+            aria-hidden="true"
+        >
+
+            <!-- Close Button -->
+            <div class="authentic-drawer-header">
+
+                <button
+                    type="button"
+                    class="authentic-drawer-close"
+                    aria-label="Close"
+                >
+                    &times;
+                </button>
+
+            </div>
+
+
+            <!-- Drawer Content -->
+            <div class="authentic-drawer-content">
+
+                <!-- Certificate Icon -->
+                <svg
+                    class="authentic-drawer-icon"
+                    width="56"
+                    height="56"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#1877f2"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <rect
+                        x="4"
+                        y="2"
+                        width="16"
+                        height="14"
+                        rx="2"
+                    ></rect>
+
+                    <line
+                        x1="8"
+                        y1="6"
+                        x2="16"
+                        y2="6"
+                    ></line>
+
+                    <line
+                        x1="8"
+                        y1="10"
+                        x2="12"
+                        y2="10"
+                    ></line>
+
+                    <path
+                        d="M12 14l-2 6 2-1 2 1-2-6z"
+                        fill="#1877f2"
+                    ></path>
+                </svg>
+
+
+                <h3>
+                    Guaranteed Authenticity, Every Time!
+                </h3>
+
+
+                <p>
+                    When you shop with us, you are investing in genuine
+                    quality. We pride ourselves on offering only 100%
+                    authentic products, meticulously sourced and verified
+                    for their originality. Every product we sell is crafted
+                    with precision and care, ensuring that you receive
+                    nothing but the best. Trust in our commitment to
+                    authenticity!
+                </p>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+
+    <!-- =========================================
+         MAGENTO JS INITIALIZATION
+         ========================================= -->
+
+    <script type="text/x-magento-init">
+        {
+            ".authentic-product-wrapper": {
+                "authentic": {}
+            }
+        }
+    </script>
+
+<?php endif; ?>

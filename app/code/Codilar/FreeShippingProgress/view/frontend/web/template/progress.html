@@ -1,0 +1,56 @@
+
+<div class="codilar-rewards__title"
+     data-bind="text: message">
+</div>
+
+<div class="codilar-rewards__progress">
+
+    <div class="codilar-rewards__track">
+        <span class="codilar-rewards__track-fill"
+              data-bind="style: {
+                  width: progressPercent() + '%'
+              }">
+        </span>
+    </div>
+
+    <div class="codilar-rewards__milestones">
+
+        <!-- ko foreach: rewards -->
+
+        <div class="reward-step"
+             data-bind="
+                 style: {
+                     left: $parent.rewardPosition($data, $index()) + '%'
+                 },
+                 css: {
+                     'is-active': $parent.isUnlocked($data)
+                 }
+             ">
+
+            <div class="reward-step__circle">
+
+                <!-- ko if: $parent.isUnlocked($data) -->
+                <span class="reward-step__check">✓</span>
+                <!-- /ko -->
+
+                <!-- ko ifnot: $parent.isUnlocked($data) -->
+                <span class="reward-step__locked">%</span>
+                <!-- /ko -->
+
+            </div>
+
+            <div class="reward-step__content">
+
+                <strong data-bind="text: title"></strong>
+
+                <span data-bind="text: subtitle"></span>
+
+            </div>
+
+        </div>
+
+        <!-- /ko -->
+
+    </div>
+
+</div>

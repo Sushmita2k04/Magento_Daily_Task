@@ -1,0 +1,198 @@
+.codilar-minicart-rewards {
+
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 13px 11px 10px;
+
+    overflow: auto;
+
+    &__title {
+        margin-bottom: 14px;
+
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 18px;
+
+        color: #222;
+    }
+
+    &__progress {
+        position: relative;
+        width: 100%;
+        height: 58px;
+    }
+
+    /* =========================
+       TRACK
+       ========================= */
+
+    &__track {
+        position: absolute;
+
+        top: 9px;
+        left: 0;
+        right: 0;
+
+        width: 100%;
+        height: 4px;
+
+        background: #e6ebef;
+
+        border-radius: 4px;
+
+        overflow: hidden;
+    }
+
+    /* =========================
+       FILLED TRACK
+       ========================= */
+
+    &__track-fill {
+        display: block;
+
+        width: 0;
+        height: 100%;
+
+        background: #e62429;
+
+        border-radius: 4px;
+
+        transition: width 0.3s ease;
+    }
+
+    /* =========================
+       MILESTONES
+       ========================= */
+
+    &__milestones {
+        position: absolute;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 58px;
+
+        z-index: 3;
+    }
+
+    /* =========================
+       REWARD STEP
+       ========================= */
+
+    .reward-step {
+        position: absolute;
+
+        top: 0;
+
+        width: 54px;
+        max-width: 54px;
+
+        margin: 0;
+        padding: 0;
+
+        box-sizing: border-box;
+
+        transform: translateX(-50%);
+
+        text-align: center;
+
+        z-index: 4;
+    }
+
+    /* =========================
+       CIRCLE
+       ========================= */
+
+    .reward-step__circle {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        width: 18px;
+        height: 18px;
+
+        margin: 0 auto;
+
+        box-sizing: border-box;
+
+        background: #fff;
+
+        border: 2px solid #d6dde3;
+
+        border-radius: 50%;
+
+        color: #1979c3;
+
+        font-size: 10px;
+        font-weight: 700;
+    }
+
+    /* =========================
+       ACTIVE
+       ========================= */
+
+    .reward-step.is-active {
+
+        .reward-step__circle {
+            background: #1979c3;
+
+            border-color: #1979c3;
+
+            color: #fff;
+        }
+    }
+
+    /* =========================
+       TEXT
+       ========================= */
+
+    .reward-step__content {
+        width: 100%;
+
+        margin-top: 6px;
+
+        text-align: center;
+
+        overflow: hidden;
+    }
+
+    .reward-step__content strong {
+        display: block;
+
+        width: 100%;
+
+        font-size: 9px;
+        font-weight: 700;
+
+        line-height: 12px;
+
+        color: #222;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+    }
+
+    .reward-step__content span {
+        display: block;
+
+        width: 100%;
+
+        font-size: 8px;
+
+        line-height: 11px;
+
+        color: #777;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+    }
+}

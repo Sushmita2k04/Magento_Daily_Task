@@ -1,0 +1,41 @@
+<?php
+/**
+ * @var \Codilar\Suggestion\Block\RelatedCategoryProducts $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$products = $block->getCategoryProducts(4);
+?>
+
+<?php if ($products && (is_countable($products) ? count($products) : 0) > 0): ?>
+    <div class="block custom-related-section">
+        <div class="block-title">
+            <strong><?= $escaper->escapeHtml(__('Related Products from Same Category')) ?></strong>
+        </div>
+
+        <div class="custom-related-grid">
+            <?php foreach ($products as $product): ?>
+                <?php
+                $productUrl = $escaper->escapeUrl($product->getProductUrl());
+                $productName = $escaper->escapeHtml($product->getName());
+                $imageUrl = $escaper->escapeUrl($block->getImageUrl($product));
+                ?>
+                <div class="custom-product-card">
+                    <a href="<?= /* @noEscape */ $productUrl ?>"
+                       class="image-wrapper"
+                       title="<?= /* @noEscape */ $productName ?>">
+                        <img src="<?= /* @noEscape */ $imageUrl ?>"
+                             alt="<?= /* @noEscape */ $productName ?>"
+                             loading="lazy"
+                             width="240"
+                             height="300" />
+                    </a>
+
+                    <a href="<?= /* @noEscape */ $productUrl ?>" class="product-name">
+                        <?= /* @noEscape */ $productName ?>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif; ?>

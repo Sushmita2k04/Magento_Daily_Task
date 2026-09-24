@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+
+    <system>
+
+        <section id="codilar_freeshippingprogress"
+                 translate="label"
+                 sortOrder="90"
+                 showInDefault="1"
+                 showInWebsite="1"
+                 showInStore="1">
+
+            <label>Free Shipping Progress</label>
+
+            <tab>sales</tab>
+
+            <resource>Codilar_FreeShippingProgress::config</resource>
+
+            <group id="general"
+                   translate="label"
+                   sortOrder="10"
+                   showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+
+                <label>General Configuration</label>
+
+                <field id="enabled"
+                       translate="label comment"
+                       type="select"
+                       sortOrder="10"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+
+                    <label>Enable</label>
+
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+
+                    <comment>Enable or disable the Free Shipping Progress Bar.</comment>
+
+                </field>
+
+                <field id="minimum_amount"
+                       translate="label comment"
+                       type="text"
+                       sortOrder="20"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+
+                    <label>Free Shipping Minimum Amount</label>
+
+                    <validate>validate-number validate-zero-or-greater</validate>
+
+                    <comment>Customer must reach this cart subtotal to qualify for free delivery.</comment>
+
+                </field>
+
+            </group>
+
+        </section>
+
+    </system>
+
+</config>

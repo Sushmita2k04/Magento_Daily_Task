@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+
+    <widget
+        id="codilar_campaign_widget"
+        class="Codilar\CampaignWidget\Block\Widget\Campaign"
+        is_email_compatible="false">
+
+        <label translate="true">Campaign Product Widget</label>
+
+        <description translate="true">
+            Dynamic Campaign Product Widget
+        </description>
+
+        <parameters>
+
+            <parameter name="campaign_title"
+                       xsi:type="text"
+                       visible="true"
+                       sort_order="10">
+
+                <label translate="true">Campaign Title</label>
+
+                <description translate="true">
+                    Campaign title displayed above the products.
+                </description>
+
+            </parameter>
+
+            <parameter name="category_id"
+                       xsi:type="text"
+                       visible="true"
+                       required="true"
+                       sort_order="20">
+
+                <label translate="true">Category ID</label>
+
+                <description translate="true">
+                    Enter the Magento category ID from which products should be displayed.
+                </description>
+
+            </parameter>
+
+            <parameter name="product_quantity"
+                       xsi:type="text"
+                       visible="true"
+                       required="true"
+                       sort_order="30">
+
+                <label translate="true">Product Quantity</label>
+
+                <description translate="true">
+                    Maximum number of products to display.
+                </description>
+
+            </parameter>
+
+            <parameter name="banner"
+                       xsi:type="block"
+                       visible="true"
+                       sort_order="35">
+
+                <label translate="true">Banner</label>
+
+                <block class="Codilar\CampaignWidget\Block\Adminhtml\Widget\ImageChooser">
+
+                    <data>
+
+                        <item name="button" xsi:type="array">
+
+                            <item name="open" xsi:type="string">
+                                Choose Image...
+                            </item>
+
+                        </item>
+
+                    </data>
+
+                </block>
+
+            </parameter>
+
+            <parameter name="banner_link"
+                       xsi:type="text"
+                       visible="true"
+                       sort_order="40">
+
+                <label translate="true">Banner Link</label>
+
+                <description translate="true">
+                    URL opened when the campaign banner is clicked.
+                </description>
+
+            </parameter>
+
+            <parameter name="voucher_label"
+                       xsi:type="text"
+                       visible="true"
+                       sort_order="50">
+
+                <label translate="true">Voucher Label</label>
+
+                <description translate="true">
+                    Small label displayed above the voucher title.
+                </description>
+
+            </parameter>
+
+            <parameter name="voucher_title"
+                       xsi:type="text"
+                       visible="true"
+                       sort_order="60">
+
+                <label translate="true">Voucher Title</label>
+
+                <description translate="true">
+                    Main voucher title.
+                </description>
+
+            </parameter>
+
+            <parameter name="voucher_description"
+                       xsi:type="text"
+                       visible="true"
+                       sort_order="70">
+
+                <label translate="true">Voucher Description</label>
+
+                <description translate="true">
+                    Additional voucher information.
+                </description>
+
+            </parameter>
+
+            <parameter name="voucher_code"
+                       xsi:type="text"
+                       visible="true"
+                       sort_order="80">
+
+                <label translate="true">Voucher Code</label>
+
+                <description translate="true">
+                    Voucher code that the customer can copy.
+                </description>
+
+            </parameter>
+
+            <parameter name="minimum_spend"
+                       xsi:type="text"
+                       visible="true"
+                       sort_order="90">
+
+                <label translate="true">Minimum Spend</label>
+
+                <description translate="true">
+                    Minimum order amount required for the voucher.
+                </description>
+
+            </parameter>
+
+            <parameter name="enabled"
+                       xsi:type="select"
+                       visible="true"
+                       required="true"
+                       sort_order="100">
+
+                <label translate="true">Enable Widget</label>
+
+                <options>
+
+                    <option name="yes"
+                            value="1"
+                            selected="true">
+
+                        <label translate="true">Yes</label>
+
+                    </option>
+
+                    <option name="no"
+                            value="0">
+
+                        <label translate="true">No</label>
+
+                    </option>
+
+                </options>
+
+            </parameter>
+
+        </parameters>
+
+    </widget>
+
+</widgets>

@@ -1,0 +1,26 @@
+.codilar-product-discount {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+    white-space: nowrap;
+}
+
+.codilar-regular-price {
+    text-decoration: line-through;
+    color: #777;
+    font-size: 14px;
+    margin: 0;
+}
+
+.codilar-discount-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    background: #28a745;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 4px;
+    margin: 0;
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/config.xsd">
+
+    <default>
+
+        <codilar_freeshippingprogress>
+
+            <general>
+
+                <enabled>1</enabled>
+
+                <minimum_amount>200</minimum_amount>
+
+            </general>
+
+        </codilar_freeshippingprogress>
+
+    </default>
+
+</config>

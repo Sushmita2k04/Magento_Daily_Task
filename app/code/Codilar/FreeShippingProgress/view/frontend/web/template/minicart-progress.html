@@ -1,0 +1,69 @@
+<div class="codilar-minicart-progress">
+
+    <div class="codilar-minicart-progress__message"
+         data-bind="text: message">
+    </div>
+
+    <div class="codilar-minicart-progress__bar">
+
+        <div class="codilar-minicart-progress__track">
+
+            <span class="codilar-minicart-progress__fill"
+                  data-bind="style: {
+                      width: progressPercent() + '%'
+                  }">
+            </span>
+
+        </div>
+
+        <div class="codilar-minicart-progress__milestones">
+
+            <!-- ko foreach: rewards -->
+
+            <div class="codilar-minicart-progress__step"
+                 data-bind="
+                     style: {
+                         left: $parent.rewardPosition(
+                             $data,
+                             $index()
+                         ) + '%'
+                     },
+                     css: {
+                         'is-active':
+                             $parent.isUnlocked($data)
+                     }
+                 ">
+
+                <div class="codilar-minicart-progress__circle">
+
+                    <!-- ko if: $parent.isUnlocked($data) -->
+
+                    <span>✓</span>
+
+                    <!-- /ko -->
+
+                    <!-- ko ifnot: $parent.isUnlocked($data) -->
+
+                    <span>%</span>
+
+                    <!-- /ko -->
+
+                </div>
+
+                <div class="codilar-minicart-progress__content">
+
+                    <strong data-bind="text: title"></strong>
+
+                    <span data-bind="text: subtitle"></span>
+
+                </div>
+
+            </div>
+
+            <!-- /ko -->
+
+        </div>
+
+    </div>
+
+</div>
