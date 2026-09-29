@@ -1,9 +1,8 @@
 var config = {
-
     deps: [
         'js/color-swatch-hover',
-        'js/mobile-infinite-scroll'
-
+        'js/mobile-infinite-scroll',
+        'js/ramadan'
     ],
 
     map: {
@@ -14,5 +13,4 @@ var config = {
             ramadan: 'js/ramadan'
         }
     }
-
 };

@@ -66,17 +66,7 @@ if ($lastPage <= 1) {
     <div class="custom-pagination__pages">
 
         <?php
-        /*
-         * Build the visible page numbers dynamically.
-         *
-         * Example for page 31 of 62:
-         *
-         * 1 ... 30 31 32 ... 62
-         */
-
         $pages = [];
-
-        // Always show first page.
         $pages[] = 1;
 
         // Page before current page.
