@@ -13,43 +13,38 @@ use Magento\Framework\Pricing\Helper\Data as PriceHelper;
 use Magento\Framework\View\Element\Template;
 use Magento\Widget\Block\BlockInterface;
 use Magento\Wishlist\Helper\Data as WishlistHelper;
+use Psr\Log\LoggerInterface;
 
 class Campaign extends Template implements BlockInterface
 {
     protected $_template = 'widget/campaign.phtml';
 
     private CollectionFactory $productCollectionFactory;
-
     private CategoryRepositoryInterface $categoryRepository;
-
     private ImageHelper $imageHelper;
-
     private PriceHelper $priceHelper;
-
     private WishlistHelper $wishlistHelper;
+    private LoggerInterface $logger;
 
-   public function __construct(
-    Template\Context $context,
-    CollectionFactory $productCollectionFactory,
-    CategoryRepositoryInterface $categoryRepository,
-    ImageHelper $imageHelper,
-    PriceHelper $priceHelper,
-    WishlistHelper $wishlistHelper,
-    array $data = []
-) {
-    $this->productCollectionFactory = $productCollectionFactory;
-    $this->categoryRepository = $categoryRepository;
-    $this->imageHelper = $imageHelper;
-    $this->priceHelper = $priceHelper;
-    $this->wishlistHelper = $wishlistHelper;
+    public function __construct(
+        Template\Context $context,
+        CollectionFactory $productCollectionFactory,
+        CategoryRepositoryInterface $categoryRepository,
+        ImageHelper $imageHelper,
+        PriceHelper $priceHelper,
+        WishlistHelper $wishlistHelper,
+        LoggerInterface $logger,
+        array $data = []
+    ) {
+        $this->productCollectionFactory = $productCollectionFactory;
+        $this->categoryRepository = $categoryRepository;
+        $this->imageHelper = $imageHelper;
+        $this->priceHelper = $priceHelper;
+        $this->wishlistHelper = $wishlistHelper;
+        $this->logger = $logger;
 
-    error_log('=== CODILAR CAMPAIGN BLOCK CREATED ===');
-    error_log('Campaign Title: ' . (string) ($data['campaign_title'] ?? 'NOT SET'));
-    error_log('Category ID: ' . (string) ($data['category_id'] ?? 'NOT SET'));
-    error_log('Product Quantity: ' . (string) ($data['product_quantity'] ?? 'NOT SET'));
-
-    parent::__construct($context, $data);
-}
+        parent::__construct($context, $data);
+    }
 
     public function getCampaignTitle(): string
     {
@@ -71,26 +66,18 @@ class Campaign extends Template implements BlockInterface
         $categoryId = $this->getCategoryId();
         $quantity = $this->getProductQuantity();
 
-        error_log('=== Campaign Widget Debug START ===');
-
-        error_log(
-            'Campaign Title: ' . $this->getCampaignTitle()
-        );
-
-        error_log(
-            'Category ID: ' . $categoryId
-        );
-
-        error_log(
-            'Product Quantity: ' . $quantity
-        );
-
-        if ($categoryId <= 0 || $quantity <= 0) {
-            error_log(
-                'Campaign Widget: Invalid category ID or quantity'
+        if ($categoryId <= 0) {
+            $this->logger->warning(
+                'Campaign Widget: Category ID is missing or invalid.'
             );
 
-            error_log('=== Campaign Widget Debug END ===');
+            return [];
+        }
+
+        if ($quantity <= 0) {
+            $this->logger->warning(
+                'Campaign Widget: Product quantity is missing or invalid.'
+            );
 
             return [];
         }
@@ -98,37 +85,35 @@ class Campaign extends Template implements BlockInterface
         try {
             $category = $this->categoryRepository->get($categoryId);
 
-            error_log(
-                'Category Loaded ID: ' . $category->getId()
-            );
-
-            error_log(
-                'Category Name: ' . $category->getName()
-            );
-
-            error_log(
-                'Category Active: ' . (int) $category->getIsActive()
+            $this->logger->info(
+                'Category Loaded: ID=' . $category->getId()
+                . ' | Name=' . $category->getName()
+                . ' | Active=' . (int) $category->getIsActive()
             );
         } catch (NoSuchEntityException $exception) {
-            error_log(
-                'Campaign Widget: Category not found: ' . $categoryId
+            $this->logger->error(
+                'Campaign Widget: Category not found. ID=' . $categoryId
             );
 
-            error_log(
-                'Exception: ' . $exception->getMessage()
+            $this->logger->error(
+                $exception->getMessage()
             );
-
-            error_log('=== Campaign Widget Debug END ===');
 
             return [];
         }
 
-        if (!$category->getId() || !$category->getIsActive()) {
-            error_log(
-                'Campaign Widget: Category is missing or inactive'
+        if (!$category->getId()) {
+            $this->logger->warning(
+                'Campaign Widget: Category does not exist.'
             );
 
-            error_log('=== Campaign Widget Debug END ===');
+            return [];
+        }
+
+        if (!$category->getIsActive()) {
+            $this->logger->warning(
+                'Campaign Widget: Category is inactive.'
+            );
 
             return [];
         }
@@ -159,38 +144,39 @@ class Campaign extends Template implements BlockInterface
 
         $collection->setVisibility([
             Visibility::VISIBILITY_IN_CATALOG,
-            Visibility::VISIBILITY_BOTH,
+            Visibility::VISIBILITY_BOTH
         ]);
 
         $collection->setPageSize($quantity);
-
         $collection->setCurPage(1);
+
+        $this->logger->info(
+            'Product Collection Size: ' . $collection->getSize()
+        );
 
         $products = $collection->getItems();
 
-        error_log(
-            'Products Found: ' . count($products)
+        $this->logger->info(
+            'Products Loaded: ' . count($products)
         );
 
         foreach ($products as $product) {
-            error_log(
+            $this->logger->info(
                 'Product: ID=' . $product->getId()
                 . ' | SKU=' . $product->getSku()
                 . ' | Name=' . $product->getName()
             );
         }
-
-        error_log('=== Campaign Widget Debug END ===');
-
         return $products;
     }
 
     public function getProductImage(Product $product): string
-    {
-        return $this->imageHelper
-            ->init($product, 'product_page_image_small')
-            ->getUrl();
-    }
+{
+    return $this->imageHelper
+        ->init($product, 'product_page_image_large')
+        ->setImageFile($product->getImage())
+        ->getUrl();
+}
 
     public function getProductName(Product $product): string
     {
@@ -229,7 +215,6 @@ class Campaign extends Template implements BlockInterface
     public function getDiscountPercentage(Product $product): int
     {
         $regularPrice = $this->getRegularPrice($product);
-
         $finalPrice = $this->getFinalPrice($product);
 
         if ($regularPrice <= 0 || $finalPrice >= $regularPrice) {

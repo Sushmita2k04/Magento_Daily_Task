@@ -7,34 +7,20 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
 
 class ImageChooser extends Template
 {
-    public function prepareElementHtml(AbstractElement $element): AbstractElement
+    public function prepareElementHtml(AbstractElement $element): string
     {
-        $config = (array) $this->getData('config');
+        $inputId = $element->getHtmlId();
 
-        $sourceUrl = $this->getUrl(
-            'cms/wysiwyg_images/index',
-            [
-                'target_element_id' => $element->getId(),
-                'type' => 'file'
-            ]
-        );
+        $html = '<div class="admin__field-control">';
+        $html .= '<input type="text"';
+        $html .= ' id="' . $inputId . '"';
+        $html .= ' name="' . $element->getName() . '"';
+        $html .= ' value="' . $element->getEscapedValue() . '"';
+        $html .= ' class="admin__control-text"';
+        $html .= ' />';
 
-        $button = $this->getLayout()
-            ->createBlock(\Magento\Backend\Block\Widget\Button::class)
-            ->setType('button')
-            ->setClass('btn-chooser')
-            ->setLabel(
-                $config['button']['open'] ?? __('Choose Image')
-            )
-            ->setOnClick(
-                "MediabrowserUtility.openDialog('" . $sourceUrl . "')"
-            );
+        $html .= '</div>';
 
-        $element->setData(
-            'after_element_html',
-            $button->toHtml()
-        );
-
-        return $element;
+        return $html;
     }
 }

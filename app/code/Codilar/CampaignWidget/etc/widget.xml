@@ -3,10 +3,9 @@
 <widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
 
-    <widget
-        id="codilar_campaign_widget"
-        class="Codilar\CampaignWidget\Block\Widget\Campaign"
-        is_email_compatible="false">
+    <widget id="codilar_campaign_widget"
+            class="Codilar\CampaignWidget\Block\Widget\Campaign"
+            is_email_compatible="false">
 
         <label translate="true">Campaign Product Widget</label>
 
@@ -38,7 +37,7 @@
                 <label translate="true">Category ID</label>
 
                 <description translate="true">
-                    Enter the Magento category ID from which products should be displayed.
+                    Enter the Magento category ID.
                 </description>
 
             </parameter>
@@ -52,7 +51,7 @@
                 <label translate="true">Product Quantity</label>
 
                 <description translate="true">
-                    Maximum number of products to display.
+                    Enter the maximum number of products to display.
                 </description>
 
             </parameter>
@@ -90,7 +89,7 @@
                 <label translate="true">Banner Link</label>
 
                 <description translate="true">
-                    URL opened when the campaign banner is clicked.
+                    URL opened when the banner is clicked.
                 </description>
 
             </parameter>

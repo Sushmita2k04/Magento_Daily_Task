@@ -1,29 +1,89 @@
 <?php
+
 /** @var \Codilar\CampaignWidget\Block\Widget\Campaign $block */
 
 $products = $block->getProducts();
 ?>
 
-<div style="padding: 2rem; background: #000; color: #fff;">
+<?php if ($products): ?>
 
-    <div>
-        Campaign Title:
-        <?= $block->escapeHtml($block->getCampaignTitle()) ?>
+    <?php foreach ($products as $product): ?>
+        <div class="campaign-section__product">
+
+    <a
+        class="campaign-section__product-image"
+        href="<?= $escaper->escapeUrl($block->getProductUrl($product)) ?>"
+    >
+        <img
+            src="<?= $escaper->escapeUrl($block->getProductImage($product)) ?>"
+            alt="<?= $escaper->escapeHtmlAttr($block->getProductName($product)) ?>"
+        />
+    </a>
+
+    <?php if ($block->canAddToWishlist()): ?>
+        <button
+            type="button"
+            class="campaign-section__wishlist"
+            aria-label="<?= $escaper->escapeHtmlAttr(__('Add to Wishlist')) ?>"
+            data-action="add-to-wishlist"
+            data-post='<?= /* @noEscape */ $block->getWishlistParams($product) ?>'
+        >
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M20.84 4.61C19.75 3.52 18.26 2.91 16.7 2.91C15.14 2.91 13.65 3.52 12.56 4.61L12 5.17L11.44 4.61C9.17 2.34 5.49 2.34 3.22 4.61C0.95 6.88 0.95 10.56 3.22 12.83L12 21.61L20.78 12.83C23.05 10.56 23.05 6.88 20.84 4.61Z"
+                    stroke="#fff"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+        </button>
+    <?php endif; ?>
+
+    <div class="campaign-section__product-content">
+
+        <h3 class="campaign-section__product-name">
+            <a href="<?= $escaper->escapeUrl($block->getProductUrl($product)) ?>">
+                <?= $escaper->escapeHtml($block->getProductName($product)) ?>
+            </a>
+        </h3>
+
+        <div class="campaign-section__product-price">
+
+            <?php if ($block->getFinalPrice($product) < $block->getRegularPrice($product)): ?>
+
+                <span class="campaign-section__product-price--regular">
+                    <?= $escaper->escapeHtml(
+                        $block->getFormattedPrice($block->getRegularPrice($product))
+                    ) ?>
+                </span>
+
+                <?php $discount = $block->getDiscountPercentage($product); ?>
+
+                <?php if ($discount > 0): ?>
+                    <span class="campaign-section__product-discount">
+                        <?= $escaper->escapeHtml($discount) ?>%
+                    </span>
+                <?php endif; ?>
+
+            <?php endif; ?>
+
+            <span class="campaign-section__product-price--final">
+                <?= $escaper->escapeHtml(
+                    $block->getFormattedPrice($block->getFinalPrice($product))
+                ) ?>
+            </span>
+
+        </div>
+
     </div>
 
-    <div>
-        Category ID:
-        <?= (int) $block->getCategoryId() ?>
     </div>
 
-    <div>
-        Product Quantity:
-        <?= (int) $block->getProductQuantity() ?>
-    </div>
+    <?php endforeach; ?>
 
-    <div>
-        Products Found:
-        <?= count($products) ?>
-    </div>
-
-</div>
+<?php endif; ?>
