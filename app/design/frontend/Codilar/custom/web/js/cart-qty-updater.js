@@ -1,8 +1,13 @@
 define([
     'jquery',
     'Magento_Customer/js/customer-data',
+    'Magento_Checkout/js/action/get-totals',
     'jquery-ui-modules/widget'
-], function ($, customerData) {
+], function (
+    $,
+    customerData,
+    getTotals
+) {
     'use strict';
 
     $.widget('mage.cartQtyUpdater', {
@@ -39,6 +44,7 @@ define([
             }
 
             $input.val(newQty);
+
             this._submitForm();
         },
 
@@ -48,27 +54,71 @@ define([
             $.ajax({
                 url: this.element.attr('action'),
                 type: 'POST',
-                data: this.element.serialize(),
-                showLoader: true
-            })
-            .done(function () {
-                customerData.invalidate(['cart']);
+                data: this.element.serialize()
+            }).done(function () {
+                console.log('Cart quantity updated');
 
-                customerData.reload(['cart'], true).done(function () {
-                    self._refreshTotals();
-                });
-            })
-            .fail(function () {
-                console.error('Unable to update cart quantity.');
+                self._refreshCartItems();
+                self._refreshTotals();
+                self._refreshCustomerData();
+            }).fail(function (xhr) {
+                console.error(
+                    'Unable to update cart quantity.',
+                    xhr
+                );
+            });
+        },
+
+        _refreshCartItems: function () {
+            var $currentItems = $('.cart-items-list');
+
+            $.ajax({
+                url: window.location.href,
+                type: 'GET',
+                cache: false
+            }).done(function (response) {
+                var $response = $('<div>').append(
+                    $.parseHTML(response)
+                );
+
+                var $newItems = $response.find('.cart-items-list');
+
+                if ($newItems.length && $currentItems.length) {
+                    $currentItems.replaceWith($newItems);
+                }
+            }).fail(function (xhr) {
+                console.error(
+                    'Unable to refresh cart items.',
+                    xhr
+                );
             });
         },
 
         _refreshTotals: function () {
-            require([
-                'Magento_Checkout/js/model/quote',
-                'Magento_Checkout/js/action/get-totals'
-            ], function (quote, getTotals) {
-                getTotals([], true);
+            var deferred = $.Deferred();
+
+            getTotals([], deferred);
+
+            deferred.done(function (totals) {
+                console.log('Updated cart totals:', totals);
+            });
+
+            deferred.fail(function (error) {
+                console.error(
+                    'Unable to update cart totals.',
+                    error
+                );
+            });
+        },
+
+        _refreshCustomerData: function () {
+            customerData.invalidate(['cart']);
+
+            customerData.reload(['cart'], true).done(function (cart) {
+                console.log(
+                    'Updated customer data:',
+                    cart
+                );
             });
         }
     });

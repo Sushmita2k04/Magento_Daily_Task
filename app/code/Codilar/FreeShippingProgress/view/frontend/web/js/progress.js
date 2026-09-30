@@ -1,12 +1,11 @@
-
 define([
     'uiComponent',
     'ko',
-    'Magento_Checkout/js/model/quote'
+    'Magento_Customer/js/customer-data'
 ], function (
     Component,
     ko,
-    quote
+    customerData
 ) {
     'use strict';
 
@@ -14,8 +13,7 @@ define([
 
         defaults: {
             template: 'Codilar_FreeShippingProgress/progress',
-            rewards: [],
-            initialSubtotal: 0
+            rewards: []
         },
 
         progressSections: 5,
@@ -23,15 +21,26 @@ define([
         initialize: function () {
             this._super();
 
-            this.subtotal = ko.observable(
-                Number(this.initialSubtotal) || 0
-            );
+            this.cart = customerData.get('cart');
 
             this.rewards = ko.observableArray(
                 Array.isArray(this.rewards)
                     ? this.rewards
                     : []
             );
+
+            this.subtotal = ko.pureComputed(function () {
+                var cartData = this.cart();
+                var subtotal = cartData && cartData.subtotal;
+
+                if (!subtotal) {
+                    return 0;
+                }
+
+                return Number(
+                    String(subtotal).replace(/[^0-9.-]/g, '')
+                ) || 0;
+            }, this);
 
             this.progressPercent = ko.pureComputed(function () {
                 var subtotal = this.subtotal();
@@ -111,14 +120,12 @@ define([
             this.message = ko.pureComputed(function () {
                 var rewards = this.rewards();
                 var nextReward;
-                var currentReward;
 
                 if (!rewards.length) {
                     return '';
                 }
 
                 nextReward = this.getNextReward();
-                currentReward = this.getCurrentReward();
 
                 if (!nextReward) {
                     return 'All rewards unlocked!';
@@ -130,28 +137,11 @@ define([
                     nextReward.title;
             }, this);
 
-            this.updateSubtotal();
-
-            this.totalsSubscription = quote.totals.subscribe(
-                this.updateSubtotal.bind(this)
-            );
+            this.cartSubscription = this.cart.subscribe(function () {
+                this.subtotal();
+            }, this);
 
             return this;
-        },
-
-        updateSubtotal: function () {
-            var totals = quote.totals();
-            var subtotal;
-
-            if (!totals) {
-                return;
-            }
-
-            subtotal = Number(totals.subtotal);
-
-            if (Number.isFinite(subtotal)) {
-                this.subtotal(subtotal);
-            }
         },
 
         getNextReward: function () {
@@ -203,8 +193,8 @@ define([
         },
 
         dispose: function () {
-            if (this.totalsSubscription) {
-                this.totalsSubscription.dispose();
+            if (this.cartSubscription) {
+                this.cartSubscription.dispose();
             }
 
             if (this.progressPercent) {
@@ -213,6 +203,10 @@ define([
 
             if (this.message) {
                 this.message.dispose();
+            }
+
+            if (this.subtotal) {
+                this.subtotal.dispose();
             }
 
             this._super();
