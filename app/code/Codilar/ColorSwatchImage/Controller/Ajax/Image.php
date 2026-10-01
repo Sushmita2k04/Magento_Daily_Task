@@ -11,23 +11,14 @@ use Magento\Framework\Controller\Result\JsonFactory;
 
 class Image extends Action
 {
-    private JsonFactory $resultJsonFactory;
-    private ProductRepositoryInterface $productRepository;
-    private Configurable $configurableType;
-    private ImageHelper $imageHelper;
-
     public function __construct(
         Context $context,
-        JsonFactory $resultJsonFactory,
-        ProductRepositoryInterface $productRepository,
-        Configurable $configurableType,
-        ImageHelper $imageHelper
+        private JsonFactory $resultJsonFactory,
+        private ProductRepositoryInterface $productRepository,
+        private Configurable $configurableType,
+        private ImageHelper $imageHelper
     ) {
         parent::__construct($context);
-        $this->resultJsonFactory = $resultJsonFactory;
-        $this->productRepository = $productRepository;
-        $this->configurableType = $configurableType;
-        $this->imageHelper = $imageHelper;
     }
 
     public function execute()

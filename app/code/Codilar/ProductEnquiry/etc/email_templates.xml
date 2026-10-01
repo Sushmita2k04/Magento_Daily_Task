@@ -1,12 +1,19 @@
 <?xml version="1.0"?>
-
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
 
     <template
         id="codilar_product_enquiry_email"
-        label="Product Enquiry Email"
+        label="Product Enquiry - Admin"
         file="product_enquiry.html"
+        type="html"
+        module="Codilar_ProductEnquiry"
+        area="frontend"/>
+
+    <template
+        id="codilar_product_enquiry_customer_email"
+        label="Product Enquiry - Customer"
+        file="product_enquiry_customer.html"
         type="html"
         module="Codilar_ProductEnquiry"
         area="frontend"/>

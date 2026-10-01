@@ -9,18 +9,13 @@ class ImageChooser extends Template
 {
     public function prepareElementHtml(AbstractElement $element): string
     {
-        $inputId = $element->getHtmlId();
-
-        $html = '<div class="admin__field-control">';
-        $html .= '<input type="text"';
-        $html .= ' id="' . $inputId . '"';
-        $html .= ' name="' . $element->getName() . '"';
-        $html .= ' value="' . $element->getEscapedValue() . '"';
-        $html .= ' class="admin__control-text"';
-        $html .= ' />';
-
-        $html .= '</div>';
-
-        return $html;
+        return sprintf(
+            '<div class="admin__field-control">
+                <input type="text" id="%s" name="%s" value="%s" class="admin__control-text" />
+            </div>',
+            $element->getHtmlId(),
+            $element->getName(),
+            $element->getEscapedValue()
+        );
     }
 }

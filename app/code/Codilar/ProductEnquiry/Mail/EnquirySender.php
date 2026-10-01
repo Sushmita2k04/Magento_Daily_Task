@@ -11,7 +11,8 @@ use Magento\Store\Model\StoreManagerInterface;
 
 class EnquirySender
 {
-    private const TEMPLATE_ID = 'codilar_product_enquiry_email';
+    private const ADMIN_TEMPLATE_ID = 'codilar_product_enquiry_email';
+    private const CUSTOMER_TEMPLATE_ID = 'codilar_product_enquiry_customer_email';
 
     public function __construct(
         private readonly TransportBuilder $transportBuilder,
@@ -28,32 +29,74 @@ class EnquirySender
         int $quantity
     ): void {
         $store = $this->storeManager->getStore();
+        $storeId = (int) $store->getId();
+
+        $adminEmail = (string) $store->getConfig(
+            'trans_email/ident_general/email'
+        );
+
+        $templateVars = [
+            'customer_name' => $name,
+            'customer_email' => $email,
+            'customer_address' => $address,
+            'product_sku' => $sku,
+            'quantity' => $quantity
+        ];
 
         $this->inlineTranslation->suspend();
 
         try {
-            $transport = $this->transportBuilder
-                ->setTemplateIdentifier(self::TEMPLATE_ID)
-                ->setTemplateOptions([
-                    'area' => Area::AREA_FRONTEND,
-                    'store' => $store->getId()
-                ])
-                ->setTemplateVars([
-                    'customer_name' => $name,
-                    'customer_email' => $email,
-                    'customer_address' => $address,
-                    'product_sku' => $sku,
-                    'quantity' => $quantity
-                ])
-                ->setFromByScope('general')
-                ->addTo(
-                    $store->getConfig('trans_email/ident_general/email')
-                )
-                ->getTransport();
+            $this->sendAdminEmail(
+                $adminEmail,
+                $storeId,
+                $templateVars
+            );
 
-            $transport->sendMessage();
+            $this->sendCustomerEmail(
+                $email,
+                $storeId,
+                $templateVars
+            );
         } finally {
             $this->inlineTranslation->resume();
         }
+    }
+
+    private function sendAdminEmail(
+        string $adminEmail,
+        int $storeId,
+        array $templateVars
+    ): void {
+        $transport = $this->transportBuilder
+            ->setTemplateIdentifier(self::ADMIN_TEMPLATE_ID)
+            ->setTemplateOptions([
+                'area' => Area::AREA_FRONTEND,
+                'store' => $storeId
+            ])
+            ->setTemplateVars($templateVars)
+            ->setFromByScope('general')
+            ->addTo($adminEmail)
+            ->getTransport();
+
+        $transport->sendMessage();
+    }
+
+    private function sendCustomerEmail(
+        string $customerEmail,
+        int $storeId,
+        array $templateVars
+    ): void {
+        $transport = $this->transportBuilder
+            ->setTemplateIdentifier(self::CUSTOMER_TEMPLATE_ID)
+            ->setTemplateOptions([
+                'area' => Area::AREA_FRONTEND,
+                'store' => $storeId
+            ])
+            ->setTemplateVars($templateVars)
+            ->setFromByScope('general')
+            ->addTo($customerEmail)
+            ->getTransport();
+
+        $transport->sendMessage();
     }
 }

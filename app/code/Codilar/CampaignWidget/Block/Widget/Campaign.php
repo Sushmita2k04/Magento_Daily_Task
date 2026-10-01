@@ -19,30 +19,16 @@ class Campaign extends Template implements BlockInterface
 {
     protected $_template = 'widget/campaign.phtml';
 
-    private CollectionFactory $productCollectionFactory;
-    private CategoryRepositoryInterface $categoryRepository;
-    private ImageHelper $imageHelper;
-    private PriceHelper $priceHelper;
-    private WishlistHelper $wishlistHelper;
-    private LoggerInterface $logger;
-
     public function __construct(
         Template\Context $context,
-        CollectionFactory $productCollectionFactory,
-        CategoryRepositoryInterface $categoryRepository,
-        ImageHelper $imageHelper,
-        PriceHelper $priceHelper,
-        WishlistHelper $wishlistHelper,
-        LoggerInterface $logger,
+        private CollectionFactory $productCollectionFactory,
+        private CategoryRepositoryInterface $categoryRepository,
+        private ImageHelper $imageHelper,
+        private PriceHelper $priceHelper,
+        private WishlistHelper $wishlistHelper,
+        private LoggerInterface $logger,
         array $data = []
     ) {
-        $this->productCollectionFactory = $productCollectionFactory;
-        $this->categoryRepository = $categoryRepository;
-        $this->imageHelper = $imageHelper;
-        $this->priceHelper = $priceHelper;
-        $this->wishlistHelper = $wishlistHelper;
-        $this->logger = $logger;
-
         parent::__construct($context, $data);
     }
 
@@ -167,16 +153,17 @@ class Campaign extends Template implements BlockInterface
                 . ' | Name=' . $product->getName()
             );
         }
+
         return $products;
     }
 
     public function getProductImage(Product $product): string
-{
-    return $this->imageHelper
-        ->init($product, 'product_page_image_large')
-        ->setImageFile($product->getImage())
-        ->getUrl();
-}
+    {
+        return $this->imageHelper
+            ->init($product, 'product_page_image_large')
+            ->setImageFile($product->getImage())
+            ->getUrl();
+    }
 
     public function getProductName(Product $product): string
     {

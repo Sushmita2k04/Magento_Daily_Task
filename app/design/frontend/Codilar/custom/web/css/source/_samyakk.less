@@ -1,0 +1,214 @@
+header {
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.05);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 1. Top Announcement Bar */
+.top-bar {
+    background-color: #51555c;
+    color: #ffffff;
+    text-align: center;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+}
+
+.top-bar i {
+    font-size: 1.2rem;
+}
+
+/* 2. Main Header Row */
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 4rem;
+    border-bottom: 0.1rem solid #f0f0f0;
+    position: relative;
+}
+
+/* Left Nav */
+.left-nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.btn-women {
+    background-color: #a3895e;
+    color: #ffffff;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.15rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    border-radius: 0.1rem;
+}
+
+.left-nav a {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.15rem;
+    color: #333333;
+    transition: color 0.2s;
+}
+
+.left-nav a:hover {
+    color: #a3895e;
+}
+
+/* Center Brand Logo */
+.logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: #a3895e;
+    letter-spacing: 0.05rem;
+    position: relative;
+    display: inline-block;
+}
+
+.logo-text sup {
+    font-size: 1rem;
+    vertical-align: super;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+/* Right Action Bar */
+.right-actions {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.currency-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    cursor: pointer;
+}
+
+.currency-selector .arrow-icon {
+    font-size: 0.9rem;
+}
+
+.icon-list {
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+}
+
+.icon-list a {
+    font-size: 1.6rem;
+    color: #333333;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.icon-list a:hover {
+    color: #a3895e;
+}
+
+/* Badge Icon Style */
+.icon-badge {
+    position: relative;
+}
+
+.icon-badge::after {
+    content: '1';
+    position: absolute;
+    top: -0.8rem;
+    right: -0.8rem;
+    background-color: #a3895e;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 3. Category Navigation Menu */
+.category-nav {
+    padding: 1.2rem 0;
+    border-bottom: 0.1rem solid #eaeaea;
+}
+
+.category-nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+.category-nav li {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+}
+
+.category-nav li a {
+    color: #333333;
+    text-transform: uppercase;
+    transition: color 0.2s;
+}
+
+.category-nav li a:hover {
+    color: #a3895e;
+}
+
+.separator {
+    color: #d1d1d1;
+    font-size: 0.8rem;
+    margin-left: 1.5rem;
+}
+
+/* 4. Breadcrumb */
+.breadcrumb {
+    padding: 1.2rem 4rem;
+    font-size: 1.1rem;
+    color: #888888;
+}
+
+.breadcrumb a {
+    color: #888888;
+}
+
+.breadcrumb span {
+    color: #555555;
+}

@@ -9,6 +9,7 @@ use Codilar\ProductEnquiry\Mail\EnquirySender;
 use Codilar\ProductEnquiry\Model\ProductEnquiryFactory;
 use Codilar\ProductEnquiry\Model\ResourceModel\ProductEnquiry as ProductEnquiryResource;
 use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Catalog\Helper\Image as ImageHelper;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\Result\Json;
@@ -24,13 +25,13 @@ class Submit implements HttpPostActionInterface
         private readonly ProductEnquiryFactory $productEnquiryFactory,
         private readonly ProductEnquiryResource $productEnquiryResource,
         private readonly ProductRepositoryInterface $productRepository,
+        private readonly ImageHelper $imageHelper,
         private readonly EmailAddress $emailValidator,
         private readonly Logger $logger,
         private readonly EnquirySender $enquirySender
     ) {
     }
 
-    
     public function execute(): Json
     {
         $result = $this->resultJsonFactory->create();
@@ -42,9 +43,6 @@ class Submit implements HttpPostActionInterface
             $sku = trim((string) $this->request->getParam('sku'));
             $quantity = (int) $this->request->getParam('quantity', 1);
 
-            /*
-             * Validate name
-             */
             if ($name === '') {
                 return $result->setData([
                     'success' => false,
@@ -52,9 +50,6 @@ class Submit implements HttpPostActionInterface
                 ]);
             }
 
-            /*
-             * Validate email
-             */
             if ($email === '') {
                 return $result->setData([
                     'success' => false,
@@ -69,9 +64,6 @@ class Submit implements HttpPostActionInterface
                 ]);
             }
 
-            /*
-             * Validate address
-             */
             if ($address === '') {
                 return $result->setData([
                     'success' => false,
@@ -79,9 +71,6 @@ class Submit implements HttpPostActionInterface
                 ]);
             }
 
-            /*
-             * Validate SKU
-             */
             if ($sku === '') {
                 return $result->setData([
                     'success' => false,
@@ -89,9 +78,6 @@ class Submit implements HttpPostActionInterface
                 ]);
             }
 
-            /*
-             * Validate quantity
-             */
             if ($quantity < 1) {
                 return $result->setData([
                     'success' => false,
@@ -99,9 +85,6 @@ class Submit implements HttpPostActionInterface
                 ]);
             }
 
-            /*
-             * Validate product
-             */
             try {
                 $product = $this->productRepository->get($sku);
             } catch (NoSuchEntityException) {
@@ -111,9 +94,6 @@ class Submit implements HttpPostActionInterface
                 ]);
             }
 
-            /*
-             * Only simple products are allowed.
-             */
             if ($product->getTypeId() !== 'simple') {
                 return $result->setData([
                     'success' => false,
@@ -123,9 +103,12 @@ class Submit implements HttpPostActionInterface
                 ]);
             }
 
-            /*
-             * Create enquiry.
-             */
+            $productName = (string) $product->getName();
+
+            $productImage = $this->imageHelper
+                ->init($product, 'product_page_image_large')
+                ->getUrl();
+
             $enquiry = $this->productEnquiryFactory->create();
 
             $enquiry->setData([
@@ -136,33 +119,26 @@ class Submit implements HttpPostActionInterface
                 'quantity' => $quantity
             ]);
 
-            /*
-             * Save enquiry to database.
-             */
             $this->productEnquiryResource->save($enquiry);
 
             $this->logger->info(
-    'Product enquiry DB save completed',
-    [
-        'entity_id' => $enquiry->getId(),
-        'data' => $enquiry->getData()
-    ]
-);
+                'Product enquiry DB save completed',
+                [
+                    'entity_id' => $enquiry->getId(),
+                    'data' => $enquiry->getData()
+                ]
+            );
 
-            /*
-             * Send enquiry email.
-             */
             $this->enquirySender->send(
                 $name,
                 $email,
                 $address,
                 $sku,
-                $quantity
+                $quantity,
+                $productName,
+                $productImage
             );
 
-            /*
-             * Log successful enquiry.
-             */
             $this->logger->info(
                 'Product enquiry submitted',
                 [
@@ -171,7 +147,9 @@ class Submit implements HttpPostActionInterface
                     'email' => $email,
                     'address' => $address,
                     'sku' => $sku,
-                    'quantity' => $quantity
+                    'quantity' => $quantity,
+                    'product_name' => $productName,
+                    'product_image' => $productImage
                 ]
             );
 

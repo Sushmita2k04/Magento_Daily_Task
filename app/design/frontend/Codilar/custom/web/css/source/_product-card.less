@@ -5,7 +5,7 @@
         .product-items {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 30px;
+            gap: 3rem;
 
             width: 100%;
             margin: 0;
@@ -96,8 +96,8 @@
             align-items: center;
             justify-content: center;
 
-            width: 42px;
-            height: 42px;
+            width: 4.2rem;
+            height: 4.2rem;
 
             padding: 0;
 
@@ -105,13 +105,13 @@
             border: 0;
             border-radius: 50%;
 
-            box-shadow: 0 4px 14px rgba(0, 0, 0, .12);
+            box-shadow: 0 .4rem 1.4rem rgba(0, 0, 0, .12);
 
             cursor: pointer;
 
             opacity: 0;
 
-            transform: translateY(6px);
+            transform: translateY(.6rem);
 
             transition:
                 opacity .2s ease,
@@ -120,12 +120,12 @@
         }
 
         .codilar-wishlist-button {
-            top: 12px;
-            right: 12px;
+            top: 1.2rem;
+            right: 1.2rem;
 
             .heart-icon {
-                width: 20px;
-                height: 20px;
+                width: 2rem;
+                height: 2rem;
 
                 fill: none;
                 stroke: #111;
@@ -151,12 +151,12 @@
         }
 
         .codilar-quick-view-button {
-            right: 12px;
-            bottom: 12px;
+            right: 1.2rem;
+            bottom: 1.2rem;
 
             .eye-icon {
-                width: 19px;
-                height: 19px;
+                width: 1.9rem;
+                height: 1.9rem;
 
                 fill: none;
                 stroke: #111;
@@ -179,13 +179,13 @@
 
             min-width: 0;
 
-            padding-top: 12px;
+            padding-top: 1.2rem;
         }
 
         .product-item-name {
-            margin: 0 0 6px;
+            margin: 0 0 .6rem;
 
-            font-size: 15px;
+            font-size: 1.5rem;
             font-weight: 500;
             line-height: 1.35;
         }
@@ -211,11 +211,11 @@
             display: flex;
             align-items: center;
 
-            gap: 6px;
+            gap: .6rem;
 
-            margin: 0 0 7px;
+            margin: 0 0 .7rem;
 
-            font-size: 11px;
+            font-size: 1.1rem;
         }
 
         .rating-summary {
@@ -224,7 +224,7 @@
             }
 
             .rating-result {
-                width: 60px;
+                width: 6rem;
             }
         }
 
@@ -232,21 +232,21 @@
             .action.view {
                 color: #2676c9;
 
-                font-size: 11px;
+                font-size: 1.1rem;
 
                 text-decoration: none;
             }
         }
 
         .price-box {
-            margin: 0 0 10px;
+            margin: 0 0 1rem;
         }
 
         .price-container {
             .price {
                 color: #111;
 
-                font-size: 15px;
+                font-size: 1.5rem;
                 font-weight: 600;
                 line-height: 1.3;
             }
@@ -272,17 +272,17 @@
             justify-content: center;
 
             width: 100%;
-            min-height: 42px;
+            min-height: 4.2rem;
 
-            padding: 0 14px;
+            padding: 0 1.4rem;
 
             background: #111;
-            border: 1px solid #111;
+            border: .1rem solid #111;
             border-radius: 0;
 
             color: #fff;
 
-            font-size: 12px;
+            font-size: 1.2rem;
             font-weight: 600;
 
             letter-spacing: .04em;
@@ -307,124 +307,124 @@
     }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 102.3rem) {
     .column.main {
         .products.wrapper.grid.products-grid {
             .product-items {
                 grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 20px;
+                gap: 2rem;
             }
 
             .codilar-wishlist-button,
             .codilar-quick-view-button {
-                width: 38px;
-                height: 38px;
+                width: 3.8rem;
+                height: 3.8rem;
             }
 
             .product-item-name {
-                font-size: 14px;
+                font-size: 1.4rem;
             }
         }
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 76.7rem) {
     .column.main {
         .products.wrapper.grid.products-grid {
             .product-items {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 24px 12px;
+                gap: 2.4rem 1.2rem;
             }
 
             .codilar-wishlist-button,
             .codilar-quick-view-button {
-                width: 34px;
-                height: 34px;
+                width: 3.4rem;
+                height: 3.4rem;
 
                 opacity: 1;
                 transform: none;
             }
 
             .codilar-wishlist-button {
-                top: 8px;
-                right: 8px;
+                top: .8rem;
+                right: .8rem;
 
                 .heart-icon {
-                    width: 17px;
-                    height: 17px;
+                    width: 1.7rem;
+                    height: 1.7rem;
                 }
             }
 
             .codilar-quick-view-button {
-                right: 8px;
-                bottom: 8px;
+                right: .8rem;
+                bottom: .8rem;
 
                 .eye-icon {
-                    width: 16px;
-                    height: 16px;
+                    width: 1.6rem;
+                    height: 1.6rem;
                 }
             }
 
             .product-item-details {
-                padding-top: 9px;
+                padding-top: .9rem;
             }
 
             .product-item-name {
-                margin-bottom: 5px;
+                margin-bottom: .5rem;
 
-                font-size: 13px;
+                font-size: 1.3rem;
             }
 
             .product-reviews-summary {
-                gap: 4px;
+                gap: .4rem;
 
-                margin-bottom: 5px;
+                margin-bottom: .5rem;
             }
 
             .rating-summary {
                 .rating-result {
-                    width: 52px;
+                    width: 5.2rem;
                 }
             }
 
             .price-box {
-                margin-bottom: 8px;
+                margin-bottom: .8rem;
             }
 
             .price-container {
                 .price {
-                    font-size: 14px;
+                    font-size: 1.4rem;
                 }
             }
 
             .action.tocart.primary {
-                min-height: 38px;
+                min-height: 3.8rem;
 
-                font-size: 11px;
+                font-size: 1.1rem;
             }
         }
     }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 42.5rem) {
     .column.main {
         .products.wrapper.grid.products-grid {
             .product-items {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 14px 10px;
+                gap: 1.4rem 1rem;
             }
 
             .product-item {
-                border: 1px solid #e5e5e5;
-                border-radius: 5px;
+                border: .1rem solid #e5e5e5;
+                border-radius: .5rem;
                 overflow: hidden;
                 background: #fff;
                 transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
 
                 &:hover {
                     border-color: #d5d5d5;
-                    box-shadow: 0 5px 14px rgba(0, 0, 0, .07);
-                    transform: translateY(-2px);
+                    box-shadow: 0 .5rem 1.4rem rgba(0, 0, 0, .07);
+                    transform: translateY(-.2rem);
                 }
             }
 
@@ -433,7 +433,7 @@
             }
 
             .codilar-product-image-wrapper {
-                border-radius: 5px 5px 0 0;
+                border-radius: .5rem .5rem 0 0;
 
                 .product-image-wrapper {
                     aspect-ratio: 4 / 4.6;
@@ -441,61 +441,61 @@
 
                 .codilar-wishlist-button,
                 .codilar-quick-view-button {
-                    width: 30px;
-                    height: 30px;
+                    width: 3rem;
+                    height: 3rem;
                 }
 
                 .codilar-wishlist-button {
-                    top: 7px;
-                    right: 7px;
+                    top: .7rem;
+                    right: .7rem;
 
                     .heart-icon {
-                        width: 15px;
-                        height: 15px;
+                        width: 1.5rem;
+                        height: 1.5rem;
                     }
                 }
 
                 .codilar-quick-view-button {
-                    right: 7px;
-                    bottom: 7px;
+                    right: .7rem;
+                    bottom: .7rem;
 
                     .eye-icon {
-                        width: 14px;
-                        height: 14px;
+                        width: 1.4rem;
+                        height: 1.4rem;
                     }
                 }
             }
 
             .product-item-details {
-                padding: 8px;
+                padding: .8rem;
             }
 
             .product-item-name {
-                margin: 0 0 4px;
-                font-size: 12px;
+                margin: 0 0 .4rem;
+                font-size: 1.2rem;
                 font-weight: 500;
                 line-height: 1.3;
             }
 
             .product-reviews-summary {
-                gap: 3px;
-                margin: 0 0 4px;
-                font-size: 9px;
+                gap: .3rem;
+                margin: 0 0 .4rem;
+                font-size: .9rem;
             }
 
             .rating-summary {
                 .rating-result {
-                    width: 46px;
+                    width: 4.6rem;
                 }
             }
 
             .price-box {
-                margin: 0 0 7px;
+                margin: 0 0 .7rem;
             }
 
             .price-container {
                 .price {
-                    font-size: 13px;
+                    font-size: 1.3rem;
                     font-weight: 600;
                 }
             }
@@ -505,56 +505,55 @@
             }
 
             .action.tocart.primary {
-                min-height: 34px;
-                padding: 0 8px;
-                border-radius: 3px;
-                font-size: 9px;
+                min-height: 3.4rem;
+                padding: 0 .8rem;
+                border-radius: .3rem;
+                font-size: .9rem;
                 letter-spacing: .03em;
             }
         }
     }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 36rem) {
     .column.main {
         .products.wrapper.grid.products-grid {
             .product-items {
                 grid-template-columns: repeat(1, minmax(0, 1fr));
-                gap: 12px 8px;
+                gap: 1.2rem .8rem;
             }
 
-
             .product-item {
-                border-radius: 5px;
+                border-radius: .5rem;
             }
 
             .product-item-details {
-                padding: 7px;
+                padding: .7rem;
             }
 
             .product-item-name {
-                font-size: 11px;
+                font-size: 1.1rem;
             }
 
             .product-reviews-summary {
-                font-size: 8px;
+                font-size: .8rem;
             }
 
             .rating-summary {
                 .rating-result {
-                    width: 42px;
+                    width: 4.2rem;
                 }
             }
 
             .price-container {
                 .price {
-                    font-size: 12px;
+                    font-size: 1.2rem;
                 }
             }
 
             .action.tocart.primary {
-                min-height: 32px;
-                font-size: 8px;
+                min-height: 3.2rem;
+                font-size: .8rem;
             }
         }
     }

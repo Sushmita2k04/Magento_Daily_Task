@@ -16,7 +16,7 @@
 
         <!-- Top black header -->
 
-        <referenceContainer name="header.panel.wrapper">
+        <!-- <referenceContainer name="header.panel.wrapper">
 
             <block
                 class="Magento\Theme\Block\Html\Header"
@@ -31,6 +31,19 @@
                         welcome
                     </argument>
                 </arguments>
+
+            </block>
+
+        </referenceContainer> -->
+
+          <referenceContainer name="header.panel.wrapper">
+
+            <block
+                class="Magento\Theme\Block\Html\Header"
+                before="-"
+                template="Magento_Theme::html/samyakkHeadertop.phtml"
+            >
+
 
             </block>
 
