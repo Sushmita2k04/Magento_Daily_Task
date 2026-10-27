@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * Mobile navigation drawer.
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ */
+?>
+
+<div
+    class="mobile-menu-overlay"
+    data-role="mobile-menu-overlay"
+    aria-hidden="true"></div>
+
+<aside
+    class="mobile-menu-drawer"
+    data-role="mobile-menu-drawer"
+    aria-hidden="true"
+    aria-label="<?= $block->escapeHtmlAttr(__('Mobile navigation')) ?>">
+
+    <div class="mobile-menu-content">
+        <section class="mobile-menu-promo">
+            <p><?= $block->escapeHtml(__('Ready to shop Great Deals?')) ?></p>
+
+            <a
+                class="mobile-menu-account"
+                href="<?= $block->escapeUrl($block->getUrl('customer/account/login')) ?>">
+                <span><?= $block->escapeHtml(__('Sign In / Register')) ?></span>
+                <span class="mobile-menu-arrow" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="8" height="14" viewBox="0 0 8 14" fill="none">
+                        <path d="M0.754349 13.5031C0.655644 13.5036 0.557797 13.4847 0.466419 13.4474C0.375041 13.4101 0.291929 13.3551 0.221849 13.2856C0.151552 13.2158 0.0957569 13.1329 0.0576804 13.0415C0.0196039 12.9501 0 12.8521 0 12.7531C0 12.6541 0.0196039 12.556 0.0576804 12.4646C0.0957569 12.3732 0.151552 12.2903 0.221849 12.2206L5.69685 6.75307L0.221849 1.28557C0.0806209 1.14434 0.00128031 0.952795 0.00128031 0.753069C0.00128031 0.654174 0.0207585 0.556248 0.0586038 0.464882C0.096449 0.373515 0.15192 0.290498 0.221849 0.220569C0.291778 0.15064 0.374795 0.0951694 0.466161 0.0573242C0.557528 0.0194789 0.655454 0 0.754349 0C0.954075 0 1.14562 0.079341 1.28685 0.220569L7.28685 6.22057C7.35714 6.29029 7.41294 6.37324 7.45102 6.46464C7.48909 6.55603 7.5087 6.65406 7.5087 6.75307C7.5087 6.85208 7.48909 6.95011 7.45102 7.0415C7.41294 7.1329 7.35714 7.21585 7.28685 7.28557L1.28685 13.2856C1.21677 13.3551 1.13366 13.4101 1.04228 13.4474C0.9509 13.4847 0.853054 13.5036 0.754349 13.5031Z" fill="#424453" />
+                    </svg>
+                </span>
+            </a>
+        </section>
+
+        <a
+            class="mobile-menu-orders"
+            href="<?= $block->escapeUrl($block->getUrl('sales/order/history')) ?>">
+            <span><?= $block->escapeHtml(__('My Orders')) ?></span>
+            <span class="mobile-menu-arrow" aria-hidden="true">›</span>
+        </a>
+
+        <nav
+            class="mobile-menu-navigation"
+            aria-label="<?= $block->escapeHtmlAttr(__('Main navigation')) ?>">
+            <?= /* @noEscape */ $block->getChildHtml('mobile.topnav') ?>
+        </nav>
+
+        <div class="mobile-menu-currency">
+            <?= /* @noEscape */ $block->getChildHtml('mobile.currency') ?>
+        </div>
+    </div>
+
+    <button
+        type="button"
+        class="mobile-menu-close"
+        aria-label="<?= $block->escapeHtmlAttr(__('Close menu')) ?>">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</aside>

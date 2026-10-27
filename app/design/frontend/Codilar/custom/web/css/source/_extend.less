@@ -8,23 +8,44 @@
 @import '_ramadan.less';
 @import '_samyakk.less';
 
+@font-face {
+    font-family: 'Futura Md BT';
+    src: url('../fonts/FuturaMDBT.woff2') format('ttf');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-family: 'Futura Md BT', sans-serif;
+
+body,
+button,
+input,
+select,
+textarea {
+    font-family: @font-family;
+}
+
 body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     width: 100%;
-    font-family: Arial, sans-serif;
+    font-family: @font-family;
 }
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
 
 *,
 *::before,
 *::after {
     box-sizing: border-box;
-}
-
-.page-main {
-    width: 100%;
-
+    font-family: 'Futura Md BT', sans-serif;
 }
 
 .sections.nav-sections {

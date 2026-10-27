@@ -115,4 +115,14 @@ define([
             }
         });
     });
+});define([
+    'jquery'
+], function ($) {
+    'use strict';
+
+    return function () {
+        $('.search-toggle').on('click', function () {
+            $('.header-search').toggleClass('active');
+        });
+    };
 });

@@ -92,8 +92,8 @@
 
         <move
             element="logo"
-            destination="codilar-navigation"
-            before="-"
+            destination="logo-container"
+            
         />
 
 
@@ -136,6 +136,49 @@
     element="cart.product.price"
     destination="cart.product.qty"
     after="-"/>
+    <referenceContainer name="header.actions" remove="true"/>
+     <referenceContainer name="page.wrapper">
+        <block
+            class="Magento\Framework\View\Element\Template"
+            name="custom.mobile.menu"
+            template="Magento_Theme::html/mobile-menu.phtml"
+            before="-"
+        >
+            <block
+                class="Magento\Framework\View\Element\Template"
+                name="custom.mobile.menu.navigation"
+                template="Magento_Theme::html/topmenu.phtml"
+            />
+        </block>
+    </referenceContainer>
+
+<referenceContainer name="after.body.start">
+    <block
+        class="Magento\Framework\View\Element\Template"
+        name="custom.mobile.menu"
+        template="Magento_Theme::html/mobile-menu.phtml"
+        before="-"
+    >
+        <block
+            class="Magento\Theme\Block\Html\Topmenu"
+            name="custom.mobile.menu.topnav"
+            as="mobile.topnav"
+            template="Magento_Theme::html/topmenu.phtml"
+        />
+
+        <block
+            class="Magento\Directory\Block\Currency"
+            name="custom.mobile.menu.currency"
+            as="mobile.currency"
+            template="Magento_Directory::currency.phtml"
+        >
+            <arguments>
+                <argument name="id_modifier" xsi:type="string">mobile</argument>
+            </arguments>
+        </block>
+    </block>
+</referenceContainer>
+
 
     </body>
 
