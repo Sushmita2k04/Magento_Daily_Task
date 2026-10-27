@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<page
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+>
+    <body>
+
+        <referenceContainer name="content">
+
+            <container
+                name="catalog.navigation.state.wrapper"
+                htmlTag="div"
+                htmlClass="catalog-navigation-state-main"
+                before="category.products"
+            >
+
+                <block
+                    class="Magento\LayeredNavigation\Block\Navigation\State"
+                    name="catalog.navigation.state.main"
+                    template="Magento_LayeredNavigation::layer/state.phtml"
+                />
+
+            </container>
+
+        </referenceContainer>
+
+    </body>
+</page>

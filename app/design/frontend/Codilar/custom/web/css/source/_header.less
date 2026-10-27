@@ -18,16 +18,15 @@
 @nav-font-size: 1.6rem;
 @nav-gap: 8rem;
 
-
-// ==========================================================================
-// 2. BASE DESKTOP STYLES
-// ==========================================================================
 .page-header {
     width: @header-width;
     margin: 0;
     padding: 0;
     background: @color-white;
     border: 0;
+    top: 0;
+    position: sticky;
+    z-index: 999;
 
     .header.content {
         width: @header-width;
@@ -35,69 +34,57 @@
         height: @header-height;
         display: flex;
         align-items: center;
-        margin: 0;
-        padding: 0 @header-padding;
+        justify-content: center;
         background: @color-white;
         box-sizing: border-box;
-        border-bottom: 0.05rem solid grey;
 
         .codilar-navigation {
             display: flex;
             align-items: center;
-            flex: 1;
-            min-width: 0;
+            width: 100%;
             height: @header-height;
             margin: 0;
             padding: 0;
 
             .navigation {
-                position: static;
-                float: none;
-                display: block;
-                flex: 1;
-                width: auto;
-                min-width: 0;
-                min-height: @header-height;
-                margin: 0;
-                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
                 background: transparent;
                 box-sizing: border-box;
 
                 >ul {
-                    display: flex !important;
-                    flex-direction: row !important;
+                    display: flex;
+                    flex-direction: row;
                     align-items: center;
-                    width: auto;
-                    height: @header-height;
-                    margin: 0;
-                    padding: 0;
+                    height: 1.9rem;
                     list-style: none;
                     box-sizing: border-box;
-                    gap: @nav-gap;
+                    gap: 3rem;
+                    text-wrap: nowrap;
+                    // margin-left: 32rem;
 
                     >li {
-                        display: block !important;
-                        float: none !important;
+                        display: block;
+                        float: none;
                         width: auto;
-                        margin: 0;
-                        padding: 0;
                         list-style: none;
                         box-sizing: border-box;
 
                         >a {
+                            width: 100%;
+                            height: 1.9rem;
                             display: flex;
                             align-items: center;
-                            width: auto;
-                            height: @header-height;
-                            margin: 0;
-                            padding: 0;
-                            color: @color-text;
-                            font-family: 'Proxima Nova', sans-serif;
-                            font-size: @nav-font-size;
-                            font-weight: 400;
-                            line-height: 1;
-                            letter-spacing: 0;
                             text-decoration: none;
+                            font-family: 'Futura Md BT';
+                            font-weight: 400;
+                            font-size: 1.6rem;
+                            line-height: 100%;
+                            letter-spacing: 0%;
+                            border: none;
+
 
                             &:hover {
                                 color: @color-hover;
@@ -119,161 +106,100 @@
                 }
             }
 
-            .logo {
-                position: static;
-                float: none;
-                display: block;
-                flex: 0 0 auto;
-                width: auto;
-                margin: 0 6rem 0 0;
-                padding: 0;
-                transform: none;
 
-                img {
-                    display: block;
-                    width: 6.1rem;
-                    height: 3rem;
-                }
-            }
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            width: 13.2rem;
-            height: 2.4rem;
-            gap: 3rem;
-            box-sizing: border-box;
-
-            .block-search {
-                flex: 0 0 2.4rem;
-                width: 2.4rem;
-                height: 2.4rem;
-                float: none;
-                position: relative;
-
-                .block-content {
-                    width: 2.4rem;
-                    height: 2.4rem;
-                }
-
-                .field.search {
-                    width: 2.4rem;
-                    height: 2.4rem;
-                }
-
-                .label {
-                    display: none;
-                }
-
-                .action.search {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    width: 2.4rem;
-                    height: 2.4rem;
-                    border: 0;
-                    background: transparent;
-
-                    &::before {
-                        content: '';
-                        display: block;
-                        width: 2.4rem;
-                        height: 2.4rem;
-                        background-image: url('../images/search.png');
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        background-size: 2.4rem 2.4rem;
-                    }
-                }
-
-                input {
-                    display: none;
-                }
-
-                .action.showcart {
-                    display: none;
-                }
-            }
-
-            .header.links {
-                flex: 0 0 2.4rem;
-                width: 2.4rem;
-                height: 2.4rem;
-                display: flex;
-                align-items: center;
-
-                li {
-                    width: 2.4rem;
-                    height: 2.4rem;
-
-                    .codilar-account__link {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        width: 2.4rem;
-                        height: 2.4rem;
-                        margin: 0;
-                        padding: 0;
-
-                        img {
-                            display: block;
-                            width: 2.4rem;
-                            height: 2.4rem;
-                            margin: 0;
-                        }
-                    }
-                }
-            }
-
-            .minicart-wrapper {
-                flex: 0 0 2.4rem;
-                width: 2.4rem;
-                height: 2.4rem;
-                margin: 0;
-                padding: 0;
-
-                .action.showcart {
-                    position: relative;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    width: 2.4rem;
-                    height: 2.4rem;
-                    margin: 0;
-                    padding: 0;
-
-                    &::before {
-                        content: '';
-                        display: block;
-                        width: 2.4rem;
-                        height: 2.4rem;
-                        background-image: url('../images/bag.png');
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        background-size: 2.4rem 2.4rem;
-                    }
-
-                    .counter.qty {
-                        position: absolute;
-                        top: -1rem;
-                        right: -1rem;
-                        width: 1.6rem;
-                        height: 1.6rem;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        padding: 1rem;
-                        border: 0.2rem solid @color-white;
-                        border-radius: 100px;
-                        color: @color-white;
-                        background-color: #CF0A2C;
-                        gap: 1rem;
-                    }
-                }
-            }
         }
     }
+}
+
+.header-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .search {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        z-index: 2;
+    }
+
+    .header-search-form {
+        width: 100%;
+        position: fixed;
+        top: 1.2rem;
+        left: 50%;
+        width: calc(100% - 4rem);
+        max-width: none;
+        padding: 3rem;
+        overflow: visible;
+        opacity: 0;
+        visibility: hidden;
+        transform: translate(-50%, -1rem);
+        background: @color-white;
+        z-index: 9999;
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    }
+
+    #header-search-input {
+        width: 80%;
+        height: 8.9rem;
+        padding: 4.3rem 2rem;
+        border: 0;
+        border-bottom: 0.3rem solid #555;
+        border-radius: 0 0.5rem 0.5rem 0.5rem;
+        outline: none;
+        background: #f7f7f7;
+        font-family: 'Futura Md BT';
+        font-size: 1.6rem;
+        box-sizing: border-box;
+        box-shadow: none;
+    }
+
+    &:hover,
+    &:focus-within {
+        .header-search-form {
+            display: flex;
+            justify-content: center;
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, 0);
+            width: 100%;
+        }
+    }
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: auto;
+    margin: 0;
+    padding: 0;
+
+
+    a {
+        background: none;
+        border: none;
+
+        svg {
+            display: block;
+            max-width: none;
+        }
+    }
+
+}
+
+.breadcrumbs .item:not(:last-child):after {
+
+    content: '/';
+    display: inline-block;
+
+    text-align: center;
 }
 
 .codilar-top-header {
@@ -289,419 +215,235 @@
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
 
-    &__store {
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-        justify-self: start;
-        color: @color-white;
-        font-size: @header-font-size;
-        font-weight: 600;
-        line-height: 1;
-        white-space: nowrap;
+
+    .separator {
+        display: block;
+        width: 0.1rem;
+        height: 1.7rem;
+        background: @color-separator;
     }
 
-    &__location {
-        display: inline-flex;
+}
+
+.whatsappicon-cover {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    white-space: nowrap;
+    text-decoration: none;
+
+    span {
+        width: 0;
+        overflow: hidden;
+        opacity: 0;
+        white-space: nowrap;
+        transition: width 0.3s ease, opacity 0.2s ease;
+    }
+
+    &:hover {
+        span {
+            width: 12rem;
+            opacity: 1;
+        }
+    }
+}
+
+.navigation .level0.active>.level-top,
+.navigation .level0.has-active>.level-top {
+
+    border-style: none;
+
+}
+
+.hamburger-menu {
+    display: none;
+    width: 2rem;
+    height: 2.2rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+
+    svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.header-wrapper {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background: @white;
+    border-bottom: 0.1rem solid #ddd;
+    height: 11.2rem;
+    font-family: 'Futura Md BT', sans-serif;
+
+    .header-content {
+        width: 100%;
+        height: 7.2rem;
+        display: flex;
+        justify-content: space-between;
         align-items: center;
-        justify-content: center;
+        position: relative;
+        margin: 0 4rem;
+        // padding: 3.8rem 4.6rem 0 5.6rem;
+        box-sizing: border-box;
+    }
+
+    .main-menu {
+        // width: 33.33%;
+        display: flex;
+        align-items: center;
+        // gap: 2.6rem;
+        font-family: 'Futura Md BT', sans-serif;
+        font-weight: 400;
+        font-style: normal;
         font-size: 1.6rem;
         line-height: 1;
-    }
-
-    &__announcement {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        white-space: nowrap;
-    }
-
-    &__message {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: @header-font-size;
-        font-weight: 600;
-        line-height: 1.8rem;
+        letter-spacing: 0;
 
         a {
-            margin-left: 0.5rem;
-            color: @color-white;
-            font-size: @header-font-size;
-            font-weight: 600;
-            text-decoration: underline;
-            text-underline-offset: 0.2rem;
-        }
-    }
-
-    &__dots {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        margin-top: 0.3rem;
-
-        span {
-            display: block;
-            width: 0.5rem;
-            height: 0.5rem;
-            border-radius: 50%;
-            background: @color-muted;
-        }
-
-        .active {
-            background: @color-white;
-        }
-    }
-
-    &__links {
-        display: flex;
-        align-items: center;
-        justify-self: end;
-        gap: 1.2rem;
-        white-space: nowrap;
-
-        a {
-            color: @color-white;
-            font-size: @header-font-size;
-            font-weight: 500;
-            line-height: 1;
+            color: @text-color;
             text-decoration: none;
-
-            span {
-                margin-left: 0.4rem;
-                font-size: 1.1rem;
-            }
+            font-family: 'Futura Md BT', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            font-style: normal;
+            white-space: nowrap;
+            height: 1.9rem;
+            width: 10.8rem;
+            padding-left: 4rem;
         }
 
-        .separator {
-            display: block;
-            width: 0.1rem;
-            height: 1.7rem;
-            background: @color-separator;
-        }
-    }
-}
-
-
-// ==========================================================================
-// 3. SEPARATED RESPONSIVE MEDIA QUERIES
-// ==========================================================================
-
-/* --------------------------------------------------------------------------
-   Large Screens / Laptops (Max Width: 120rem / 1200px)
-   -------------------------------------------------------------------------- */
-@media screen and (max-width: 120rem) {
-    .page-header {
-        .header.content {
-            padding: 0 3rem;
-
-            .codilar-navigation {
-                .logo {
-                    margin-right: 4rem;
-                }
-
-                .navigation {
-                    >ul {
-                        gap: 5rem;
-                    }
-                }
-            }
+        a:first-child {
+            background: @golden;
+            color: @white;
+            height: 4.9rem;
+            width: 13.7rem;
+            justify-content: center;
+            padding: 1.2rem 1.8rem;
+            border-radius: 0.2rem;
+            display: flex;
+            align-items: center;
         }
     }
 
-    .codilar-top-header {
-        padding: 0 3rem;
-    }
-}
+    .header-icons {
+        align-items: center;
+        justify-content: flex-end;
+        display: flex;
+        width: 27%;
+        height: 3.6rem;
+        gap: 2rem;
+        font-family: 'Futura Md BT', sans-serif;
 
-/* --------------------------------------------------------------------------
-   Desktops / Small Laptops (Max Width: 102.4rem / 1024px)
-   -------------------------------------------------------------------------- */
-@media screen and (max-width: 102.4rem) {
-    .page-header {
-        .header.content {
-            padding: 0 2.5rem;
-
-            .codilar-navigation {
-                .logo {
-                    margin-right: 3rem;
-                }
-
-                .navigation {
-                    >ul {
-                        gap: 3rem;
-
-                        >li {
-                            >a {
-                                font-size: 1.7rem;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    .codilar-top-header {
-        padding: 0 2.5rem;
-
-        &__store,
-        &__message,
-        &__links a {
-            font-size: 1.3rem;
-        }
-    }
-}
-
-/* --------------------------------------------------------------------------
-   Tablets in Landscape (Max Width: 80rem / 800px)
-   -------------------------------------------------------------------------- */
-@media screen and (max-width: 80rem) {
-    .page-header {
-        .header.content {
-            padding: 0 2rem;
-
-            .codilar-navigation {
-                .logo {
-                    margin-right: 2rem;
-
-                    img {
-                        width: 5.5rem;
-                        height: auto;
-                    }
-                }
-
-                .navigation {
-                    >ul {
-                        gap: 2rem;
-
-                        >li {
-                            >a {
-                                font-size: 1.4rem;
-                            }
-                        }
-                    }
-                }
-            }
-
-            .header-actions {
-                width: 11rem;
-                gap: 2rem;
-            }
-        }
-    }
-
-    .codilar-top-header {
-        padding: 0 2rem;
-
-        &__links {
-            gap: 0.8rem;
-        }
-    }
-}
-
-/* --------------------------------------------------------------------------
-   Tablets in Portrait (Max Width: 64rem / 640px)
-   -------------------------------------------------------------------------- */
-@media screen and (max-width: 64rem) {
-    .page-header {
-        .header.content {
-            height: auto;
-            min-height: @header-height;
-            padding: 1.5rem 2rem;
-            flex-wrap: wrap;
-
-            .codilar-navigation {
-                height: auto;
-                min-height: @header-height;
-
-                .logo {
-                    margin-right: 2rem;
-                }
-
-                .navigation {
-                    min-height: @header-height;
-
-                    >ul {
-                        gap: 1.5rem;
-
-                        >li {
-                            >a {
-                                height: auto;
-                                font-size: 1.4rem;
-                            }
-                        }
-                    }
-                }
-            }
-
-            .header-actions {
-                flex-shrink: 0;
-                width: 11rem;
-                gap: 1.5rem;
-            }
-        }
-    }
-
-    .codilar-top-header {
-        height: 4.8rem;
-        padding: 0 1.5rem;
-
-        &__announcement {
-            display: none;
+        select {
+            border: 0;
+            outline: none;
+            background: transparent;
+            font-family: 'Futura Md BT', sans-serif;
+            font-size: 1.2rem;
+            color: @color-black;
         }
 
-        &__store {
-            font-size: 1.1rem;
-        }
-
-        &__links {
-            gap: 0.8rem;
-
-            a {
-                font-size: 1.1rem;
-            }
-        }
-    }
-}
-
-/* --------------------------------------------------------------------------
-   Mobile Devices - Portrait / Large Phones (Max Width: 48rem / 480px)
-   -------------------------------------------------------------------------- */
-@media screen and (max-width: 48rem) {
-    .page-header {
-        .header.content {
-            height: auto;
-            min-height: 6rem;
-            padding: 1.5rem;
-            flex-wrap: nowrap;
-
-            .codilar-navigation {
-                height: auto;
-                min-height: 0;
-
-                .logo {
-                    display: block;
-                    margin-right: 1.5rem;
-
-                    img {
-                        width: 5.5rem;
-                        height: auto;
-                    }
-                }
-
-                .navigation {
-                    display: none;
-                }
-            }
-
-            .header-actions {
-                width: auto;
-                height: 2.4rem;
-                margin-left: auto;
-                gap: 1.5rem;
-
-                .block-search {
-                    margin-left: 0;
-                    margin-right: 0;
-                    display: none;
-                }
-            }
-        }
-    }
-
-    .codilar-top-header {
-        height: 4.8rem;
-        padding: 0 1.5rem;
-
-        &__store {
-            font-size: 1rem;
-        }
-
-        &__links {
-            gap: 0.6rem;
-
-            a {
-                font-size: 1rem;
-            }
-        }
-    }
-}
-
-/* --------------------------------------------------------------------------
-   Small Mobile Devices (Max Width: 36rem / 360px)
-   -------------------------------------------------------------------------- */
-@media screen and (max-width: 36rem) {
-    .page-header {
-        .header.content {
-            padding: 1.2rem;
-
-            .codilar-navigation {
-                .logo {
-                    margin-right: 1rem;
-
-                    img {
-                        width: 5rem;
-                    }
-                }
-            }
-
-            .header-actions {
-                gap: 1.2rem;
-            }
-        }
-    }
-
-    .codilar-top-header {
-        height: 4.8rem;
-        padding: 0 1rem;
-
-        &__store {
-            font-size: 0.9rem;
-        }
-
-        &__links {
-            gap: 0.5rem;
-
-            a {
-                font-size: 0.9rem;
-            }
-        }
-    }
-}
-
-/* --------------------------------------------------------------------------
-   Extra Small Mobile Devices (Max Width: 30rem / 300px)
-   -------------------------------------------------------------------------- */
-@media screen and (max-width: 30rem) {
-    .page-header {
-        .header.content {
+        a {
+            color: @color-black;
+            text-decoration: none;
+            font-family: 'Futura Md BT', sans-serif;
+            font-size: 1.2rem;
+            white-space: nowrap;
             padding: 1rem;
+        }
 
-            .codilar-navigation {
-                .logo {
-                    display: none;
-                }
-            }
-
-            .header-actions {
-                gap: 1rem;
-            }
+        button {
+            border: 0;
+            background: transparent;
+            // padding: 1rem;
+            color: @color-black;
+            font-family: 'Futura Md BT', sans-serif;
         }
     }
+}
 
-    .codilar-top-header {
-        &__store {
-            font-size: 0.8rem;
-        }
+@media (max-width:102.4rem) {
+    .page-header .header.content .codilar-navigation .navigation>ul {
+        gap: 0;
+    }
 
-        &__links {
-            a {
-                font-size: 0.8rem;
+    .navigation ul {
+        padding: 0;
+    }
+}
+
+@media (max-width:76.8rem) {
+    .header-wrapper .header-icons {
+        gap: 1.7rem;
+    }
+
+    .page-header .header.content {
+        display: none;
+    }
+
+    .header-wrapper .main-menu {
+        display: none;
+    }
+
+    .hamburger-menu {
+        display: block;
+
+    }
+
+    .header.content {
+        display: none;
+    }
+
+
+    .logo-container {
+
+        a {
+
+
+            svg {
+                display: block;
+                width: 11.7rem;
+                height: auto;
+                max-width: none;
             }
         }
+
+    }
+}
+
+
+@media (max-width:39rem) {
+
+    .header-wrapper .header-content {
+        margin: 0 1.1rem;
+    }
+
+    .header-wrapper {
+        border-bottom: none;
+        height: 5.8rem;
+    }
+
+    .header-wrapper .header-icons {
+        gap: 0.5rem;
+        width: 19.2rem;
+
+    }
+
+    .header-wrapper .header-icons button {
+        padding: 0;
+    }
+
+    .header-wrapper .header-icons a {
+        padding: 0;
+    }
+
+    .header-icons> :first-child {
+        display: none;
     }
 }

@@ -1,0 +1,69 @@
+<?php
+
+/** @var \Magento\LayeredNavigation\Block\Navigation $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$filters = $block->getFilters();
+
+$priority = [
+    'category' => 1,
+    'price' => 2
+];
+
+usort($filters, function ($a, $b) use ($priority) {
+    return ($priority[$a->getRequestVar()] ?? 99)
+        <=> ($priority[$b->getRequestVar()] ?? 99);
+});
+?>
+
+<?php if ($block->canShowBlock()): ?>
+    <div class="block filter">
+        <div class="block-title filter-title">
+            <span><?= $escaper->escapeHtml(__('Filters')) ?></span>
+            <?php if ($block->getLayer()->getState()->getFilters()): ?>
+                <a href="<?= $escaper->escapeUrl($block->getClearUrl()) ?>"
+                    class="action clear filter-clear">
+                    <span><?= $escaper->escapeHtml(__('Clear All')) ?></span>
+                </a>
+            <?php endif; ?>
+        </div>
+
+        <div class="block-content filter-content">
+
+            <div
+                class="filter-options"
+                id="narrow-by-list"
+                data-role="content"
+                data-mage-init='{"accordion":{"openedState":"active","collapsible":true,"active":false,"multipleCollapsible":true,"animate":{"duration":200}}}'>
+
+                <?php foreach ($filters as $filter): ?>
+                    <?php if ($filter->getItemsCount()): ?>
+                        <div
+                            class="filter-options-item"
+                            data-role="collapsible">
+
+                            <div
+                                class="filter-options-title"
+                                data-role="title">
+                                <?= $escaper->escapeHtml(__($filter->getName())) ?>
+                            </div>
+
+                            <div
+                                class="filter-options-content"
+                                data-role="content">
+
+                                <?php
+                                $renderer = $block->getChildBlock('renderer');
+                                $renderer->setData('current_filter', $filter);
+                                ?>
+
+                                <?= /* @noEscape */ $renderer->render($filter) ?>
+
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

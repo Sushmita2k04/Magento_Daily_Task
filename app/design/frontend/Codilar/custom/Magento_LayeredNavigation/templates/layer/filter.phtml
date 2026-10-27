@@ -1,0 +1,308 @@
+<?php
+
+/** @var \Magento\LayeredNavigation\Block\Navigation\FilterRenderer $block */
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \Magento\Framework\Locale\LocaleFormatter $localeFormatter */
+/** @var \Magento\LayeredNavigation\ViewModel\Layer\Filter $viewModel */
+
+$viewModel = $block->getData('product_layer_view_model');
+$filter = $block->getData('current_filter');
+
+$isPriceFilter = $filter
+    && $filter->getRequestVar() === 'price';
+$isCategoryFilter = $filter
+    && $filter->getRequestVar() === 'cat';
+
+$parentCategoryName = '';
+
+if ($isCategoryFilter) {
+    $currentCategory = $filter->getLayer()->getCurrentCategory();
+
+    if ($currentCategory) {
+        $parentCategoryName = $currentCategory->getName();
+    }
+}
+
+?>
+
+<?php if ($isPriceFilter): ?>
+    <?php
+    $minPrice = 0;
+    $maxPrice = 1;
+
+    $productCollection = $filter->getLayer()->getProductCollection();
+    $connection = $productCollection->getConnection();
+    $select = clone $productCollection->getSelect();
+
+    $select->reset(\Magento\Framework\DB\Select::COLUMNS);
+    $select->reset(\Magento\Framework\DB\Select::ORDER);
+    $select->reset(\Magento\Framework\DB\Select::LIMIT_COUNT);
+    $select->reset(\Magento\Framework\DB\Select::LIMIT_OFFSET);
+    $select->reset(\Magento\Framework\DB\Select::GROUP);
+    $select->reset(\Magento\Framework\DB\Select::HAVING);
+
+    $select->columns([
+        'min_price' => 'MIN(price_index.min_price)',
+        'max_price' => 'MAX(price_index.max_price)'
+    ]);
+
+    $priceRange = $connection->fetchRow($select);
+
+    if (
+        $priceRange
+        && $priceRange['min_price'] !== null
+        && $priceRange['max_price'] !== null
+    ) {
+        $minPrice = (int) floor((float) $priceRange['min_price']);
+        $maxPrice = (int) ceil((float) $priceRange['max_price']);
+    }
+
+    if ($maxPrice <= $minPrice) {
+        $maxPrice = $minPrice + 1;
+    }
+
+    $currentMinPrice = $minPrice;
+    $currentMaxPrice = $maxPrice;
+
+    $priceParam = $block->getRequest()->getParam('price');
+
+    if (
+        is_string($priceParam)
+        && preg_match('/^(\d+)-(\d+)$/', $priceParam, $matches)
+    ) {
+        $currentMinPrice = max(
+            $minPrice,
+            min($maxPrice, (int) $matches[1])
+        );
+
+        $currentMaxPrice = max(
+            $currentMinPrice,
+            min($maxPrice, (int) $matches[2])
+        );
+    }
+    ?>
+
+    <div
+        class="codilar-price-filter"
+        data-min-price="<?= $escaper->escapeHtmlAttr($minPrice) ?>"
+        data-max-price="<?= $escaper->escapeHtmlAttr($maxPrice) ?>">
+
+        <div class="codilar-price-slider">
+            <div class="codilar-price-slider-track"></div>
+            <div class="codilar-price-slider-range"></div>
+
+            <input
+                type="range"
+                class="codilar-price-slider-min"
+                min="<?= $escaper->escapeHtmlAttr($minPrice) ?>"
+                max="<?= $escaper->escapeHtmlAttr($maxPrice) ?>"
+                value="<?= $escaper->escapeHtmlAttr($currentMinPrice) ?>"
+                step="1"
+                aria-label="<?= $escaper->escapeHtmlAttr(__('Minimum price')) ?>">
+
+            <input
+                type="range"
+                class="codilar-price-slider-max"
+                min="<?= $escaper->escapeHtmlAttr($minPrice) ?>"
+                max="<?= $escaper->escapeHtmlAttr($maxPrice) ?>"
+                value="<?= $escaper->escapeHtmlAttr($currentMaxPrice) ?>"
+                step="1"
+                aria-label="<?= $escaper->escapeHtmlAttr(__('Maximum price')) ?>">
+        </div>
+
+        <div class="codilar-price-values">
+            <span class="codilar-price-min">
+                ₹ <?= $escaper->escapeHtml(
+                        $localeFormatter->formatNumber($currentMinPrice)
+                    ) ?>
+            </span>
+
+            <span class="codilar-price-max">
+                ₹ <?= $escaper->escapeHtml(
+                        $localeFormatter->formatNumber($currentMaxPrice)
+                    ) ?>
+            </span>
+        </div>
+    </div>
+
+<?php else: ?>
+
+    <?php
+    $items = [];
+    $isCategoryFilter = $filter
+        && $filter->getRequestVar() === 'cat';
+
+    $parentCategoryName = '';
+    $parentCategoryCount = 0;
+    $parentCategoryUrl = '';
+
+    if ($isCategoryFilter) {
+        $currentCategory = $filter->getLayer()->getCurrentCategory();
+
+        if ($currentCategory) {
+            $parentCategoryName = $currentCategory->getName();
+            $parentCategoryCount = (int) $currentCategory->getProductCount();
+            $parentCategoryUrl = $currentCategory->getUrl();
+        }
+    }
+    foreach ($filterItems as $filterItem) {
+        $items[] = $filterItem;
+    }
+
+    $showMore = count($items) > 5;
+    $hasSelectedItem = false;
+
+    foreach ($items as $filterItem) {
+        if ($filterItem->getIsSelected()) {
+            $hasSelectedItem = true;
+            break;
+        }
+    }
+
+    $showLimitedClass = $showMore && !$hasSelectedItem
+        ? 'show-limited'
+        : '';
+    ?>
+
+    <div class="codilar-filter-options">
+        <?php if ($isCategoryFilter && $parentCategoryName !== ''): ?>
+            <a
+                href="<?= $escaper->escapeUrl($parentCategoryUrl) ?>"
+                class="codilar-category-parent selected"
+                rel="nofollow">
+
+                <span class="filter-checkbox-box" aria-hidden="true">
+                    <span class="filter-checkbox-check">✓</span>
+                </span>
+
+                <span class="codilar-category-parent-label">
+                    <?= $escaper->escapeHtml($parentCategoryName) ?>
+                </span>
+
+                <?php if ($viewModel->shouldDisplayProductCountOnLayer() && $parentCategoryCount > 0): ?>
+                    <span class="filter-option-count">
+                        <?= $escaper->escapeHtml(
+                            $localeFormatter->formatNumber($parentCategoryCount)
+                        ) ?>
+                    </span>
+                <?php endif; ?>
+            </a>
+        <?php endif; ?>
+
+        <ol class="items <?= $escaper->escapeHtmlAttr($showLimitedClass) ?>">
+
+            <?php foreach ($items as $filterItem): ?>
+
+                <?php
+                $isSelected = (bool) $filterItem->getIsSelected();
+                $count = (int) $filterItem->getCount();
+
+                $itemClass = $isSelected
+                    ? 'filter-option selected'
+                    : 'filter-option';
+                ?>
+
+                <li class="item">
+
+                    <?php if ($count > 0): ?>
+
+                        <a
+                            href="<?= $escaper->escapeUrl($filterItem->getUrl()) ?>"
+                            rel="nofollow"
+                            class="<?= $escaper->escapeHtmlAttr($itemClass) ?>"
+                            <?= $isSelected ? 'aria-current="true"' : '' ?>>
+
+                            <span
+                                class="filter-checkbox-box"
+                                aria-hidden="true">
+
+                                <?php if ($isSelected): ?>
+                                    <span class="filter-checkbox-check">✓</span>
+                                <?php endif; ?>
+
+                            </span>
+
+                            <span class="filter-option-label">
+                                <?= /* @noEscape */ $filterItem->getLabel() ?>
+                            </span>
+
+                            <?php if ($viewModel->shouldDisplayProductCountOnLayer()): ?>
+
+                                <span class="filter-option-count">
+                                    <?= $escaper->escapeHtml(
+                                        $localeFormatter->formatNumber($count)
+                                    ) ?>
+
+                                    <span class="filter-count-label">
+                                        <?= $escaper->escapeHtml(
+                                            $count === 1
+                                                ? __('item')
+                                                : __('items')
+                                        ) ?>
+                                    </span>
+                                </span>
+
+                            <?php endif; ?>
+
+                        </a>
+
+                    <?php else: ?>
+
+                        <span class="filter-option filter-option-disabled">
+
+                            <span
+                                class="filter-checkbox-box"
+                                aria-hidden="true"></span>
+
+                            <span class="filter-option-label">
+                                <?= /* @noEscape */ $filterItem->getLabel() ?>
+                            </span>
+
+                            <?php if ($viewModel->shouldDisplayProductCountOnLayer()): ?>
+
+                                <span class="filter-option-count">
+                                    <?= $escaper->escapeHtml(
+                                        $localeFormatter->formatNumber($count)
+                                    ) ?>
+
+                                    <span class="filter-count-label">
+                                        <?= $escaper->escapeHtml(
+                                            $count === 1
+                                                ? __('item')
+                                                : __('items')
+                                        ) ?>
+                                    </span>
+                                </span>
+
+                            <?php endif; ?>
+
+                        </span>
+
+                    <?php endif; ?>
+
+                </li>
+
+            <?php endforeach; ?>
+
+        </ol>
+
+        <?php if ($showMore): ?>
+
+            <button
+                type="button"
+                class="codilar-show-more"
+                aria-expanded="<?= $hasSelectedItem ? 'true' : 'false' ?>">
+
+                <?= $escaper->escapeHtml(
+                    $hasSelectedItem
+                        ? __('Show Less')
+                        : __('Show More')
+                ) ?>
+
+            </button>
+
+        <?php endif; ?>
+
+    </div>
+
+<?php endif; ?>
