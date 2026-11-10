@@ -1,0 +1,22 @@
+<?php
+/**
+ * Category description (PLP): full-width block below the listing with a
+ * "Read More" toggle. Content comes from the category's Description field.
+ *
+ * @var $block \Magento\Catalog\Block\Category\View
+ */
+?>
+<?php if ($_description = $block->getCurrentCategory()->getDescription()): ?>
+    <div class="category-description" data-mage-init='{"js/category-read-more": {}}'>
+        <div class="category-description-content" data-role="description-content">
+            <?= /* @noEscape */ $this->helper(Magento\Catalog\Helper\Output::class)->categoryAttribute(
+                $block->getCurrentCategory(),
+                $_description,
+                'description'
+            ) ?>
+        </div>
+        <button type="button" class="category-description-toggle" data-role="description-toggle" aria-expanded="false" hidden>
+            <span data-role="description-toggle-label"><?= $block->escapeHtml(__('Read More')) ?></span>
+        </button>
+    </div>
+<?php endif; ?>

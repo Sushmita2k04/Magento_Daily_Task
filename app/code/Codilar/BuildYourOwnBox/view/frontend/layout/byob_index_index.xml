@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Codilar_BuildYourOwnBox::css/box.css"/>
+    </head>
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">Build Your Own Gift Box</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Codilar\BuildYourOwnBox\Block\BoxPage" name="byob.page" template="Codilar_BuildYourOwnBox::box.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="codilar_byob" translate="label" type="text" sortOrder="95" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Build Your Own Box</label>
+            <tab>sales</tab>
+            <resource>Codilar_BuildYourOwnBox::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>General</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1">
+                    <label>Enable Build Your Own Box</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <backend_model>Codilar\BuildYourOwnBox\Model\Config\Backend\Validated</backend_model>
+                </field>
+                <field id="coffee_category_id" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1">
+                    <label>Coffee Category ID</label>
+                    <comment>Products in this category can be chosen as coffee.</comment>
+                    <backend_model>Codilar\BuildYourOwnBox\Model\Config\Backend\Validated</backend_model>
+                </field>
+                <field id="equipment_category_id" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1">
+                    <label>Equipment Category ID</label>
+                    <comment>Products in this category can be chosen as the optional equipment item.</comment>
+                    <backend_model>Codilar\BuildYourOwnBox\Model\Config\Backend\Validated</backend_model>
+                </field>
+                <field id="coffee_count" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1">
+                    <label>Required Coffee Selections</label>
+                    <comment>Whole number from 1 to 10. Default 3.</comment>
+                    <backend_model>Codilar\BuildYourOwnBox\Model\Config\Backend\Validated</backend_model>
+                </field>
+                <field id="discount_amount" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1">
+                    <label>Fixed Box Discount</label>
+                    <comment>In the base currency. Applies to newly assembled boxes only; boxes already in a cart keep their original discount.</comment>
+                    <backend_model>Codilar\BuildYourOwnBox\Model\Config\Backend\Validated</backend_model>
+                </field>
+                <field id="message_max_length" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
+                    <label>Maximum Gift Message Length</label>
+                    <comment>Characters, 1 to 1000. Default 200.</comment>
+                    <backend_model>Codilar\BuildYourOwnBox\Model\Config\Backend\Validated</backend_model>
+                </field>
+                <field id="box_product_id" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1">
+                    <label>Gift Box Product ID (optional)</label>
+                    <comment>Leave empty to use the product with SKU BYOB-GIFT-BOX created by this module.</comment>
+                    <backend_model>Codilar\BuildYourOwnBox\Model\Config\Backend\Validated</backend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

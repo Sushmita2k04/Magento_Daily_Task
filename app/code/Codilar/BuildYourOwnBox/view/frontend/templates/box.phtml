@@ -1,0 +1,89 @@
+<?php
+declare(strict_types=1);
+
+use Codilar\BuildYourOwnBox\Block\BoxPage;
+use Magento\Framework\Escaper;
+
+/** @var BoxPage $block */
+/** @var Escaper $escaper */
+
+$error = $block->getErrorMessage();
+if ($error !== null): ?>
+    <div class="message info"><div><?= $escaper->escapeHtml($error) ?></div></div>
+    <?php return; ?>
+<?php endif;
+
+$config = $block->getJsConfig();
+$renderCards = function (array $rows, string $group) use ($block, $escaper): void {
+    foreach ($rows as $row): ?>
+        <li class="byob-card<?= $row['salable'] ? '' : ' is-unavailable' ?>">
+            <button type="button" class="byob-card-btn" data-byob-group="<?= $escaper->escapeHtmlAttr($group) ?>"
+                    data-byob-id="<?= (int)$row['id'] ?>"
+                    data-byob-name="<?= $escaper->escapeHtmlAttr($row['name']) ?>"
+                    data-byob-price="<?= $escaper->escapeHtmlAttr((string)$row['price']) ?>"
+                    aria-pressed="false"<?= $row['salable'] ? '' : ' disabled aria-disabled="true"' ?>>
+                <img src="<?= $escaper->escapeUrl($row['image']) ?>" alt="<?= $escaper->escapeHtmlAttr($row['name']) ?>"
+                     loading="lazy" width="200" height="200"/>
+                <span class="byob-card-name"><?= $escaper->escapeHtml($row['name']) ?></span>
+                <?php if ($row['description'] !== ''): ?>
+                    <span class="byob-card-desc"><?= $escaper->escapeHtml($row['description']) ?></span>
+                <?php endif; ?>
+                <span class="byob-card-price"><?= $escaper->escapeHtml($row['priceHtml']) ?></span>
+                <span class="byob-card-stock"><?= $row['salable']
+                    ? $escaper->escapeHtml(__('In stock'))
+                    : $escaper->escapeHtml(__('Out of stock')) ?></span>
+                <span class="byob-card-state" data-role="state"><?= $escaper->escapeHtml(__('Select')) ?></span>
+            </button>
+        </li>
+    <?php endforeach;
+};
+?>
+<div class="byob" data-mage-init='<?= $escaper->escapeHtmlAttr(json_encode(
+    ['Codilar_BuildYourOwnBox/js/box-builder' => $config],
+    JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE
+)) ?>'>
+    <div class="byob-main">
+        <section class="byob-section" aria-labelledby="byob-coffee-title">
+            <h2 id="byob-coffee-title"><?= $escaper->escapeHtml(__('1. Choose your coffee')) ?></h2>
+            <p class="byob-counter" data-role="coffee-counter" aria-live="polite"></p>
+            <?php if ($block->getCoffee()): ?>
+                <ul class="byob-grid"><?php $renderCards($block->getCoffee(), 'coffee'); ?></ul>
+            <?php else: ?>
+                <p><?= $escaper->escapeHtml(__('No coffee is available right now.')) ?></p>
+            <?php endif; ?>
+        </section>
+
+        <section class="byob-section" aria-labelledby="byob-equipment-title">
+            <h2 id="byob-equipment-title"><?= $escaper->escapeHtml(__('2. Add equipment (optional)')) ?></h2>
+            <?php if ($block->getEquipment()): ?>
+                <ul class="byob-grid"><?php $renderCards($block->getEquipment(), 'equipment'); ?></ul>
+            <?php else: ?>
+                <p><?= $escaper->escapeHtml(__('No equipment is available right now.')) ?></p>
+            <?php endif; ?>
+        </section>
+
+        <section class="byob-section" aria-labelledby="byob-message-title">
+            <h2 id="byob-message-title"><?= $escaper->escapeHtml(__('3. Gift message (optional)')) ?></h2>
+            <textarea class="byob-message" rows="3" data-role="message"
+                      aria-label="<?= $escaper->escapeHtmlAttr(__('Gift message')) ?>"></textarea>
+            <p class="byob-hint" data-role="message-counter" aria-live="polite"></p>
+        </section>
+    </div>
+
+    <aside class="byob-summary" aria-labelledby="byob-summary-title">
+        <h2 id="byob-summary-title"><?= $escaper->escapeHtml(__('Your box')) ?></h2>
+        <dl>
+            <dt><?= $escaper->escapeHtml(__('Coffee subtotal')) ?></dt><dd data-role="coffee-subtotal"></dd>
+            <dt><?= $escaper->escapeHtml(__('Equipment')) ?></dt><dd data-role="equipment-subtotal"></dd>
+            <dt><?= $escaper->escapeHtml(__('Subtotal')) ?></dt><dd data-role="subtotal"></dd>
+            <dt><?= $escaper->escapeHtml(__('Discount')) ?></dt><dd data-role="discount"></dd>
+            <dt class="byob-total"><?= $escaper->escapeHtml(__('Final price')) ?></dt>
+            <dd class="byob-total" data-role="final"></dd>
+        </dl>
+        <div class="byob-messages" role="alert" data-role="messages"></div>
+        <button type="button" class="action primary byob-add" data-role="add" disabled>
+            <span><?= $escaper->escapeHtml(__('Add Box to Cart')) ?></span>
+        </button>
+        <p class="byob-hint"><?= $escaper->escapeHtml(__('The final price is confirmed when you add the box to your cart.')) ?></p>
+    </aside>
+</div>

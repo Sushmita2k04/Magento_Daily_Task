@@ -19,6 +19,7 @@
             before="-"
         />
 
+        <move element="category.description" destination="page.bottom" before="-"/>
     </body>
 
 </page>

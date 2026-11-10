@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_quote_collect_totals_before">
+        <observer name="codilar_byob_validate_boxes" instance="Codilar\BuildYourOwnBox\Observer\ValidateBoxesObserver"/>
+    </event>
+    <event name="sales_quote_item_qty_set_after">
+        <observer name="codilar_byob_limit_qty" instance="Codilar\BuildYourOwnBox\Observer\LimitBoxQtyObserver"/>
+    </event>
+    <event name="sales_quote_merge_before">
+        <observer name="codilar_byob_merge_boxes" instance="Codilar\BuildYourOwnBox\Observer\MergeBoxesObserver"/>
+    </event>
+    <event name="sales_order_item_cancel">
+        <observer name="codilar_byob_release_components" instance="Codilar\BuildYourOwnBox\Observer\ReleaseComponentsOnCancelObserver"/>
+    </event>
+</config>

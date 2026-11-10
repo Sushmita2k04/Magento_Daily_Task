@@ -1,0 +1,35 @@
+
+<?php
+/** @var \Magento\Catalog\Block\Product\View $block */
+
+$product = $block->getProduct();
+
+if ($product && $product->getId()):
+    $categoryIds = $product->getCategoryIds();
+    $categories = $product->getCategoryCollection()
+        ->addAttributeToSelect(['name', 'url_key', 'url_path'])
+        ->addAttributeToFilter('entity_id', ['in' => $categoryIds])
+        ->addAttributeToFilter('entity_id', ['neq' => 2]);
+
+    $lastCategory = null;
+    $maxLevel = -1;
+
+    foreach ($categories as $category) {
+        if ($category->getLevel() > $maxLevel) {
+            $maxLevel = $category->getLevel();
+            $lastCategory = $category;
+        }
+    }
+?>
+
+    <?php if ($lastCategory): ?>
+        <div class="category-name">
+            <span>
+                <a href="<?= $block->escapeUrl($lastCategory->getUrl()) ?>">
+                    <?= $block->escapeHtml($lastCategory->getName()) ?>
+                </a>
+            </span>
+        </div>
+    <?php endif; ?>
+
+<?php endif; ?>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <codilar_byob>
+            <general>
+                <enabled>0</enabled>
+                <coffee_count>3</coffee_count>
+                <discount_amount>0</discount_amount>
+                <message_max_length>200</message_max_length>
+            </general>
+        </codilar_byob>
+    </default>
+</config>

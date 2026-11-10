@@ -1,0 +1,27 @@
+.byob { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 32px; align-items: start; }
+.byob-section { margin-bottom: 32px; }
+.byob-section h2 { font-size: 2rem; margin-bottom: 8px; }
+.byob-counter { font-weight: 600; margin-bottom: 12px; }
+.byob-hint { color: #6b6b6b; font-size: 1.3rem; }
+.byob-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+.byob-card-btn { width: 100%; height: 100%; display: flex; flex-direction: column; gap: 6px; text-align: left; padding: 12px; background: #fff; border: 2px solid #d6d6d6; border-radius: 8px; cursor: pointer; }
+.byob-card-btn img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 4px; }
+.byob-card-btn:hover:not(:disabled) { border-color: #888; }
+.byob-card.is-selected .byob-card-btn { border-color: #1a6b3c; background: #f1faf4; }
+.byob-card-btn:disabled { opacity: .5; cursor: not-allowed; }
+.byob-card-name { font-weight: 600; }
+.byob-card-desc { font-size: 1.3rem; color: #555; }
+.byob-card-price { font-weight: 700; }
+.byob-card-stock { font-size: 1.2rem; color: #1a6b3c; }
+.is-unavailable .byob-card-stock { color: #b00020; }
+.byob-card-state { margin-top: auto; font-size: 1.2rem; text-decoration: underline; }
+.byob-message { width: 100%; box-sizing: border-box; }
+.byob-summary { position: sticky; top: 16px; padding: 20px; border: 1px solid #d6d6d6; border-radius: 8px; background: #fafafa; }
+.byob-summary dl { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; margin: 0 0 16px; }
+.byob-summary dd { margin: 0; text-align: right; }
+.byob-total { font-weight: 700; font-size: 1.6rem; border-top: 1px solid #d6d6d6; padding-top: 8px; }
+.byob-add { width: 100%; }
+@media (max-width: 767px) {
+    .byob { grid-template-columns: 1fr; }
+    .byob-summary { position: static; }
+}

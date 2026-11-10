@@ -4,7 +4,8 @@ define([
 ], function ($, mage) {
     'use strict';
 
-    var breakpoint = 425;
+    // 0 = disabled: the mobile PLP design uses numbered pagination.
+    var breakpoint = 0;
 
     function init() {
 

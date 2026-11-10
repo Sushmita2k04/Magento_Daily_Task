@@ -34,7 +34,7 @@ usort($filters, function ($a, $b) use ($priority) {
                 class="filter-options"
                 id="narrow-by-list"
                 data-role="content"
-                data-mage-init='{"accordion":{"openedState":"active","collapsible":true,"active":false,"multipleCollapsible":true,"animate":{"duration":200}}}'>
+                data-mage-init='{"accordion":{"openedState":"active","collapsible":true,"active":[0,1],"multipleCollapsible":true,"animate":{"duration":200}}}'>
 
                 <?php foreach ($filters as $filter): ?>
                     <?php if ($filter->getItemsCount()): ?>
