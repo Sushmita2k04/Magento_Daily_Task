@@ -1,0 +1,21 @@
+
+<?php
+/**
+ * @var $block \Magento\Catalog\Block\Product\View\Gallery
+ * @var $escaper \Magento\Framework\Escaper
+ */
+
+$images = array_values($block->getGalleryImages()->getItems());
+?>
+
+<div class="custom-product-gallery">
+    <?php foreach ($images as $index => $image): ?>
+        <div class="custom-product-gallery__item custom-product-gallery__item--<?= $index === 0 || $index === 3 ? 'full' : 'half' ?>">
+            <img
+                src="<?= $escaper->escapeUrl($image->getData('medium_image_url')) ?>"
+                alt="<?= $escaper->escapeHtmlAttr($image->getLabel() ?: $block->getProduct()->getName()) ?>"
+                loading="<?= $index < 3 ? 'eager' : 'lazy' ?>"
+            />
+        </div>
+    <?php endforeach; ?>
+</div>

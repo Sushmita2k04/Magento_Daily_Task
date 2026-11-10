@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * Copyright 2016 Adobe
+ * All Rights Reserved.
+ */
+
+/** @var \Magento\Wishlist\Block\Catalog\Product\View\AddTo\Wishlist $block */
+?>
+<?php if ($block->isWishListAllowed()) : ?>
+    <a href="#"
+        class="action towishlist"
+        data-post='<?= /* @noEscape */ $block->getWishlistParams() ?>'
+        data-action="add-to-wishlist"
+        aria-label="<?= $block->escapeHtmlAttr(__('Add to Wish List')) ?>"
+        title="<?= $block->escapeHtmlAttr(__('Add to Wish List')) ?>">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="wishlist-icon">
+            <path d="M16.5 18.5L12 22L3.5 15.5C1 12.5 1 8.5 3.5 6C6 3.5 10 4.5 12 7.5C14 4.5 18 3.5 20.5 6C22.5 8 22.5 11.5 21 14"
+                stroke="#222222"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+        </svg>
+    </a>
+<?php endif; ?>
+<script type="text/x-magento-init">
+    {
+        "body": {
+            "addToWishlist": <?= /* @noEscape */ $block->getWishlistOptionsJson() ?>
+        }
+    }
+</script>

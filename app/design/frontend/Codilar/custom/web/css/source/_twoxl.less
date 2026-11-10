@@ -1,0 +1,971 @@
+.columns {
+
+    .column.main {
+        // display: flex;
+        align-items: flex-start;
+        gap: 3rem;
+
+        .product.media {
+            position: relative;
+            flex: 0 0 55%;
+            width: 55%;
+            min-width: 0;
+            margin: 0;
+        }
+
+        .product-info-main {
+            position: sticky;
+            top: 7rem;
+            align-self: flex-start;
+            flex: 1;
+            margin: 0;
+            padding-top: 2.1rem;
+
+            .category-name {
+                span {
+                    display: inline-block;
+                    margin-right: 0.5rem;
+                }
+
+                a {
+                    font-family: 'Futura Md BT', sans-serif;
+                    font-size: 1.4rem;
+                    text-transform: uppercase;
+                    color: #000;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            .product-addto-links {
+                position: absolute;
+                right: 1.4rem;
+                left: unset;
+                top: 2.2rem;
+                display: inline-block;
+                text-decoration: none;
+                font-size: 0;
+                z-index: 3;
+                transform: scale(1.5);
+
+                .action.towishlist {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-decoration: none;
+
+                    svg {
+                        width: 2.6rem;
+                        height: 2.6rem;
+
+                        path {
+                            stroke: #222;
+                            transition: stroke 0.2s ease;
+                        }
+                    }
+
+                    &:hover svg path {
+                        stroke: #000;
+                    }
+                }
+            }
+
+            .page-title-wrapper {
+                padding-right: 4rem;
+
+                .page-title {
+                    font-weight: 400;
+                    font-size: 2.8rem;
+                    text-transform: uppercase;
+                    color: #000;
+                    font-family: 'futura';
+                    line-height: 1;
+                    letter-spacing: 0.16rem;
+                }
+            }
+
+            .product-reviews-summary {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 2rem;
+                position: absolute;
+                right: 0;
+                top: 6rem;
+
+                .reviews-actions {
+                    margin-left: auto;
+
+                    .action.add {
+                        font-size: 1.8rem;
+                        color: #151415;
+                        font-weight: 500;
+                        text-decoration: none;
+                    }
+                }
+
+            }
+
+            .product-info-price {
+                margin-top: 6rem;
+                border-bottom: none;
+                margin-bottom: 0;
+
+                .price-box {
+                    .old-price {
+                        .price {
+                            font-size: 1.7rem;
+                            font-weight: 400;
+                            color: #686666;
+                            text-decoration: line-through;
+                        }
+                    }
+
+                    .special-price {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+
+                        .price-container {
+                            display: inline;
+
+                            .price {
+                                display: flex;
+                                font-size: 2.8rem;
+                                font-weight: 400;
+                                font-family: 'futura-medium';
+                                color: #000;
+                            }
+                        }
+
+                        .codilar-product-discount {
+                            display: inline-flex;
+                            align-items: center;
+                            white-space: nowrap;
+
+                            .codilar-discount-label {
+                                border: 0;
+                                color: #c21d26;
+                                font-size: 1.6rem;
+                                text-transform: uppercase;
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            .product-add-form {
+                margin-bottom: 3.5rem;
+
+                .braintree-express-container {
+                    margin-bottom: 0;
+                }
+
+                .box-tocart {
+                    width: 100%;
+                    margin-top: 0;
+
+                    .fieldset {
+                        display: flex;
+                        align-items: flex-end;
+                        gap: 0.5rem;
+                        width: 100%;
+                        max-width: unset;
+                        margin: 0;
+                        padding: 0;
+                        border: 0;
+
+                        .field.qty {
+                            width: auto;
+                            flex: 1;
+                            min-width: 0;
+                            margin: 0;
+
+                            .label {
+                                display: flex !important;
+                                margin-bottom: 1rem !important;
+                                color: #151415 !important;
+                                font-size: 1.6rem !important;
+                                font-weight: 400 !important;
+                                letter-spacing: 0.05rem;
+                                text-transform: uppercase;
+                            }
+
+                            .control {
+                                display: flex;
+                                align-items: center;
+                                width: 100%;
+                                height: 5rem;
+                                border: 0.1rem solid #151415;
+                                box-sizing: border-box;
+                                justify-content: center;
+
+                                .qty-button {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    width: 4rem;
+                                    height: 100%;
+                                    padding: 0;
+                                    border: none;
+                                    background: transparent;
+                                    color: #151415;
+                                    font-size: 1.8rem;
+                                    cursor: pointer;
+                                }
+
+                                .input-text.qty {
+                                    min-width: 0;
+                                    height: 100%;
+                                    margin: 0;
+                                    padding: 0;
+                                    border: none;
+                                    box-shadow: none;
+                                    color: #151415;
+                                    font-size: 1.6rem;
+                                    font-weight: 400;
+                                    text-align: center;
+                                    appearance: textfield;
+
+                                    &::-webkit-inner-spin-button,
+                                    &::-webkit-outer-spin-button {
+                                        margin: 0;
+                                        appearance: none;
+                                    }
+                                }
+                            }
+                        }
+
+                        .actions {
+                            flex: 1;
+                            min-width: 0;
+                            margin: 0;
+
+                            .action.primary.tocart {
+                                width: 100%;
+                                height: 5rem;
+                                margin: 0;
+                                padding: 0 1rem;
+                                border: none;
+                                background: #000;
+                                color: #fff;
+                                font-size: 1.4rem;
+                                font-weight: 500;
+                                letter-spacing: 0.1rem;
+                                text-transform: uppercase;
+                                cursor: pointer;
+                                transition: background 0.2s ease;
+
+                                &:hover {
+                                    background: #333;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .product-options-bottom {
+                    .box-tocart {
+                        width: 100%;
+                        margin-top: 0;
+
+                        .fieldset {
+                            display: flex;
+                            align-items: flex-end;
+                            gap: 0.5rem;
+                            width: 100%;
+                            max-width: unset;
+                            margin: 0;
+                            padding: 0;
+                            border: 0;
+
+                            .field.qty {
+                                width: auto;
+                                flex: 1;
+                                min-width: 0;
+                                margin: 0;
+
+                                .label {
+                                    display: flex !important;
+                                    margin-bottom: 1rem !important;
+                                    color: #151415 !important;
+                                    font-size: 1.6rem !important;
+                                    font-weight: 400 !important;
+                                    letter-spacing: 0.05rem;
+                                    text-transform: uppercase;
+                                }
+
+                                .control {
+                                    display: flex;
+                                    align-items: center;
+                                    width: 100%;
+                                    height: 5rem;
+                                    border: 0.1rem solid #151415;
+                                    box-sizing: border-box;
+                                    justify-content: center;
+
+                                    .qty-button {
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        width: 4rem;
+                                        height: 100%;
+                                        padding: 0;
+                                        border: none;
+                                        background: transparent;
+                                        color: #151415;
+                                        font-size: 1.8rem;
+                                        cursor: pointer;
+                                    }
+
+                                    .input-text.qty {
+                                        // flex: 1;
+                                        min-width: 0;
+                                        height: 100%;
+                                        margin: 0;
+                                        padding: 0;
+                                        border: none;
+                                        box-shadow: none;
+                                        color: #151415;
+                                        font-size: 1.6rem;
+                                        font-weight: 400;
+                                        text-align: center;
+                                        appearance: textfield;
+
+                                        &::-webkit-inner-spin-button,
+                                        &::-webkit-outer-spin-button {
+                                            margin: 0;
+                                            appearance: none;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .actions {
+                                flex: 1;
+                                min-width: 0;
+                                margin: 0;
+
+                                .action.primary.tocart {
+                                    width: 100%;
+                                    height: 5rem;
+                                    margin: 0;
+                                    padding: 0 1rem;
+                                    border: none;
+                                    background: #000;
+                                    color: #fff;
+                                    font-size: 1.4rem;
+                                    font-weight: 500;
+                                    letter-spacing: 0.1rem;
+                                    text-transform: uppercase;
+                                    cursor: pointer;
+                                    transition: background 0.2s ease;
+
+                                    &:hover {
+                                        background: #333;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .pdp-payment-info {
+                margin-bottom: 3.5rem;
+
+                .pdp-rewards {
+                    display: flex;
+                    border: 0;
+                    padding: 0;
+                    margin-top: 3rem;
+                    align-items: center;
+                    justify-content: flex-start;
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    letter-spacing: 0.05rem;
+                    text-transform: uppercase;
+                    gap: 0.8rem;
+
+                    .pdp-rewards-logo img {
+                        width: 3.5rem;
+                        height: 3.5rem;
+                        display: block;
+                    }
+                }
+
+
+                .pdp-payment-card {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 1rem;
+                    margin-bottom: 1.5rem;
+                    padding: 1.5rem;
+                    border: 0.1rem solid #d8d8d8;
+                    border-radius: 1rem;
+                    font-size: 1.4rem;
+                    line-height: 1.5;
+
+                    a {
+                        display: block;
+                        color: #2878e8;
+                        text-decoration: underline;
+                    }
+
+                    &.pdp-tamara .pdp-payment-logo {
+                        width: 43%;
+
+                        svg {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+
+            .warehouse-pickup-banner {
+                display: flex;
+                align-items: flex-start;
+                gap: 1.5rem;
+                margin-bottom: 3rem;
+                align-items: center;
+                padding-top: 1rem;
+
+                .warehouse-icon {
+                    svg {
+                        stroke: #222;
+                    }
+                }
+
+                .warehouse-info {
+                    h3 {
+                        font-size: 1.6rem;
+                        font-weight: normal;
+                        letter-spacing: 0.08rem;
+                        margin-bottom: 5rem;
+                        text-transform: uppercase;
+                    }
+
+                    p {
+                        font-size: 1.3rem;
+                        color: #555;
+                        margin: 0;
+
+                        a {
+                            color: #55acee;
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+
+            .product.info.detailed.accordion-details {
+                .product.data.items {
+                    border: none;
+
+                    >.data.item.title {
+                        position: relative;
+                        float: none;
+                        display: block;
+                        margin: 0;
+                        padding: 2rem 0;
+                        border-bottom: 0.2rem solid #000;
+
+                        >.data.switch {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            width: 100%;
+                            padding: 0;
+                            border: none;
+                            background: none;
+                            font-size: 1.5rem;
+                            font-weight: 500;
+                            color: #151415;
+                            text-transform: uppercase;
+                            letter-spacing: 0.05rem;
+                            text-decoration: none;
+                            margin: 3rem 0;
+
+                            &::after {
+                                content: '+';
+                                display: block;
+                                font-size: 2rem;
+                                font-weight: 300;
+                                line-height: 1;
+                            }
+                        }
+
+                        &.active {
+                            border-bottom: none;
+
+                            >.data.switch::after {
+                                content: '−';
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
+        .block.related {
+            .block-title {
+                strong {}
+            }
+
+            .block-content {
+                .products.wrapper.products-grid {
+                    .products.list.product-items {
+                        .product-item {
+                            .product-item-info {
+                                .product-item-details {
+                                    .price-box {
+
+                                        .old-price {
+                                            .price-container {
+                                                .price-label {}
+
+                                                .price-wrapper {
+                                                    .price {
+                                                        display: flex;
+                                                        font-size: 2.8rem;
+                                                        font-weight: 400;
+                                                        font-family: 'futura-medium';
+                                                        color: #000;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.pdp-payment-info {
+    margin-top: 5rem;
+    max-width: 42rem;
+
+    .pdp-rewards {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .pdp-rewards-logo {
+        width: 3.5rem;
+        height: 3.8rem;
+    }
+
+
+
+    .pdp-payment-logo {
+        svg {
+            display: block;
+            width: 8rem;
+            height: 4rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.7rem;
+            box-sizing: border-box;
+        }
+    }
+}
+
+.pdp-back-to-top {
+    position: fixed;
+    right: 3rem;
+    bottom: 5rem;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 0;
+    background: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    span {
+        display: block;
+    }
+}
+
+.warehouse-pickup-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+
+    .warehouse-icon {
+        svg {
+            stroke: #222;
+        }
+    }
+
+    .warehouse-info {
+        h3 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            letter-spacing: 0.1rem;
+            margin: 0 0 0.5rem 0;
+            text-transform: uppercase;
+            font-family: 'Futura Md BT', sans-serif;
+        }
+
+        p {
+            font-size: 1.4rem;
+            color: #333;
+            margin: 0;
+
+            a {
+                color: #55acee;
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.product.info.detailed.accordion-details {
+    .product.data.items {
+        border: none;
+
+        >.data.item.title {
+            float: none;
+            display: block;
+            margin: 0;
+            padding: 1.8rem 0;
+            border-bottom: 0.2rem solid #000;
+            background: transparent;
+
+            >.data.switch {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: transparent;
+                border: none;
+                padding: 0;
+                font-size: 1.8rem;
+                font-weight: 500;
+                color: #222;
+                text-transform: uppercase;
+                letter-spacing: 0.05rem;
+                text-decoration: none;
+
+                &::after {
+                    content: '+';
+                    font-size: 2.2rem;
+                    font-weight: 300;
+                    line-height: 1;
+                }
+            }
+
+            &.active {
+                border-bottom: none;
+
+                >.data.switch::after {
+                    content: '–';
+                }
+            }
+        }
+
+        >.data.item.content {
+            float: none;
+            margin-left: 0;
+            float: none;
+            margin-top: 0;
+            padding: 0;
+            border: none;
+
+        }
+    }
+}
+
+.product-service-features {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 5rem;
+    padding-top: 3rem;
+    text-align: center;
+
+    .feature-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: 'futura';
+
+        .icon-circle {
+            width: 9rem;
+            height: 9rem;
+            border: 0.1rem solid #222;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+
+            img {
+                width: 4rem;
+                height: 4rem;
+                object-fit: contain;
+            }
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            margin: 0 0 0.5rem 0;
+            color: #222;
+            letter-spacing: 0.05rem;
+            line-height: 1.3;
+        }
+
+        span {
+            font-size: 1rem;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 0.03rem;
+            line-height: 1.2;
+        }
+    }
+}
+
+.action.towishlist {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    text-decoration: none;
+
+    span {
+        display: none; // Ensures fallback Luma text spans don't render
+    }
+
+    &::before {
+        content: none !important; // Hides default Magento icon font if present
+    }
+
+    .wishlist-icon {
+        display: block;
+        transition: stroke 0.2s ease;
+    }
+
+    &:hover .wishlist-icon path {
+        stroke: @color-hover;
+    }
+}
+
+.custom-product-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+
+    .custom-product-gallery__item {
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            max-height: 82rem;
+            object-fit: cover;
+        }
+
+        &--full {
+            flex: 0 0 100%;
+        }
+
+        &--half {
+            flex: 1 1 calc(50% - 0.15rem);
+            min-width: 0;
+        }
+    }
+}
+
+.block.review-add {
+    margin: 1rem;
+    padding: 1rem;
+
+}
+
+@media (max-width: 42.5rem) {
+    .page-main {
+        width: 100%;
+    }
+
+    .columns {
+        .column.main {
+            .product.media {
+                width: 100%;
+                max-width: 100%;
+                margin: 0;
+                float: none;
+                padding: 0;
+            }
+
+            .product-info-main {
+                position: static;
+                padding-top: 5.1rem;
+
+                .product-addto-links {
+                    position: absolute;
+                    right: 2.7rem;
+                    top: 18rem;
+
+                    .action.towishlist {
+                        height: 2rem;
+                        width: 2rem;
+                    }
+                }
+
+                .product-reviews-summary {
+                    position: static;
+                }
+
+                .product.info.detailed.accordion-details .product.data.items {
+
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+
+                .product.info.detailed.accordion-details .product.data.items>.data.item.title {
+                    padding: 0;
+
+                    >.data.switch {
+                        margin: 2rem 0;
+                    }
+                }
+
+                .page-title-wrapper {
+
+                    .page-title {
+                        font-size: 2rem !important;
+                    }
+                }
+
+                .category-name a {
+                    font-size: 1.2rem;
+                }
+            }
+
+            .custom-product-gallery {
+                display: flex;
+                flex-wrap: nowrap;
+                gap: 0;
+                width: 100%;
+                overflow: hidden;
+                touch-action: pan-y;
+                position: relative;
+
+                .custom-product-gallery__item {
+                    flex: 0 0 100%;
+                    width: 100%;
+                    min-width: 100%;
+                    transition: transform 0.3s ease;
+                    overflow: hidden;
+
+                    img {
+                        display: block;
+                        width: 100%;
+                        height: auto;
+                        max-height: none;
+                        object-fit: cover;
+                    }
+
+                    &--full,
+                    &--half {
+                        flex: 0 0 100%;
+                    }
+                }
+            }
+
+            .custom-product-gallery__dots {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                gap: 0.6rem;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 1rem 0;
+            }
+
+            .custom-product-gallery__dot {
+                width: 0.6rem;
+                height: 0.6rem;
+                padding: 0;
+                border: 0;
+                border-radius: 50%;
+                background: #ccc;
+                cursor: pointer;
+
+                &.active {
+                    background: #555;
+                }
+            }
+        }
+    }
+
+    .product-service-features .feature-item {
+        .icon-circle {
+            width: 7rem;
+            height: 7rem;
+
+            img {
+                width: 3rem;
+                height: 4rem;
+            }
+        }
+
+
+
+        span {
+            font-size: 0.7rem;
+
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            font-weight: normal;
+
+        }
+    }
+
+    .product-service-features {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .product-info-main .product-info-price .price-box {
+        display: flex;
+
+        .price {
+            font-size: 1rem !important;
+        }
+
+        .special-price {
+            .codilar-product-discount .codilar-discount-label {
+
+                font-size: 1rem !important;
+            }
+
+            .price-container .price {
+                font-size: 2.1rem !important;
+            }
+        }
+    }
+
+}

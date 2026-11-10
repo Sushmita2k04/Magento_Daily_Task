@@ -6,7 +6,9 @@ var config = {
         'js/ramadan',
         'js/layered-filter',
         'js/price-filter',
-        'js/header'
+        'js/header',
+        'js/qty-control',
+        'js/mobile-product-gallery'
     ],
     map: {
         '*': {

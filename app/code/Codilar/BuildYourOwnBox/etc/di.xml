@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Quote\Model\QuoteManagement">
+        <plugin name="codilar_byob_validate_on_submit" type="Codilar\BuildYourOwnBox\Plugin\ValidateBoxesOnSubmitPlugin"/>
+    </type>
+    <type name="Magento\Sales\Api\OrderManagementInterface">
+        <plugin name="codilar_byob_reserve_components" type="Codilar\BuildYourOwnBox\Plugin\ReserveComponentsPlugin" sortOrder="50"/>
+    </type>
+</config>

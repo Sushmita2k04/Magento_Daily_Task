@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Catalog:etc/product_types.xsd">
+    <type name="byob_box" label="Build Your Own Box" modelInstance="Codilar\BuildYourOwnBox\Model\Product\Type\Box" composite="false" isQty="false" canUseQtyDecimals="false" sortOrder="75">
+        <priceModel instance="Codilar\BuildYourOwnBox\Model\Product\Price"/>
+        <indexerModel instance="Magento\Catalog\Model\ResourceModel\Product\Indexer\Price\SimpleProductPrice"/>
+        <customAttributes>
+            <attribute name="refundable" value="true"/>
+            <attribute name="is_real_product" value="true"/>
+        </customAttributes>
+    </type>
+</config>
