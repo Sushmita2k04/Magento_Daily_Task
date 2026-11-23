@@ -1,0 +1,78 @@
+<?php
+/** @var \Codilar\Task\Block\Task\ListTask $block */
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \Codilar\Task\ViewModel\TaskList $viewModel */
+$viewModel = $block->getData('view_model');
+$tasks = $viewModel->getTasks();
+?>
+<div class="ct-page">
+    <?php if (!$tasks): ?>
+        <p class="ct-empty message info empty">
+            <span><?= $escaper->escapeHtml(__('There are no tasks yet.')) ?></span>
+        </p>
+    <?php else: ?>
+        <p class="ct-summary">
+            <?= $escaper->escapeHtml(__('%1 task(s)', $viewModel->getTotal())) ?>
+        </p>
+        <ul class="ct-list">
+            <?php foreach ($tasks as $task): ?>
+                <li class="ct-card ct-status-<?= (int) $task['status'] ?>
+                    ct-priority-<?= (int) $task['priority'] ?><?= $task['is_overdue'] ? ' ct-overdue' : '' ?>">
+                    <div class="ct-head">
+                        <h2 class="ct-title"><?= $escaper->escapeHtml($task['title']) ?></h2>
+                        <span class="ct-badge ct-badge-status"><?= $escaper->escapeHtml($task['status_label']) ?></span>
+                        <span class="ct-badge ct-badge-priority">
+                            <?= $escaper->escapeHtml(__('%1 priority', $task['priority_label'])) ?>
+                        </span>
+                    </div>
+                    <?php if ($task['description'] !== ''): ?>
+                        <p class="ct-description"><?= $escaper->escapeHtml($task['description']) ?></p>
+                    <?php endif; ?>
+                    <?php if ($task['due_date']): ?>
+                        <p class="ct-due">
+                            <span class="ct-due-label"><?= $escaper->escapeHtml(__('Due')) ?>:</span>
+                            <time datetime="<?= $escaper->escapeHtmlAttr($task['due_date']) ?>">
+                                <?= $escaper->escapeHtml($task['due_date_formatted']) ?>
+                            </time>
+                            <?php if ($task['is_overdue']): ?>
+                                <span class="ct-overdue-flag"><?= $escaper->escapeHtml(__('Overdue')) ?></span>
+                            <?php endif; ?>
+                        </p>
+                    <?php endif; ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+        <?php if ($viewModel->getTotalPages() > 1): ?>
+            <?php $current = $viewModel->getCurrentPage(); ?>
+            <?php $last = $viewModel->getTotalPages(); ?>
+            <nav class="ct-pager" aria-label="<?= $escaper->escapeHtmlAttr(__('Task pages')) ?>">
+                <?php if ($current > 1): ?>
+                    <a class="ct-page-link ct-prev"
+                       href="<?= $escaper->escapeUrl($viewModel->getPageUrl($current - 1)) ?>">
+                        <?= $escaper->escapeHtml(__('Previous')) ?>
+                    </a>
+                <?php endif; ?>
+                <?php $shown = 0; ?>
+                <?php foreach ($viewModel->getPageNumbers() as $number): ?>
+                    <?php if ($shown && $number - $shown > 1): ?>
+                        <span class="ct-page-gap">&hellip;</span>
+                    <?php endif; ?>
+                    <?php $shown = $number; ?>
+                    <?php if ($number === $current): ?>
+                        <span class="ct-page-link ct-current" aria-current="page"><?= (int) $number ?></span>
+                    <?php else: ?>
+                        <a class="ct-page-link" href="<?= $escaper->escapeUrl($viewModel->getPageUrl($number)) ?>">
+                            <?= (int) $number ?>
+                        </a>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                <?php if ($current < $last): ?>
+                    <a class="ct-page-link ct-next"
+                       href="<?= $escaper->escapeUrl($viewModel->getPageUrl($current + 1)) ?>">
+                        <?= $escaper->escapeHtml(__('Next')) ?>
+                    </a>
+                <?php endif; ?>
+            </nav>
+        <?php endif; ?>
+    <?php endif; ?>
+</div>

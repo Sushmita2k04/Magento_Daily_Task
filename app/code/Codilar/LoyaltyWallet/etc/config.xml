@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <codilar_loyalty>
+            <general>
+                <enabled>1</enabled>
+                <points_per_currency_unit>1</points_per_currency_unit>
+                <points_per_wallet_currency_unit>10</points_per_wallet_currency_unit>
+                <min_conversion_points>1</min_conversion_points>
+                <expiry_months>12</expiry_months>
+                <refund_wallet_portion_to_wallet>1</refund_wallet_portion_to_wallet>
+                <max_redemption_percent>50</max_redemption_percent>
+            </general>
+        </codilar_loyalty>
+    </default>
+</config>

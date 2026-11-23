@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">productlaunch_launch_listing.productlaunch_launch_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">Add New Launch</label>
+            </button>
+        </buttons>
+        <spinner>productlaunch_launch_columns</spinner>
+        <deps>
+            <dep>productlaunch_launch_listing.productlaunch_launch_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="productlaunch_launch_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">launch_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Codilar_ProductLaunch::launch_view</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="productlaunch_launch_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>launch_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters"/>
+        <massaction name="listing_massaction">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Delete the selected launches? This cannot be undone.</message>
+                        <title translate="true">Delete launches</title>
+                    </confirm>
+                    <url path="productlaunch/launch/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+            <action name="enable">
+                <settings>
+                    <url path="productlaunch/launch/massStatus">
+                        <param name="enable">1</param>
+                    </url>
+                    <type>enable</type>
+                    <label translate="true">Enable</label>
+                </settings>
+            </action>
+            <action name="disable">
+                <settings>
+                    <url path="productlaunch/launch/massStatus">
+                        <param name="enable">0</param>
+                    </url>
+                    <type>disable</type>
+                    <label translate="true">Disable</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="productlaunch_launch_columns">
+        <selectionsColumn name="ids" sortOrder="10">
+            <settings>
+                <indexField>launch_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="launch_id" sortOrder="20">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="banner" class="Codilar\ProductLaunch\Ui\Component\Listing\Column\Banner" component="Magento_Ui/js/grid/columns/thumbnail" sortOrder="30">
+            <settings>
+                <altField>title</altField>
+                <hasPreview>1</hasPreview>
+                <label translate="true">Banner</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="title" sortOrder="40">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Title</label>
+            </settings>
+        </column>
+        <column name="sku" sortOrder="50">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Product SKU</label>
+            </settings>
+        </column>
+        <column name="start_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="60">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Start</label>
+                <dateFormat>MMM d, y h:mm a</dateFormat>
+                <timezone>true</timezone>
+            </settings>
+        </column>
+        <column name="end_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="70">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">End</label>
+                <dateFormat>MMM d, y h:mm a</dateFormat>
+                <timezone>true</timezone>
+            </settings>
+        </column>
+        <column name="calculated_status" component="Magento_Ui/js/grid/columns/select" sortOrder="80">
+            <settings>
+                <options class="Codilar\ProductLaunch\Model\Source\StatusOptions"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Status (calculated)</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="is_active" component="Magento_Ui/js/grid/columns/select" sortOrder="90">
+            <settings>
+                <options class="Codilar\ProductLaunch\Model\Source\EnabledOptions"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Enabled</label>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="100">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Created</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+        <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="110">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Updated</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Codilar\ProductLaunch\Ui\Component\Listing\Column\Actions" sortOrder="200">
+            <settings>
+                <indexField>launch_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

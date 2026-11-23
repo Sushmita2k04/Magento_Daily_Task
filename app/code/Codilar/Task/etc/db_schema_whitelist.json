@@ -1,0 +1,23 @@
+{
+    "codilar_task": {
+        "column": {
+            "task_id": true,
+            "title": true,
+            "is_done": true,
+            "created_at": true,
+            "description": true,
+            "status": true,
+            "priority": true,
+            "due_date": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        },
+        "index": {
+            "CODILAR_TASK_STATUS": true,
+            "CODILAR_TASK_PRIORITY": true,
+            "CODILAR_TASK_DUE_DATE": true
+        }
+    }
+}

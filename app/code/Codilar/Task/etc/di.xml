@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- When someone asks for the interface, Magento gives them the concrete class. -->
+    <preference for="Codilar\Task\Api\Data\TaskInterface" type="Codilar\Task\Model\Task"/>
+    <preference for="Codilar\Task\Api\TaskRepositoryInterface" type="Codilar\Task\Model\TaskRepository"/>
+    <preference for="Codilar\Task\Api\Data\TaskSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
+    <!-- Search criteria (filters, sorting, paging) -> task collection. -->
+    <virtualType name="Codilar\Task\Model\Api\SearchCriteria\TaskCollectionProcessor"
+                 type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Codilar\Task\Model\TaskRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Codilar\Task\Model\Api\SearchCriteria\TaskCollectionProcessor</argument>
+        </arguments>
+    </type>
+
+    <!-- Admin grid: search-result collection for the listing's data source. -->
+    <virtualType name="Codilar\Task\Model\ResourceModel\Task\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">codilar_task</argument>
+            <argument name="resourceModel" xsi:type="string">Codilar\Task\Model\ResourceModel\Task</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="codilar_task_listing_data_source" xsi:type="string">Codilar\Task\Model\ResourceModel\Task\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

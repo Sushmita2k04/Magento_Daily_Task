@@ -1,0 +1,292 @@
+<?xml version="1.0"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">productlaunch_launch_form.productlaunch_launch_form_data_source</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="Codilar\ProductLaunch\Block\Adminhtml\Launch\Edit\BackButton"/>
+            <button name="delete" class="Codilar\ProductLaunch\Block\Adminhtml\Launch\Edit\DeleteButton"/>
+            <button name="view" class="Codilar\ProductLaunch\Block\Adminhtml\Launch\Edit\ViewButton"/>
+            <button name="save" class="Codilar\ProductLaunch\Block\Adminhtml\Launch\Edit\SaveButton"/>
+        </buttons>
+        <namespace>productlaunch_launch_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>productlaunch_launch_form.productlaunch_launch_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="productlaunch_launch_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="productlaunch/launch/save"/>
+        </settings>
+        <dataProvider class="Codilar\ProductLaunch\Ui\DataProvider\Launch\FormDataProvider" name="productlaunch_launch_form_data_source">
+            <settings>
+                <requestFieldName>launch_id</requestFieldName>
+                <primaryFieldName>launch_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <fieldset name="general">
+        <settings>
+            <collapsible>false</collapsible>
+            <label translate="true">Launch Details</label>
+        </settings>
+        <field name="launch_id" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>launch_id</dataScope>
+            </settings>
+        </field>
+        <field name="status_label" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Status</label>
+                <notice translate="true">Calculated automatically from the start and end date/time (store timezone). It cannot be edited.</notice>
+                <disabled>true</disabled>
+                <dataScope>status_label</dataScope>
+            </settings>
+        </field>
+        <field name="is_active" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">launch</item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Launch</label>
+                <notice translate="true">Disabled launches are never shown on the storefront.</notice>
+                <dataScope>is_active</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="title" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">launch</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Launch Title</label>
+                <dataScope>title</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="max_text_length" xsi:type="number">255</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="product_id" formElement="select" component="Codilar_ProductLaunch/js/form/element/product-select" template="ui/form/field">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">launch</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="searchOptions" xsi:type="boolean">true</item>
+                    <item name="searchUrl" xsi:type="url" path="productlaunch/launch/productSearch"/>
+                    <item name="showPath" xsi:type="boolean">false</item>
+                    <item name="multiple" xsi:type="boolean">false</item>
+                    <item name="levelsVisibility" xsi:type="number">1</item>
+                    <item name="filterPlaceholder" xsi:type="string" translate="true">Search by product name or SKU</item>
+                    <item name="emptyOptionsHtml" xsi:type="string" translate="true">Start typing to find products</item>
+                    <item name="filterRateLimit" xsi:type="number">500</item>
+                    <item name="filterRateLimitMethod" xsi:type="string">notifyWhenChangesStop</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Product</label>
+                <notice translate="true">Choose an existing catalog product. No product is created or duplicated.</notice>
+                <dataScope>product_id</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="sku" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">launch</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">SKU</label>
+                <disabled>true</disabled>
+                <notice translate="true">Filled automatically from the selected product.</notice>
+                <dataScope>sku</dataScope>
+            </settings>
+        </field>
+        <field name="description" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">launch</item>
+                    <item name="rows" xsi:type="number">8</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Description</label>
+                <dataScope>description</dataScope>
+                <validation>
+                    <rule name="max_text_length" xsi:type="number">65000</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="banner" formElement="fileUploader">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">launch</item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>ui/form/element/uploader/image</elementTmpl>
+                <dataType>string</dataType>
+                <label translate="true">Banner Image</label>
+                <notice translate="true">Allowed: JPG, PNG, GIF, WEBP. Recommended 1200 x 500 px.</notice>
+                <visible>true</visible>
+                <required>false</required>
+            </settings>
+            <formElements>
+                <fileUploader>
+                    <settings>
+                        <required>false</required>
+                        <uploaderConfig>
+                            <param xsi:type="string" name="url">productlaunch/launch/upload</param>
+                            <param xsi:type="string" name="paramName">banner</param>
+                        </uploaderConfig>
+                        <previewTmpl>Magento_Catalog/image-preview</previewTmpl>
+                        <allowedExtensions>jpg jpeg gif png webp</allowedExtensions>
+                        <maxFileSize>5242880</maxFileSize>
+                    </settings>
+                </fileUploader>
+            </formElements>
+        </field>
+    </fieldset>
+
+    <fieldset name="schedule">
+        <settings>
+            <collapsible>false</collapsible>
+            <label translate="true">Schedule</label>
+        </settings>
+        <field name="start_at" formElement="date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">launch</item>
+                    <item name="options" xsi:type="array">
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Start Date and Time</label>
+                <notice translate="true">In the store timezone.</notice>
+                <dataScope>start_at</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-date" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="end_at" formElement="date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">launch</item>
+                    <item name="options" xsi:type="array">
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">End Date and Time (optional)</label>
+                <notice translate="true">Leave empty for a launch that never ends. Must be after the start.</notice>
+                <dataScope>end_at</dataScope>
+                <validation>
+                    <rule name="validate-date" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+    </fieldset>
+
+    <fieldset name="visibility">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Store View Visibility and URL</label>
+        </settings>
+        <field name="store_ids" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Codilar\ProductLaunch\Model\Source\StoreViews</item>
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">launch</item>
+                    <item name="default" xsi:type="array">
+                        <item name="0" xsi:type="number">0</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>int</dataType>
+                <label translate="true">Store Views</label>
+                <dataScope>store_ids</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="url_key" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">launch</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">URL Key</label>
+                <notice translate="true">Optional. Generated from the title when empty. Lowercase letters, numbers and hyphens.</notice>
+                <dataScope>url_key</dataScope>
+                <validation>
+                    <rule name="validate-identifier" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="created_at_label" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Created</label>
+                <disabled>true</disabled>
+                <dataScope>created_at_label</dataScope>
+            </settings>
+        </field>
+        <field name="updated_at_label" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Last Updated</label>
+                <disabled>true</disabled>
+                <dataScope>updated_at_label</dataScope>
+            </settings>
+        </field>
+    </fieldset>
+</form>

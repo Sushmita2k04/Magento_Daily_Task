@@ -1,0 +1,46 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Codilar\LoyaltyWallet\ViewModel\CartWallet $viewModel
+ */
+$viewModel = $block->getData('view_model');
+if (!$viewModel->isAvailable()) {
+    return;
+}
+$applied = $viewModel->getAppliedAmount();
+?>
+<div class="codilar-cart-wallet block">
+    <div class="title"><strong><?= $escaper->escapeHtml(__('Store wallet')) ?></strong></div>
+    <p class="codilar-cart-wallet__balance">
+        <?= $escaper->escapeHtml(__('Available: %1', $viewModel->formatMoney($viewModel->getBalance()))) ?>
+    </p>
+    <?php if ($viewModel->hasApplied()): ?>
+        <p class="codilar-cart-wallet__applied">
+            <?= $escaper->escapeHtml(__('Using %1 on this order.', $viewModel->formatMoney($applied))) ?>
+        </p>
+        <form method="post" action="<?= $escaper->escapeUrl($block->getUrl('loyalty/wallet/remove')) ?>">
+            <?= $block->getBlockHtml('formkey') ?>
+            <button type="submit" class="action"><span><?= $escaper->escapeHtml(__('Stop using wallet')) ?></span></button>
+        </form>
+    <?php elseif ($viewModel->canApply()): ?>
+        <p class="codilar-cart-wallet__note">
+            <?= $escaper->escapeHtml(__(
+                'Up to %1% of the order total can be paid from your wallet.',
+                $viewModel->getMaxPercent()
+            )) ?>
+        </p>
+        <form method="post" action="<?= $escaper->escapeUrl($block->getUrl('loyalty/wallet/apply')) ?>">
+            <?= $block->getBlockHtml('formkey') ?>
+            <input type="hidden" name="wallet_mode" value="all"/>
+            <button type="submit" class="action primary"><span><?= $escaper->escapeHtml(__('Use wallet')) ?></span></button>
+        </form>
+        <form method="post" action="<?= $escaper->escapeUrl($block->getUrl('loyalty/wallet/apply')) ?>">
+            <?= $block->getBlockHtml('formkey') ?>
+            <input type="hidden" name="wallet_mode" value="amount"/>
+            <label for="codilar-wallet-amount"><?= $escaper->escapeHtml(__('Or use a specific amount')) ?></label>
+            <input type="number" id="codilar-wallet-amount" name="wallet_amount" min="0.01" step="0.01" required/>
+            <button type="submit" class="action"><span><?= $escaper->escapeHtml(__('Apply')) ?></span></button>
+        </form>
+    <?php endif; ?>
+</div>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="codilar_loyalty" translate="label" sortOrder="95" showInDefault="1">
+            <label>Loyalty Points and Store Wallet</label>
+            <tab>sales</tab>
+            <resource>Codilar_LoyaltyWallet::config</resource>
+            <group id="general" translate="label" sortOrder="10" showInDefault="1">
+                <label>General</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="points_per_currency_unit" translate="label comment" type="text" sortOrder="20" showInDefault="1">
+                    <label>Points earned per ₹1 spent</label>
+                    <comment>Applied to the order subtotal after discounts, excluding shipping and tax. Fractions are rounded down.</comment>
+                    <validate>validate-number validate-greater-than-zero</validate>
+                </field>
+                <field id="points_per_wallet_currency_unit" translate="label comment" type="text" sortOrder="30" showInDefault="1">
+                    <label>Points required per ₹1 of wallet balance</label>
+                    <comment>Conversion rate. Each conversion stores the rate it used, so later changes never alter history.</comment>
+                    <validate>validate-number validate-greater-than-zero</validate>
+                </field>
+                <field id="min_conversion_points" translate="label" type="text" sortOrder="40" showInDefault="1">
+                    <label>Minimum points per conversion</label>
+                    <validate>validate-digits validate-greater-than-zero</validate>
+                </field>
+                <field id="expiry_months" translate="label" type="text" sortOrder="50" showInDefault="1">
+                    <label>Points expiry (months)</label>
+                    <validate>validate-digits validate-greater-than-zero</validate>
+                </field>
+                <field id="max_redemption_percent" translate="label comment" type="text" sortOrder="60" showInDefault="1">
+                    <label>Maximum wallet redemption per order (%)</label>
+                    <comment>Share of the order total (before wallet) that may be settled from wallet balance.</comment>
+                    <validate>validate-number validate-number-range number-range-0-100</validate>
+                </field>
+                <field id="refund_wallet_portion_to_wallet" translate="label comment" type="select" sortOrder="70" showInDefault="1">
+                    <label>Refund the wallet-paid part of an order to the wallet</label>
+                    <comment>Yes: a credit memo returns the wallet-paid share to the wallet and refunds only the rest to the payment method. No: the whole amount goes back through the payment method.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

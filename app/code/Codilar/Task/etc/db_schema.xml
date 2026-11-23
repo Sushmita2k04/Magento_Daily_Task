@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="codilar_task" resource="default" engine="innodb" comment="Codilar Task">
+        <column xsi:type="int" name="task_id" unsigned="true" nullable="false" identity="true" comment="Task ID"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Task Title"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Task Description"/>
+        <column xsi:type="smallint" name="status" unsigned="true" nullable="false" default="0" comment="0 = Pending, 1 = In Progress, 2 = Completed"/>
+        <column xsi:type="smallint" name="priority" unsigned="true" nullable="false" default="1" comment="0 = Low, 1 = Medium, 2 = High"/>
+        <column xsi:type="date" name="due_date" nullable="true" comment="Due Date"/>
+        <column xsi:type="smallint" name="is_done" unsigned="true" nullable="false" default="0" comment="Legacy flag derived from status: 1 only when status = Completed"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="task_id"/>
+        </constraint>
+        <index referenceId="CODILAR_TASK_STATUS" indexType="btree">
+            <column name="status"/>
+        </index>
+        <index referenceId="CODILAR_TASK_PRIORITY" indexType="btree">
+            <column name="priority"/>
+        </index>
+        <index referenceId="CODILAR_TASK_DUE_DATE" indexType="btree">
+            <column name="due_date"/>
+        </index>
+    </table>
+</schema>

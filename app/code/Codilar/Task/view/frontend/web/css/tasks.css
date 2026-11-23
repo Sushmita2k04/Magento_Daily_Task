@@ -1,0 +1,58 @@
+.ct-page { margin: 0 0 30px; }
+.ct-summary { color: #6b6b6b; margin: 0 0 15px; }
+.ct-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 15px; }
+.ct-card {
+    border: 1px solid #d9d9d9;
+    border-left-width: 5px;
+    border-radius: 4px;
+    background: #fff;
+    padding: 15px 20px;
+}
+.ct-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.ct-title { flex: 1 1 100%; margin: 0 0 4px; font-size: 1.8rem; line-height: 1.3; word-break: break-word; }
+.ct-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 10px;
+    background: #eee;
+    color: #333;
+    font-size: 1.2rem;
+}
+.ct-description { margin: 10px 0 0; color: #333; word-break: break-word; white-space: pre-line; }
+.ct-due { margin: 10px 0 0; color: #333; }
+.ct-due-label { font-weight: 600; }
+.ct-overdue-flag { margin-left: 8px; color: #b3261e; font-weight: 600; }
+
+/* status */
+.ct-status-0 { border-left-color: #9e9e9e; }
+.ct-status-1 { border-left-color: #1979c3; }
+.ct-status-1 .ct-badge-status { background: #dbeafe; color: #0b4a85; }
+.ct-status-2 { border-left-color: #2e7d32; background: #f7fbf7; }
+.ct-status-2 .ct-badge-status { background: #dcf1dd; color: #1b5e20; }
+.ct-status-2 .ct-title { text-decoration: line-through; color: #6b6b6b; }
+
+/* priority */
+.ct-priority-2 .ct-badge-priority { background: #fde2e0; color: #8a1c14; }
+.ct-priority-1 .ct-badge-priority { background: #fff1cc; color: #7a5600; }
+.ct-priority-0 .ct-badge-priority { background: #e8eaed; color: #4a4a4a; }
+
+.ct-overdue { border-color: #e0a09b; border-left-color: #b3261e; }
+
+/* pagination */
+.ct-pager { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 25px 0 0; }
+.ct-page-link {
+    display: inline-block;
+    min-width: 36px;
+    padding: 6px 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    text-align: center;
+    color: #333;
+    text-decoration: none;
+}
+a.ct-page-link:hover { background: #f0f0f0; text-decoration: none; }
+.ct-current { background: #1979c3; border-color: #1979c3; color: #fff; font-weight: 600; }
+
+@media (min-width: 768px) {
+    .ct-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

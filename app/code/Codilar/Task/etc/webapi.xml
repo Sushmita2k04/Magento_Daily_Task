@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- Create a task: POST /rest/V1/codilar-tasks
+         (kept for backward compatibility: including "task_id" in the body still updates) -->
+    <route url="/V1/codilar-tasks" method="POST">
+        <service class="Codilar\Task\Api\TaskRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Codilar_Task::task_save"/>
+        </resources>
+    </route>
+
+    <!-- Search tasks: GET /rest/V1/codilar-tasks/search?searchCriteria[...] -->
+    <route url="/V1/codilar-tasks/search" method="GET">
+        <service class="Codilar\Task\Api\TaskRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Codilar_Task::task_view"/>
+        </resources>
+    </route>
+
+    <!-- Read one task: GET /rest/V1/codilar-tasks/:taskId -->
+    <route url="/V1/codilar-tasks/:taskId" method="GET">
+        <service class="Codilar\Task\Api\TaskRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Codilar_Task::task_view"/>
+        </resources>
+    </route>
+
+    <!-- Update a task (only the supplied fields change): PUT /rest/V1/codilar-tasks/:taskId -->
+    <route url="/V1/codilar-tasks/:taskId" method="PUT">
+        <service class="Codilar\Task\Api\TaskRepositoryInterface" method="update"/>
+        <resources>
+            <resource ref="Codilar_Task::task_save"/>
+        </resources>
+    </route>
+
+    <!-- Delete a task: DELETE /rest/V1/codilar-tasks/:taskId -->
+    <route url="/V1/codilar-tasks/:taskId" method="DELETE">
+        <service class="Codilar\Task\Api\TaskRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Codilar_Task::task_delete"/>
+        </resources>
+    </route>
+</routes>

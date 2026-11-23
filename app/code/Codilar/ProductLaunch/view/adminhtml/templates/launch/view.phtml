@@ -1,0 +1,47 @@
+<?php
+/** @var \Codilar\ProductLaunch\Block\Adminhtml\Launch\View $block */
+/** @var \Magento\Framework\Escaper $escaper */
+$launch = $block->getLaunch();
+$product = $block->getProductInfo();
+$banner = $block->getBannerUrl();
+?>
+<div class="admin__page-section">
+    <div class="page-main-actions" style="margin-bottom:1.5rem">
+        <a class="action-secondary" href="<?= $escaper->escapeUrl($block->getBackUrl()) ?>"><span><?= $escaper->escapeHtml(__('Back')) ?></span></a>
+        <?php if ($block->isAllowedToEdit()): ?>
+            <a class="action-primary" href="<?= $escaper->escapeUrl($block->getEditUrl()) ?>"><span><?= $escaper->escapeHtml(__('Edit Launch')) ?></span></a>
+        <?php endif; ?>
+    </div>
+    <div class="admin__page-section-title"><strong class="title"><?= $escaper->escapeHtml(__('Launch #%1', $launch->getLaunchId())) ?></strong></div>
+    <table class="data-grid">
+        <tbody>
+        <tr><th><?= $escaper->escapeHtml(__('Title')) ?></th><td><?= $escaper->escapeHtml($launch->getTitle()) ?></td></tr>
+        <tr><th><?= $escaper->escapeHtml(__('Status (calculated)')) ?></th><td><strong><?= $escaper->escapeHtml($block->getStatusLabel()) ?></strong></td></tr>
+        <tr><th><?= $escaper->escapeHtml(__('Enabled')) ?></th><td><?= $escaper->escapeHtml($launch->getIsActive() ? __('Yes') : __('No')) ?></td></tr>
+        <tr><th><?= $escaper->escapeHtml(__('Start')) ?></th><td><?= $escaper->escapeHtml($block->formatLaunchDate($launch->getStartAt())) ?></td></tr>
+        <tr><th><?= $escaper->escapeHtml(__('End')) ?></th><td><?= $escaper->escapeHtml($block->formatLaunchDate($launch->getEndAt())) ?></td></tr>
+        <tr>
+            <th><?= $escaper->escapeHtml(__('Product')) ?></th>
+            <td>
+                <?php if ($product): ?>
+                    <a href="<?= $escaper->escapeUrl($product['edit_url']) ?>"><?= $escaper->escapeHtml($product['name']) ?></a>
+                    (<?= $escaper->escapeHtml($launch->getSku()) ?>)
+                    <?php if (!$product['enabled']): ?>
+                        <em class="message message-warning"><?= $escaper->escapeHtml(__('Product is disabled: the launch is hidden on the storefront.')) ?></em>
+                    <?php elseif (!$product['websites']): ?>
+                        <em class="message message-warning"><?= $escaper->escapeHtml(__('Product is not assigned to any website: the launch is hidden on the storefront.')) ?></em>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <em class="message message-warning"><?= $escaper->escapeHtml(__('The product (SKU %1) no longer exists. This launch is hidden on the storefront until you select another product.', (string)$launch->getSku())) ?></em>
+                <?php endif; ?>
+            </td>
+        </tr>
+        <tr><th><?= $escaper->escapeHtml(__('Store Views')) ?></th><td><?= $escaper->escapeHtml(implode(', ', array_map(fn($id) => $id === 0 ? (string)__('All Store Views') : (string)$id, $launch->getStoreIds()))) ?></td></tr>
+        <tr><th><?= $escaper->escapeHtml(__('URL Key')) ?></th><td><?= $escaper->escapeHtml($launch->getUrlKey()) ?></td></tr>
+        <tr><th><?= $escaper->escapeHtml(__('Description')) ?></th><td><?= $launch->getDescription() ? nl2br($escaper->escapeHtml($launch->getDescription())) : $escaper->escapeHtml(__('—')) ?></td></tr>
+        <tr><th><?= $escaper->escapeHtml(__('Banner')) ?></th><td><?php if ($banner): ?><img src="<?= $escaper->escapeUrl($banner) ?>" alt="" style="max-width:480px;height:auto"><?php else: ?><?= $escaper->escapeHtml(__('No banner')) ?><?php endif; ?></td></tr>
+        <tr><th><?= $escaper->escapeHtml(__('Created')) ?></th><td><?= $escaper->escapeHtml($block->formatLaunchDate($launch->getCreatedAt())) ?></td></tr>
+        <tr><th><?= $escaper->escapeHtml(__('Updated')) ?></th><td><?= $escaper->escapeHtml($block->formatLaunchDate($launch->getUpdatedAt())) ?></td></tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,12 @@
+<!-- ko if: isVisible() -->
+<a class="codilar-loyalty-header__link" data-bind="attr: {href: accountUrl}">
+    <span class="codilar-loyalty-header__item">
+        <span class="codilar-loyalty-header__label" data-bind="i18n: 'Points'"></span>
+        <strong data-bind="text: loyalty().points"></strong>
+    </span>
+    <span class="codilar-loyalty-header__item">
+        <span class="codilar-loyalty-header__label" data-bind="i18n: 'Wallet'"></span>
+        <strong data-bind="text: loyalty().wallet"></strong>
+    </span>
+</a>
+<!-- /ko -->

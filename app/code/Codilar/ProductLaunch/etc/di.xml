@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Codilar\ProductLaunch\Api\Data\LaunchInterface" type="Codilar\ProductLaunch\Model\Launch"/>
+    <preference for="Codilar\ProductLaunch\Api\LaunchRepositoryInterface" type="Codilar\ProductLaunch\Model\LaunchRepository"/>
+    <preference for="Codilar\ProductLaunch\Api\Data\LaunchSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
+    <virtualType name="Codilar\ProductLaunch\Model\Api\SearchCriteria\LaunchCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Codilar\ProductLaunch\Model\LaunchRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Codilar\ProductLaunch\Model\Api\SearchCriteria\LaunchCollectionProcessor</argument>
+        </arguments>
+    </type>
+
+    <!-- Banner upload: extension + real MIME validation, tmp dir then final dir -->
+    <virtualType name="Codilar\ProductLaunch\BannerUploader" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">codilar/productlaunch/tmp</argument>
+            <argument name="basePath" xsi:type="string">codilar/productlaunch</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+                <item name="webp" xsi:type="string">webp</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="gif" xsi:type="string">image/gif</item>
+                <item name="png" xsi:type="string">image/png</item>
+                <item name="webp" xsi:type="string">image/webp</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Codilar\ProductLaunch\Model\BannerManager">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Codilar\ProductLaunch\BannerUploader</argument>
+        </arguments>
+    </type>
+    <type name="Codilar\ProductLaunch\Controller\Adminhtml\Launch\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Codilar\ProductLaunch\BannerUploader</argument>
+        </arguments>
+    </type>
+
+    <!-- Admin grid -->
+    <virtualType name="Codilar\ProductLaunch\Model\ResourceModel\Launch\Grid\CollectionVirtual" type="Codilar\ProductLaunch\Model\ResourceModel\Launch\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">codilar_product_launch</argument>
+            <argument name="resourceModel" xsi:type="string">Codilar\ProductLaunch\Model\ResourceModel\Launch</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="productlaunch_launch_listing_data_source" xsi:type="string">Codilar\ProductLaunch\Model\ResourceModel\Launch\Grid\CollectionVirtual</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

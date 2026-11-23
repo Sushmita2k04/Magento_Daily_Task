@@ -1,0 +1,121 @@
+"Add New Task","Add New Task"
+Back,Back
+"Are you sure you want to delete this task? This cannot be undone.","Are you sure you want to delete this task? This cannot be undone."
+"Delete Task","Delete Task"
+"Save Task","Save Task"
+"The dashboard data could not be loaded. Please try again.","The dashboard data could not be loaded. Please try again."
+"Task Dashboard","Task Dashboard"
+"We can't find a task to delete.","We can't find a task to delete."
+"The task has been deleted.","The task has been deleted."
+"This task no longer exists.","This task no longer exists."
+"The task could not be deleted.","The task could not be deleted."
+"New Task","New Task"
+"Edit Task: %1","Edit Task: %1"
+"Manage Tasks","Manage Tasks"
+"Could not determine which tasks to delete.","Could not determine which tasks to delete."
+"No tasks were selected.","No tasks were selected."
+"%1 task(s) deleted: %2","%1 task(s) deleted: %2"
+"%1 task(s) could not be deleted: %2","%1 task(s) could not be deleted: %2"
+" and %1 more"," and %1 more"
+"The task has been saved.","The task has been saved."
+"Something went wrong while saving the task.","Something went wrong while saving the task."
+Tasks,Tasks
+"""date_field"" must be ""created"" or ""due"".","""date_field"" must be ""created"" or ""due""."
+"""date_from"" must not be later than ""date_to"".","""date_from"" must not be later than ""date_to""."
+"""%1"" must be a valid date in Y-m-d format.","""%1"" must be a valid date in Y-m-d format."
+"""%1"" contains an invalid value.","""%1"" contains an invalid value."
+Low,Low
+Medium,Medium
+High,High
+Pending,Pending
+"In Progress","In Progress"
+Completed,Completed
+"it no longer exists","it no longer exists"
+"an error occurred, see the log","an error occurred, see the log"
+"Unsupported task implementation.","Unsupported task implementation."
+"Could not save the task: %1","Could not save the task: %1"
+"The ""task_id"" in the request body (%1) does not match the id in the URL (%2).","The ""task_id"" in the request body (%1) does not match the id in the URL (%2)."
+"Could not delete the task: %1","Could not delete the task: %1"
+"Unknown search field(s): %1.","Unknown search field(s): %1."
+"Task with id ""%1"" does not exist.","Task with id ""%1"" does not exist."
+"""%fieldName"" is required.","""%fieldName"" is required."
+"""%fieldName"" must not be empty.","""%fieldName"" must not be empty."
+"""%fieldName"" must be at most %max characters.","""%fieldName"" must be at most %max characters."
+"""%fieldName"" must be text.","""%fieldName"" must be text."
+"""%fieldName"" must be at most %max bytes.","""%fieldName"" must be at most %max bytes."
+"""%fieldName"" must be 0 (Pending), 1 (In Progress) or 2 (Completed).","""%fieldName"" must be 0 (Pending), 1 (In Progress) or 2 (Completed)."
+"""%fieldName"" must be 0 or 1.","""%fieldName"" must be 0 or 1."
+"""is_done"" (%isDone) contradicts ""status"" (%status). Send only ""status"", or make them agree: is_done is 1 only when status is 2.","""is_done"" (%isDone) contradicts ""status"" (%status). Send only ""status"", or make them agree: is_done is 1 only when status is 2."
+"""%fieldName"" must be 0 (Low), 1 (Medium) or 2 (High).","""%fieldName"" must be 0 (Low), 1 (Medium) or 2 (High)."
+"""%fieldName"" must be a valid date in Y-m-d format.","""%fieldName"" must be a valid date in Y-m-d format."
+Invalid,Invalid
+"""date_from"" must be a valid date in Y-m-d format.","""date_from"" must be a valid date in Y-m-d format."
+"""status"" contains an invalid value.","""status"" contains an invalid value."
+"first problem","first problem"
+"second problem","second problem"
+bad,bad
+gone,gone
+"SQLSTATE secret internals","SQLSTATE secret internals"
+"""date_from"" is invalid.","""date_from"" is invalid."
+"One or more input exceptions have occurred.","One or more input exceptions have occurred."
+Edit,Edit
+Delete,Delete
+"Delete task","Delete task"
+"Created date","Created date"
+"Due date","Due date"
+tasks,tasks
+"No tasks match the selected filters.","No tasks match the selected filters."
+"No overdue tasks. Nice work!","No overdue tasks. Nice work!"
+"No tasks to show yet.","No tasks to show yet."
+Overdue,Overdue
+Due,Due
+Created,Created
+"The chart could not be displayed.","The chart could not be displayed."
+"All time","All time"
+"Last 7 days","Last 7 days"
+"Last 30 days","Last 30 days"
+"This month","This month"
+"of total","of total"
+"day late","day late"
+"days late","days late"
+"The start date must not be later than the end date.","The start date must not be later than the end date."
+"Total Tasks","Total Tasks"
+"Completed Tasks","Completed Tasks"
+"Pending Tasks","Pending Tasks"
+"In Progress Tasks","In Progress Tasks"
+"Overdue Tasks","Overdue Tasks"
+"A live overview of your tasks. Every figure follows the filters below.","A live overview of your tasks. Every figure follows the filters below."
+"Dashboard filters","Dashboard filters"
+"Date range","Date range"
+"Filter by","Filter by"
+"From date","From date"
+to,to
+"To date","To date"
+Status,Status
+Priority,Priority
+"Reset filters","Reset filters"
+Summary,Summary
+"Task Completion","Task Completion"
+"Status Distribution","Status Distribution"
+"Status distribution chart","Status distribution chart"
+"Priority Distribution","Priority Distribution"
+"Priority distribution chart","Priority distribution chart"
+"Recent Tasks","Recent Tasks"
+"View all","View all"
+Task,Task
+"There are no tasks yet.","There are no tasks yet."
+"%1 task(s)","%1 task(s)"
+"%1 priority","%1 priority"
+"Task pages","Task pages"
+Previous,Previous
+Next,Next
+Dashboard,Dashboard
+"Task Details","Task Details"
+Title,Title
+Description,Description
+"Due Date","Due Date"
+"Optional. Date only (no time).","Optional. Date only (no time)."
+"Delete the selected tasks? This cannot be undone.","Delete the selected tasks? This cannot be undone."
+"Delete tasks","Delete tasks"
+ID,ID
+Updated,Updated

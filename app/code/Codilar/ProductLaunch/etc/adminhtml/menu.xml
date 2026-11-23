@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Codilar_ProductLaunch::launches" title="Product Launches" translate="title" module="Codilar_ProductLaunch" parent="Magento_Backend::marketing" sortOrder="80" resource="Codilar_ProductLaunch::launch_view"/>
+        <add id="Codilar_ProductLaunch::launch_manage" title="Manage Launches" translate="title" module="Codilar_ProductLaunch" parent="Codilar_ProductLaunch::launches" sortOrder="10" action="productlaunch/launch" resource="Codilar_ProductLaunch::launch_view"/>
+        <add id="Codilar_ProductLaunch::launch_settings" title="Launch Settings" translate="title" module="Codilar_ProductLaunch" parent="Codilar_ProductLaunch::launches" sortOrder="20" action="adminhtml/system_config/edit/section/codilar_productlaunch" resource="Codilar_ProductLaunch::config"/>
+    </menu>
+</config>

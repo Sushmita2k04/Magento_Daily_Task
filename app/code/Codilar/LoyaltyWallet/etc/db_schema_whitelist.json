@@ -1,0 +1,131 @@
+{
+    "codilar_loyalty_points_lot": {
+        "column": {
+            "lot_id": true,
+            "customer_id": true,
+            "order_id": true,
+            "points_original": true,
+            "points_remaining": true,
+            "accrued_at": true,
+            "expires_at": true,
+            "expired_at": true,
+            "created_at": true,
+            "points_reversal_handled": true,
+            "points_clawed": true
+        },
+        "index": {
+            "CODILAR_LOYALTY_POINTS_LOT_CUSTOMER_ID_EXPIRES_AT": true,
+            "CODILAR_LOYALTY_POINTS_LOT_EXPIRES_AT_EXPIRED_AT": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "CODILAR_LOYALTY_POINTS_LOT_ORDER_ID": true
+        }
+    },
+    "codilar_loyalty_points_ledger": {
+        "column": {
+            "entry_id": true,
+            "customer_id": true,
+            "customer_email": true,
+            "entry_type": true,
+            "points": true,
+            "balance_after": true,
+            "lot_id": true,
+            "order_id": true,
+            "order_increment_id": true,
+            "wallet_entry_id": true,
+            "wallet_value": true,
+            "reason": true,
+            "accrued_at": true,
+            "expires_at": true,
+            "idempotency_key": true,
+            "created_at": true
+        },
+        "index": {
+            "CODILAR_LOYALTY_POINTS_LEDGER_CUSTOMER_ID_ENTRY_ID": true,
+            "CODILAR_LOYALTY_POINTS_LEDGER_ORDER_ID_ENTRY_TYPE": true,
+            "CODILAR_LOYALTY_POINTS_LEDGER_LOT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "CODILAR_LOYALTY_POINTS_LEDGER_IDEMPOTENCY_KEY": true,
+            "FK_7F05B4A0A828577ECB72CD62FCC9C2DA": true
+        }
+    },
+    "codilar_loyalty_points_balance": {
+        "column": {
+            "customer_id": true,
+            "points_balance": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "codilar_wallet_ledger": {
+        "column": {
+            "entry_id": true,
+            "customer_id": true,
+            "customer_email": true,
+            "entry_type": true,
+            "amount": true,
+            "memo_amount": true,
+            "balance_after": true,
+            "reason": true,
+            "order_id": true,
+            "order_increment_id": true,
+            "creditmemo_id": true,
+            "operator_ref": true,
+            "idempotency_key": true,
+            "created_at": true
+        },
+        "index": {
+            "CODILAR_WALLET_LEDGER_CUSTOMER_ID_ENTRY_ID": true,
+            "CODILAR_WALLET_LEDGER_ORDER_ID": true,
+            "CODILAR_WALLET_LEDGER_CREDITMEMO_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "CODILAR_WALLET_LEDGER_IDEMPOTENCY_KEY": true
+        }
+    },
+    "codilar_wallet_balance": {
+        "column": {
+            "customer_id": true,
+            "balance": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "quote": {
+        "column": {
+            "codilar_wallet_requested": true,
+            "codilar_wallet_use_all": true,
+            "codilar_wallet_amount": true
+        }
+    },
+    "quote_address": {
+        "column": {
+            "codilar_wallet_amount": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "codilar_wallet_amount": true,
+            "codilar_wallet_invoiced": true,
+            "codilar_wallet_refunded": true
+        }
+    },
+    "sales_invoice": {
+        "column": {
+            "codilar_wallet_amount": true
+        }
+    },
+    "sales_creditmemo": {
+        "column": {
+            "codilar_wallet_amount": true
+        }
+    }
+}
