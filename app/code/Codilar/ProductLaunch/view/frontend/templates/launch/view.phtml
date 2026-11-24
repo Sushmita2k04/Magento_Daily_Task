@@ -1,0 +1,81 @@
+<?php
+/** @var \Codilar\ProductLaunch\Block\Launch\View $block */
+/** @var \Magento\Framework\Escaper $escaper */
+use Codilar\ProductLaunch\Model\Status;
+
+$entry = $block->getEntry();
+if (!$entry) {
+    return;
+}
+$launch = $entry['launch'];
+$product = $entry['product'];
+$status = $entry['status'];
+$banner = $block->getBannerUrl($launch);
+$productUrl = $block->getProductUrl($product);
+$price = $block->getProductPrice($product);
+$labels = [];
+foreach ([Status::UPCOMING, Status::LIVE, Status::COMPLETED] as $code) {
+    $labels[$code] = $block->getStatusLabel($code);
+}
+$description = trim((string)$launch->getDescription());
+?>
+<article class="pl-detail pl-detail-<?= $escaper->escapeHtmlAttr($status) ?>"
+         data-mage-init='<?= $escaper->escapeHtmlAttr(json_encode([
+             'Codilar_ProductLaunch/js/countdown' => [
+                 'start' => $block->getStartTimestamp($launch),
+                 'end' => $block->getEndTimestamp($launch),
+                 'labels' => $labels,
+             ],
+         ], JSON_THROW_ON_ERROR)) ?>'>
+    <?php if ($banner): ?>
+        <div class="pl-detail-banner"><img src="<?= $escaper->escapeUrl($banner) ?>" alt="<?= $escaper->escapeHtmlAttr($launch->getTitle()) ?>"></div>
+    <?php endif; ?>
+    <div class="pl-detail-head">
+        <span class="pl-badge pl-badge-<?= $escaper->escapeHtmlAttr($status) ?>" data-role="badge"><?= $escaper->escapeHtml($block->getStatusLabel($status)) ?></span>
+        <h1 class="pl-detail-title"><?= $escaper->escapeHtml($launch->getTitle()) ?></h1>
+        <dl class="pl-detail-dates">
+            <div><dt><?= $escaper->escapeHtml(__('Starts')) ?></dt><dd><?= $escaper->escapeHtml($block->formatLaunchDate($launch->getStartAt())) ?></dd></div>
+            <?php if ($launch->getEndAt()): ?>
+                <div><dt><?= $escaper->escapeHtml(__('Ends')) ?></dt><dd><?= $escaper->escapeHtml($block->formatLaunchDate($launch->getEndAt())) ?></dd></div>
+            <?php endif; ?>
+        </dl>
+        <?php if ($status === Status::UPCOMING): ?>
+            <div class="pl-countdown pl-countdown-large" data-role="countdown" role="timer" aria-live="off">
+                <span><b data-unit="d">0</b><i><?= $escaper->escapeHtml(__('Days')) ?></i></span>
+                <span><b data-unit="h">0</b><i><?= $escaper->escapeHtml(__('Hours')) ?></i></span>
+                <span><b data-unit="m">0</b><i><?= $escaper->escapeHtml(__('Minutes')) ?></i></span>
+                <span><b data-unit="s">0</b><i><?= $escaper->escapeHtml(__('Seconds')) ?></i></span>
+            </div>
+        <?php endif; ?>
+        <p class="pl-detail-note" data-role="note">
+            <?php if ($status === Status::LIVE): ?>
+                <?= $escaper->escapeHtml(__('This launch is live now.')) ?>
+            <?php elseif ($status === Status::COMPLETED): ?>
+                <?= $escaper->escapeHtml(__('This launch has ended.')) ?>
+            <?php endif; ?>
+        </p>
+    </div>
+    <?php if ($description !== ''): ?>
+        <div class="pl-detail-description"><?= nl2br($escaper->escapeHtml($description)) ?></div>
+    <?php endif; ?>
+    <section class="pl-product">
+        <h2 class="pl-product-heading"><?= $escaper->escapeHtml(__('Featured product')) ?></h2>
+        <div class="pl-product-card">
+            <?php if ($productUrl): ?><a href="<?= $escaper->escapeUrl($productUrl) ?>"><?php endif; ?>
+                <img src="<?= $escaper->escapeUrl($block->getProductImageUrl($product)) ?>" alt="<?= $escaper->escapeHtmlAttr($product->getName()) ?>" loading="lazy" width="240" height="300">
+            <?php if ($productUrl): ?></a><?php endif; ?>
+            <div class="pl-product-info">
+                <strong class="pl-product-name">
+                    <?php if ($productUrl): ?><a href="<?= $escaper->escapeUrl($productUrl) ?>"><?= $escaper->escapeHtml($product->getName()) ?></a>
+                    <?php else: ?><?= $escaper->escapeHtml($product->getName()) ?><?php endif; ?>
+                </strong>
+                <span class="pl-product-sku"><?= $escaper->escapeHtml(__('SKU: %1', $product->getSku())) ?></span>
+                <?php if ($price !== ''): ?><span class="pl-product-price"><?= $escaper->escapeHtml($price) ?></span><?php endif; ?>
+                <?php if ($productUrl): ?>
+                    <a class="action primary" href="<?= $escaper->escapeUrl($productUrl) ?>"><span><?= $escaper->escapeHtml($status === Status::UPCOMING ? __('Preview product') : __('Shop now')) ?></span></a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </section>
+    <p class="pl-back"><a href="<?= $escaper->escapeUrl($block->getUrl('launches')) ?>">&larr; <?= $escaper->escapeHtml(__('All launches')) ?></a></p>
+</article>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Codilar_Task::tasks" title="Tasks" translate="title" module="Codilar_Task" sortOrder="75" resource="Codilar_Task::task"/>
+        <add id="Codilar_Task::task_dashboard" title="Dashboard" translate="title" module="Codilar_Task" parent="Codilar_Task::tasks" sortOrder="5" action="codilar_task/dashboard" resource="Codilar_Task::task_dashboard"/>
+        <add id="Codilar_Task::task_manage" title="Manage Tasks" translate="title" module="Codilar_Task" parent="Codilar_Task::tasks" sortOrder="10" action="codilar_task/task" resource="Codilar_Task::task_view"/>
+        <add id="Codilar_Task::task_add" title="Add New Task" translate="title" module="Codilar_Task" parent="Codilar_Task::tasks" sortOrder="20" action="codilar_task/task/new" resource="Codilar_Task::task_save"/>
+    </menu>
+</config>

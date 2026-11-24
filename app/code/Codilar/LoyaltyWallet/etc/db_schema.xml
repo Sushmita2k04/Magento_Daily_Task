@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <!-- Points lot: one row per accrual; allocation projection for FIFO and expiry. Ledger is authoritative. -->
+    <table name="codilar_loyalty_points_lot" resource="default" engine="innodb" comment="Loyalty points lot (accrual batch)">
+        <column xsi:type="bigint" name="lot_id" unsigned="true" nullable="false" identity="true" comment="Lot ID"/>
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="false" comment="Customer ID"/>
+        <column xsi:type="int" name="order_id" unsigned="true" nullable="true" comment="Order that earned the points"/>
+        <column xsi:type="int" name="points_original" unsigned="true" nullable="false" comment="Points accrued"/>
+        <column xsi:type="int" name="points_remaining" unsigned="true" nullable="false" comment="Points still available"/>
+        <column xsi:type="timestamp" name="accrued_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Accrual date"/>
+        <column xsi:type="timestamp" name="expires_at" nullable="false" comment="Expiry date"/>
+        <column xsi:type="timestamp" name="expired_at" nullable="true" comment="Set once when the lot is expired"/>
+        <column xsi:type="int" name="points_reversal_handled" unsigned="true" nullable="false" default="0" comment="Points of this lot already processed for cancellation/refund reversal"/>
+        <column xsi:type="int" name="points_clawed" unsigned="true" nullable="false" default="0" comment="Converted points whose wallet value has been clawed back"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="lot_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="CODILAR_LOYALTY_POINTS_LOT_ORDER_ID">
+            <column name="order_id"/>
+        </constraint>
+        <index referenceId="CODILAR_LOYALTY_POINTS_LOT_CUSTOMER_EXPIRES" indexType="btree">
+            <column name="customer_id"/>
+            <column name="expires_at"/>
+        </index>
+        <index referenceId="CODILAR_LOYALTY_POINTS_LOT_EXPIRES_EXPIRED" indexType="btree">
+            <column name="expires_at"/>
+            <column name="expired_at"/>
+        </index>
+    </table>
+
+    <table name="codilar_loyalty_points_ledger" resource="default" engine="innodb" comment="Loyalty points ledger (immutable)">
+        <column xsi:type="bigint" name="entry_id" unsigned="true" nullable="false" identity="true" comment="Entry ID"/>
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="false" comment="Customer ID (no FK: history is retained)"/>
+        <column xsi:type="varchar" name="customer_email" nullable="false" length="255" comment="Customer email snapshot"/>
+        <column xsi:type="varchar" name="entry_type" nullable="false" length="32" comment="ACCRUAL, REVERSAL, CONVERSION, EXPIRY, ADJUSTMENT"/>
+        <column xsi:type="int" name="points" nullable="false" comment="Signed point quantity"/>
+        <column xsi:type="int" name="balance_after" unsigned="true" nullable="false" comment="Resulting balance"/>
+        <column xsi:type="bigint" name="lot_id" unsigned="true" nullable="true" comment="Lot touched"/>
+        <column xsi:type="int" name="order_id" unsigned="true" nullable="true" comment="Related order"/>
+        <column xsi:type="varchar" name="order_increment_id" nullable="true" length="32" comment="Related order increment id"/>
+        <column xsi:type="bigint" name="wallet_entry_id" unsigned="true" nullable="true" comment="Wallet credit created by a conversion"/>
+        <column xsi:type="decimal" name="wallet_value" scale="4" precision="20" unsigned="true" nullable="true" comment="Wallet value of this conversion row, at the rate used"/>
+        <column xsi:type="varchar" name="reason" nullable="false" length="255" comment="Reason"/>
+        <column xsi:type="timestamp" name="accrued_at" nullable="true" comment="Accrual date of the lot"/>
+        <column xsi:type="timestamp" name="expires_at" nullable="true" comment="Expiry date of the lot"/>
+        <column xsi:type="varchar" name="idempotency_key" nullable="false" length="128" comment="Unique key preventing duplicate posting"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entry_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="CODILAR_LOYALTY_POINTS_LEDGER_IDEMPOTENCY_KEY">
+            <column name="idempotency_key"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="CODILAR_LOYALTY_POINTS_LEDGER_LOT_ID_LOT_LOT_ID" table="codilar_loyalty_points_ledger"
+                    column="lot_id" referenceTable="codilar_loyalty_points_lot" referenceColumn="lot_id" onDelete="NO ACTION"/>
+        <index referenceId="CODILAR_LOYALTY_POINTS_LEDGER_CUSTOMER_ENTRY" indexType="btree">
+            <column name="customer_id"/>
+            <column name="entry_id"/>
+        </index>
+        <index referenceId="CODILAR_LOYALTY_POINTS_LEDGER_ORDER_TYPE" indexType="btree">
+            <column name="order_id"/>
+            <column name="entry_type"/>
+        </index>
+        <index referenceId="CODILAR_LOYALTY_POINTS_LEDGER_LOT_ID" indexType="btree">
+            <column name="lot_id"/>
+        </index>
+    </table>
+
+    <table name="codilar_loyalty_points_balance" resource="default" engine="innodb" comment="Loyalty points balance projection (row-lock target)">
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="false" comment="Customer ID"/>
+        <column xsi:type="int" name="points_balance" unsigned="true" nullable="false" default="0" comment="Balance; reconciles to ledger"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="customer_id"/>
+        </constraint>
+    </table>
+
+    <table name="codilar_wallet_ledger" resource="default" engine="innodb" comment="Store wallet ledger (immutable)">
+        <column xsi:type="bigint" name="entry_id" unsigned="true" nullable="false" identity="true" comment="Entry ID"/>
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="false" comment="Customer ID (no FK: history is retained)"/>
+        <column xsi:type="varchar" name="customer_email" nullable="false" length="255" comment="Customer email snapshot"/>
+        <column xsi:type="varchar" name="entry_type" nullable="false" length="32" comment="Entry type"/>
+        <column xsi:type="decimal" name="amount" scale="4" precision="20" nullable="false" comment="Signed amount (INR)"/>
+        <column xsi:type="decimal" name="memo_amount" scale="4" precision="20" unsigned="true" nullable="true" comment="Written-off residual on WRITE_OFF rows; does not move the balance"/>
+        <column xsi:type="decimal" name="balance_after" scale="4" precision="20" unsigned="true" nullable="false" comment="Resulting balance"/>
+        <column xsi:type="varchar" name="reason" nullable="false" length="255" comment="Reason"/>
+        <column xsi:type="int" name="order_id" unsigned="true" nullable="true" comment="Related order"/>
+        <column xsi:type="varchar" name="order_increment_id" nullable="true" length="32" comment="Related order increment id"/>
+        <column xsi:type="int" name="creditmemo_id" unsigned="true" nullable="true" comment="Related credit memo"/>
+        <column xsi:type="varchar" name="operator_ref" nullable="true" length="64" comment="Operator reference (manual entries)"/>
+        <column xsi:type="varchar" name="idempotency_key" nullable="false" length="128" comment="Unique key preventing duplicate posting"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entry_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="CODILAR_WALLET_LEDGER_IDEMPOTENCY_KEY">
+            <column name="idempotency_key"/>
+        </constraint>
+        <index referenceId="CODILAR_WALLET_LEDGER_CUSTOMER_ENTRY" indexType="btree">
+            <column name="customer_id"/>
+            <column name="entry_id"/>
+        </index>
+        <index referenceId="CODILAR_WALLET_LEDGER_ORDER_ID" indexType="btree">
+            <column name="order_id"/>
+        </index>
+        <index referenceId="CODILAR_WALLET_LEDGER_CREDITMEMO_ID" indexType="btree">
+            <column name="creditmemo_id"/>
+        </index>
+    </table>
+
+    <table name="codilar_wallet_balance" resource="default" engine="innodb" comment="Store wallet balance projection (row-lock target)">
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="false" comment="Customer ID"/>
+        <column xsi:type="decimal" name="balance" scale="4" precision="20" unsigned="true" nullable="false" default="0" comment="Balance; reconciles to ledger; never negative"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="customer_id"/>
+        </constraint>
+    </table>
+    <table name="quote" resource="checkout">
+        <column xsi:type="decimal" name="codilar_wallet_requested" scale="4" precision="20" unsigned="true" nullable="true" comment="Wallet amount the customer asked to use"/>
+        <column xsi:type="smallint" name="codilar_wallet_use_all" unsigned="true" nullable="false" default="0" comment="Use as much wallet balance as allowed"/>
+        <column xsi:type="decimal" name="codilar_wallet_amount" scale="4" precision="20" unsigned="true" nullable="false" default="0" comment="Wallet amount applied to the quote"/>
+    </table>
+    <table name="quote_address" resource="checkout">
+        <column xsi:type="decimal" name="codilar_wallet_amount" scale="4" precision="20" unsigned="true" nullable="false" default="0" comment="Wallet amount applied"/>
+    </table>
+    <table name="sales_order" resource="sales">
+        <column xsi:type="decimal" name="codilar_wallet_amount" scale="4" precision="20" unsigned="true" nullable="false" default="0" comment="Wallet amount paid"/>
+        <column xsi:type="decimal" name="codilar_wallet_invoiced" scale="4" precision="20" unsigned="true" nullable="false" default="0" comment="Wallet amount invoiced"/>
+        <column xsi:type="decimal" name="codilar_wallet_refunded" scale="4" precision="20" unsigned="true" nullable="false" default="0" comment="Wallet amount refunded to the wallet"/>
+    </table>
+    <table name="sales_invoice" resource="sales">
+        <column xsi:type="decimal" name="codilar_wallet_amount" scale="4" precision="20" unsigned="true" nullable="false" default="0" comment="Wallet amount on this invoice"/>
+    </table>
+    <table name="sales_creditmemo" resource="sales">
+        <column xsi:type="decimal" name="codilar_wallet_amount" scale="4" precision="20" unsigned="true" nullable="false" default="0" comment="Wallet amount returned to the wallet"/>
+    </table>
+</schema>

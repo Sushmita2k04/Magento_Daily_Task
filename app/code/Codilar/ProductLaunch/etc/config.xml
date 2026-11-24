@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <codilar_productlaunch>
+            <general>
+                <enabled>1</enabled>
+                <page_title>Product Launches</page_title>
+                <completed_limit>6</completed_limit>
+            </general>
+        </codilar_productlaunch>
+    </default>
+</config>

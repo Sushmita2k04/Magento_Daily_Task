@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Codilar_Task::css/tasks.css"/>
+    </head>
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">Tasks</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Codilar\Task\Block\Task\ListTask" name="codilar.task.list" template="Codilar_Task::task/list.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Codilar\Task\ViewModel\TaskList</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

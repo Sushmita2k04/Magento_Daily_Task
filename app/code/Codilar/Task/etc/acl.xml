@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <!-- Codilar_Task::task is the pre-existing ID; it stays the parent so existing grants keep working. -->
+                <resource id="Codilar_Task::task" title="Tasks" sortOrder="200">
+                    <resource id="Codilar_Task::task_dashboard" title="View Task Dashboard" sortOrder="5"/>
+                    <resource id="Codilar_Task::task_view" title="View Tasks" sortOrder="10"/>
+                    <resource id="Codilar_Task::task_save" title="Create / Edit Tasks" sortOrder="20"/>
+                    <resource id="Codilar_Task::task_delete" title="Delete Tasks" sortOrder="30"/>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

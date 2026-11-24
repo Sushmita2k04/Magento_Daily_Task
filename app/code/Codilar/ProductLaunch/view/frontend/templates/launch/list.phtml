@@ -1,0 +1,75 @@
+<?php
+/** @var \Codilar\ProductLaunch\Block\Launch\ListBlock $block */
+/** @var \Magento\Framework\Escaper $escaper */
+use Codilar\ProductLaunch\Model\Status;
+
+$sections = $block->getSections();
+$titles = [
+    Status::LIVE => __('Live Now'),
+    Status::UPCOMING => __('Upcoming Launches'),
+    Status::COMPLETED => __('Past Launches'),
+];
+$labels = [];
+foreach ([Status::UPCOMING, Status::LIVE, Status::COMPLETED] as $code) {
+    $labels[$code] = $block->getStatusLabel($code);
+}
+?>
+<div class="pl-page">
+    <?php if (!$block->hasEntries()): ?>
+        <p class="pl-empty message info empty"><span><?= $escaper->escapeHtml(__('There are no product launches right now. Please check back soon.')) ?></span></p>
+    <?php endif; ?>
+
+    <?php foreach ([Status::LIVE, Status::UPCOMING, Status::COMPLETED] as $section): ?>
+        <?php if (empty($sections[$section])): ?>
+            <?php continue; ?>
+        <?php endif; ?>
+        <section class="pl-section pl-section-<?= $escaper->escapeHtmlAttr($section) ?>" aria-labelledby="pl-h-<?= $escaper->escapeHtmlAttr($section) ?>">
+            <h2 class="pl-section-title" id="pl-h-<?= $escaper->escapeHtmlAttr($section) ?>"><?= $escaper->escapeHtml($titles[$section]) ?></h2>
+            <ul class="pl-grid">
+                <?php foreach ($sections[$section] as $entry): ?>
+                    <?php
+                    $launch = $entry['launch'];
+                    $product = $entry['product'];
+                    $banner = $block->getBannerUrl($launch);
+                    $url = $block->getLaunchUrl($launch);
+                    $excerpt = $block->getDescriptionExcerpt($launch);
+                    ?>
+                    <li class="pl-card pl-card-<?= $escaper->escapeHtmlAttr($entry['status']) ?>"
+                        data-mage-init='<?= $escaper->escapeHtmlAttr(json_encode([
+                            'Codilar_ProductLaunch/js/countdown' => [
+                                'start' => $block->getStartTimestamp($launch),
+                                'end' => $block->getEndTimestamp($launch),
+                                'labels' => $labels,
+                            ],
+                        ], JSON_THROW_ON_ERROR)) ?>'>
+                        <a class="pl-card-media" href="<?= $escaper->escapeUrl($url) ?>" tabindex="-1" aria-hidden="true">
+                            <?php if ($banner): ?>
+                                <img src="<?= $escaper->escapeUrl($banner) ?>" alt="" loading="lazy">
+                            <?php else: ?>
+                                <span class="pl-card-placeholder"><?= $escaper->escapeHtml(mb_substr((string)$launch->getTitle(), 0, 1)) ?></span>
+                            <?php endif; ?>
+                        </a>
+                        <div class="pl-card-body">
+                            <span class="pl-badge pl-badge-<?= $escaper->escapeHtmlAttr($entry['status']) ?>" data-role="badge"><?= $escaper->escapeHtml($block->getStatusLabel($entry['status'])) ?></span>
+                            <h3 class="pl-card-title"><a href="<?= $escaper->escapeUrl($url) ?>"><?= $escaper->escapeHtml($launch->getTitle()) ?></a></h3>
+                            <p class="pl-card-date"><?= $escaper->escapeHtml($block->formatLaunchDate($launch->getStartAt())) ?></p>
+                            <?php if ($entry['status'] === Status::UPCOMING): ?>
+                                <div class="pl-countdown" data-role="countdown" role="timer" aria-live="off">
+                                    <span><b data-unit="d">0</b><i><?= $escaper->escapeHtml(__('Days')) ?></i></span>
+                                    <span><b data-unit="h">0</b><i><?= $escaper->escapeHtml(__('Hrs')) ?></i></span>
+                                    <span><b data-unit="m">0</b><i><?= $escaper->escapeHtml(__('Min')) ?></i></span>
+                                    <span><b data-unit="s">0</b><i><?= $escaper->escapeHtml(__('Sec')) ?></i></span>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($excerpt !== ''): ?>
+                                <p class="pl-card-excerpt"><?= $escaper->escapeHtml($excerpt) ?></p>
+                            <?php endif; ?>
+                            <p class="pl-card-product"><?= $escaper->escapeHtml($product->getName()) ?></p>
+                            <a class="action primary pl-card-cta" href="<?= $escaper->escapeUrl($url) ?>"><span><?= $escaper->escapeHtml(__('View launch')) ?></span></a>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </section>
+    <?php endforeach; ?>
+</div>

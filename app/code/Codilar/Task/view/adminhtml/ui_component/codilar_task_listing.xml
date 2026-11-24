@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">codilar_task_listing.codilar_task_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add" class="Codilar\Task\Block\Adminhtml\Task\AddButton"/>
+        </buttons>
+        <spinner>codilar_task_columns</spinner>
+        <deps>
+            <dep>codilar_task_listing.codilar_task_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="codilar_task_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">task_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Codilar_Task::task_view</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="codilar_task_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>task_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters"/>
+        <massaction name="listing_massaction" class="Codilar\Task\Ui\Component\MassAction">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Delete the selected tasks? This cannot be undone.</message>
+                        <title translate="true">Delete tasks</title>
+                    </confirm>
+                    <url path="codilar_task/task/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="codilar_task_columns">
+        <selectionsColumn name="ids" sortOrder="10">
+            <settings>
+                <indexField>task_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="task_id" sortOrder="20">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="title" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Title</label>
+            </settings>
+        </column>
+        <column name="status" component="Magento_Ui/js/grid/columns/select" sortOrder="40">
+            <settings>
+                <options class="Codilar\Task\Model\Source\Status"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <column name="priority" component="Magento_Ui/js/grid/columns/select" sortOrder="50">
+            <settings>
+                <options class="Codilar\Task\Model\Source\Priority"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Priority</label>
+            </settings>
+        </column>
+        <column name="due_date" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="60">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Due Date</label>
+                <dateFormat>MMM d, y</dateFormat>
+                <timezone>false</timezone>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="70">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Created</label>
+                <dateFormat>MMM d, y h:mm a</dateFormat>
+            </settings>
+        </column>
+        <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="80">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Updated</label>
+                <dateFormat>MMM d, y h:mm a</dateFormat>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Codilar\Task\Ui\Component\Listing\Column\TaskActions" sortOrder="100">
+            <settings>
+                <indexField>task_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

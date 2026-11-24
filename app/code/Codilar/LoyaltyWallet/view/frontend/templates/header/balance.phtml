@@ -1,0 +1,21 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<div class="codilar-loyalty-header" data-bind="scope: 'codilar_loyalty'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "codilar_loyalty": {
+                    "component": "Codilar_LoyaltyWallet/js/view/balance",
+                    "accountUrl": "<?= $escaper->escapeJs($block->getUrl('loyalty/account')) ?>"
+                }
+            }
+        }
+    }
+}
+</script>

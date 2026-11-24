@@ -1,0 +1,42 @@
+{
+    "codilar_product_launch": {
+        "column": {
+            "launch_id": true,
+            "title": true,
+            "url_key": true,
+            "product_id": true,
+            "sku": true,
+            "description": true,
+            "banner": true,
+            "start_at": true,
+            "end_at": true,
+            "is_active": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "CODILAR_PRODUCT_LAUNCH_START_AT_END_AT": true,
+            "CODILAR_PRODUCT_LAUNCH_IS_ACTIVE": true,
+            "CODILAR_PRODUCT_LAUNCH_TITLE": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "CODILAR_PRODUCT_LAUNCH_URL_KEY": true,
+            "CODILAR_PRD_LAUNCH_PRD_ID_CAT_PRD_ENTT_ENTT_ID": true
+        }
+    },
+    "codilar_product_launch_store": {
+        "column": {
+            "launch_id": true,
+            "store_id": true
+        },
+        "index": {
+            "CODILAR_PRODUCT_LAUNCH_STORE_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "CODILAR_PRD_LAUNCH_STORE_LAUNCH_ID_CODILAR_PRD_LAUNCH_LAUNCH_ID": true,
+            "CODILAR_PRODUCT_LAUNCH_STORE_STORE_ID_STORE_STORE_ID": true
+        }
+    }
+}

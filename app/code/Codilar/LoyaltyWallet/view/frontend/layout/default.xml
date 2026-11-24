@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Codilar_LoyaltyWallet::css/loyalty.css"/>
+    </head>
+    <body>
+        <!-- Rendered once into the cached page as an empty shell; balances arrive through the private customer-data
+             section in the browser, so nothing customer-specific is ever cached. -->
+        <referenceBlock name="codilar.header.top">
+            <block class="Magento\Framework\View\Element\Template" name="codilar.loyalty.header"
+                   template="Codilar_LoyaltyWallet::header/balance.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

@@ -40,6 +40,7 @@
 
             <block
                 class="Magento\Theme\Block\Html\Header"
+                name="codilar.header.top"
                 before="-"
                 template="Magento_Theme::html/samyakkHeadertop.phtml"
             >

@@ -1,0 +1,13 @@
+.codilar-loyalty-header { display: inline-flex; align-items: center; margin-right: 12px; }
+.codilar-loyalty-header__link { display: flex; gap: 12px; color: inherit; text-decoration: none; font-size: 12px; line-height: 1.2; }
+.codilar-loyalty-header__item { display: flex; flex-direction: column; }
+.codilar-loyalty-header__label { opacity: .7; text-transform: uppercase; font-size: 10px; letter-spacing: .04em; }
+.loyalty-balances { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+.loyalty-balance { flex: 1 1 200px; padding: 16px; border: 1px solid #ddd; display: flex; flex-direction: column; gap: 4px; }
+.loyalty-balance__label { opacity: .7; }
+.loyalty-balance__value { font-size: 28px; }
+.loyalty-balance__note, .loyalty-note { font-size: 13px; opacity: .8; }
+.loyalty-convert { margin-bottom: 24px; display: flex; flex-direction: column; gap: 8px; max-width: 360px; }
+.loyalty-history { width: 100%; margin-bottom: 8px; }
+.loyalty-history td small { display: block; opacity: .7; }
+@media (max-width: 640px) { .codilar-loyalty-header__label { display: none; } }

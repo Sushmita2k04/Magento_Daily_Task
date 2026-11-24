@@ -1,0 +1,113 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Codilar\LoyaltyWallet\ViewModel\Account $viewModel
+ */
+$viewModel = $block->getData('view_model');
+$summary = $viewModel->getSummary();
+$points = $viewModel->getPointsHistory();
+$wallet = $viewModel->getWalletHistory();
+$minPoints = $viewModel->getMinConversionPoints();
+?>
+<div class="loyalty-account">
+    <div class="loyalty-balances">
+        <div class="loyalty-balance">
+            <span class="loyalty-balance__label"><?= $escaper->escapeHtml(__('Loyalty points')) ?></span>
+            <strong class="loyalty-balance__value"><?= (int)$summary->points ?></strong>
+            <?php if ($summary->nextExpiry): ?>
+                <span class="loyalty-balance__note">
+                    <?= $escaper->escapeHtml(__(
+                        '%1 points expire on %2',
+                        (int)$summary->nextExpiry['points'],
+                        $viewModel->formatDate($summary->nextExpiry['expires_at'])
+                    )) ?>
+                </span>
+            <?php endif; ?>
+        </div>
+        <div class="loyalty-balance">
+            <span class="loyalty-balance__label"><?= $escaper->escapeHtml(__('Wallet balance')) ?></span>
+            <strong class="loyalty-balance__value">
+                <?= $escaper->escapeHtml($viewModel->formatMoney($summary->wallet)) ?>
+            </strong>
+        </div>
+    </div>
+
+    <?php if ($summary->points >= $minPoints): ?>
+        <form class="loyalty-convert" method="post" action="<?= $escaper->escapeUrl($block->getUrl('loyalty/account/convert')) ?>">
+            <?= $block->getBlockHtml('formkey') ?>
+            <input type="hidden" name="request_key" value="<?= $escaper->escapeHtmlAttr($viewModel->newRequestKey()) ?>"/>
+            <h2><?= $escaper->escapeHtml(__('Convert points to wallet')) ?></h2>
+            <p>
+                <?= $escaper->escapeHtml(__(
+                    '%1 points = %2. Converting is final: wallet money cannot be turned back into points.',
+                    $viewModel->getPointsPerWalletUnit(),
+                    $viewModel->formatMoney('1')
+                )) ?>
+            </p>
+            <label for="loyalty-points"><?= $escaper->escapeHtml(__('Points to convert')) ?></label>
+            <input type="number" id="loyalty-points" name="points" min="<?= (int)$minPoints ?>"
+                   max="<?= (int)$summary->points ?>" step="1" required/>
+            <button type="submit" class="action primary"><span><?= $escaper->escapeHtml(__('Convert')) ?></span></button>
+        </form>
+    <?php else: ?>
+        <p class="loyalty-note">
+            <?= $escaper->escapeHtml(__('You can convert once you have at least %1 points.', $minPoints)) ?>
+        </p>
+    <?php endif; ?>
+
+    <h2><?= $escaper->escapeHtml(__('Points history')) ?></h2>
+    <?php if (!$points['entries']): ?>
+        <p class="loyalty-note"><?= $escaper->escapeHtml(__('No points activity yet.')) ?></p>
+    <?php else: ?>
+        <table class="loyalty-history">
+            <thead><tr>
+                <th><?= $escaper->escapeHtml(__('Date')) ?></th><th><?= $escaper->escapeHtml(__('Activity')) ?></th>
+                <th><?= $escaper->escapeHtml(__('Points')) ?></th><th><?= $escaper->escapeHtml(__('Balance')) ?></th>
+            </tr></thead>
+            <tbody>
+            <?php foreach ($points['entries'] as $entry): ?>
+                <tr>
+                    <td><?= $escaper->escapeHtml($viewModel->formatDate($entry->getCreatedAt())) ?></td>
+                    <td>
+                        <?= $escaper->escapeHtml($viewModel->pointsLabel($entry)) ?>
+                        <?php if ($entry->getOrderId()): ?>
+                            <small><?= $escaper->escapeHtml($entry->getReason()) ?></small>
+                        <?php endif; ?>
+                    </td>
+                    <td><?= $entry->getPoints() > 0 ? '+' : '' ?><?= (int)$entry->getPoints() ?></td>
+                    <td><?= (int)$entry->getBalanceAfter() ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?php if ($points['next']): ?>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('loyalty/account', ['_query' => ['pb' => $points['next']]])) ?>"><?= $escaper->escapeHtml(__('Older points activity')) ?></a>
+        <?php endif; ?>
+    <?php endif; ?>
+
+    <h2><?= $escaper->escapeHtml(__('Wallet history')) ?></h2>
+    <?php if (!$wallet['entries']): ?>
+        <p class="loyalty-note"><?= $escaper->escapeHtml(__('No wallet activity yet.')) ?></p>
+    <?php else: ?>
+        <table class="loyalty-history">
+            <thead><tr>
+                <th><?= $escaper->escapeHtml(__('Date')) ?></th><th><?= $escaper->escapeHtml(__('Activity')) ?></th>
+                <th><?= $escaper->escapeHtml(__('Amount')) ?></th><th><?= $escaper->escapeHtml(__('Balance')) ?></th>
+            </tr></thead>
+            <tbody>
+            <?php foreach ($wallet['entries'] as $entry): ?>
+                <tr>
+                    <td><?= $escaper->escapeHtml($viewModel->formatDate($entry->getCreatedAt())) ?></td>
+                    <td><?= $escaper->escapeHtml($viewModel->walletLabel($entry)) ?></td>
+                    <td><?= $escaper->escapeHtml($viewModel->walletAmountText($entry)) ?></td>
+                    <td><?= $escaper->escapeHtml($viewModel->formatMoney($entry->getBalanceAfter())) ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?php if ($wallet['next']): ?>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('loyalty/account', ['_query' => ['wb' => $wallet['next']]])) ?>"><?= $escaper->escapeHtml(__('Older wallet activity')) ?></a>
+        <?php endif; ?>
+    <?php endif; ?>
+</div>

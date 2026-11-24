@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">codilar_task_form.codilar_task_form_data_source</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="Codilar\Task\Block\Adminhtml\Task\Edit\BackButton"/>
+            <button name="delete" class="Codilar\Task\Block\Adminhtml\Task\Edit\DeleteButton"/>
+            <button name="save" class="Codilar\Task\Block\Adminhtml\Task\Edit\SaveButton"/>
+        </buttons>
+        <namespace>codilar_task_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>codilar_task_form.codilar_task_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="codilar_task_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="codilar_task/task/save"/>
+        </settings>
+        <dataProvider class="Codilar\Task\Ui\DataProvider\TaskFormDataProvider" name="codilar_task_form_data_source">
+            <settings>
+                <requestFieldName>task_id</requestFieldName>
+                <primaryFieldName>task_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <collapsible>false</collapsible>
+            <label translate="true">Task Details</label>
+        </settings>
+        <field name="task_id" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>task_id</dataScope>
+            </settings>
+        </field>
+        <field name="title" formElement="input" sortOrder="10">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Title</label>
+                <dataScope>title</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="max_text_length" xsi:type="number">255</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="description" formElement="textarea" sortOrder="20">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Description</label>
+                <dataScope>description</dataScope>
+            </settings>
+        </field>
+        <field name="status" formElement="select" sortOrder="30">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>number</dataType>
+                <label translate="true">Status</label>
+                <dataScope>status</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Codilar\Task\Model\Source\Status"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="priority" formElement="select" sortOrder="40">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>number</dataType>
+                <label translate="true">Priority</label>
+                <dataScope>priority</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Codilar\Task\Model\Source\Priority"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="due_date" formElement="date" sortOrder="50">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Due Date</label>
+                <dataScope>due_date</dataScope>
+                <notice translate="true">Optional. Date only (no time).</notice>
+            </settings>
+            <formElements>
+                <date>
+                    <settings>
+                        <options>
+                            <option name="showsTime" xsi:type="boolean">false</option>
+                        </options>
+                    </settings>
+                </date>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

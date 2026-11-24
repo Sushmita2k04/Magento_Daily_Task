@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Codilar\LoyaltyWallet\Api\Data\PointsLedgerEntryInterface" type="Codilar\LoyaltyWallet\Model\PointsLedger"/>
+    <preference for="Codilar\LoyaltyWallet\Api\Data\WalletLedgerEntryInterface" type="Codilar\LoyaltyWallet\Model\WalletLedger"/>
+    <preference for="Codilar\LoyaltyWallet\Api\PointsLedgerRepositoryInterface" type="Codilar\LoyaltyWallet\Model\PointsLedgerRepository"/>
+    <preference for="Codilar\LoyaltyWallet\Api\WalletLedgerRepositoryInterface" type="Codilar\LoyaltyWallet\Model\WalletLedgerRepository"/>
+    <preference for="Codilar\LoyaltyWallet\Api\PointsManagementInterface" type="Codilar\LoyaltyWallet\Model\PointsManagement"/>
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="codilar_points_expire" xsi:type="object">Codilar\LoyaltyWallet\Console\Command\PointsExpire</item>
+                <item name="codilar_wallet_adjust" xsi:type="object">Codilar\LoyaltyWallet\Console\Command\WalletAdjust</item>
+                <item name="codilar_wallet_reconcile" xsi:type="object">Codilar\LoyaltyWallet\Console\Command\WalletReconcile</item>
+                <item name="codilar_loyalty_sweep" xsi:type="object">Codilar\LoyaltyWallet\Console\Command\LoyaltySweep</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Customer\Api\CustomerRepositoryInterface">
+        <plugin name="codilar_loyalty_prevent_customer_deletion" type="Codilar\LoyaltyWallet\Plugin\PreventCustomerDeletion"/>
+    </type>
+</config>

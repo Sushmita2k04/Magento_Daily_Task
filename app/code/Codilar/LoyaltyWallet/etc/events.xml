@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_model_service_quote_submit_before">
+        <observer name="codilar_loyalty_redeem_wallet" instance="Codilar\LoyaltyWallet\Observer\RedeemWallet"/>
+    </event>
+    <event name="sales_model_service_quote_submit_success">
+        <observer name="codilar_loyalty_accrue_points" instance="Codilar\LoyaltyWallet\Observer\AccruePoints"/>
+    </event>
+    <event name="sales_model_service_quote_submit_failure">
+        <observer name="codilar_loyalty_release_wallet" instance="Codilar\LoyaltyWallet\Observer\ReleaseWallet"/>
+    </event>
+    <event name="sales_order_invoice_register">
+        <observer name="codilar_loyalty_track_invoiced_wallet" instance="Codilar\LoyaltyWallet\Observer\TrackInvoicedWallet"/>
+    </event>
+    <event name="sales_order_creditmemo_refund">
+        <observer name="codilar_loyalty_track_refunded_wallet" instance="Codilar\LoyaltyWallet\Observer\TrackRefundedWallet"/>
+    </event>
+    <event name="sales_order_creditmemo_save_after">
+        <observer name="codilar_loyalty_credit_wallet_on_refund" instance="Codilar\LoyaltyWallet\Observer\CreditWalletOnRefund"/>
+    </event>
+    <event name="sales_order_save_commit_after">
+        <observer name="codilar_loyalty_process_order_reversals" instance="Codilar\LoyaltyWallet\Observer\ProcessOrderReversals"/>
+    </event>
+    <event name="sales_order_creditmemo_save_commit_after">
+        <observer name="codilar_loyalty_process_refund_reversals" instance="Codilar\LoyaltyWallet\Observer\ProcessOrderReversals"/>
+    </event>
+</config>
